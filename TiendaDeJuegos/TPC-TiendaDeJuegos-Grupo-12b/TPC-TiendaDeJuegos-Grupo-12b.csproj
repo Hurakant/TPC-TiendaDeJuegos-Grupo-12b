@@ -68,6 +68,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Home.aspx" />
+    <Content Include="Logo\LogosfB.svg" />
+    <Content Include="Logo\LogosfN.svg" />
+    <Content Include="StyleTPC\MasterStyle.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +83,7 @@
     </Compile>
     <Compile Include="Master1.Master.cs">
       <DependentUpon>Master1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Master1.Master.designer.cs">
       <DependentUpon>Master1.Master</DependentUpon>

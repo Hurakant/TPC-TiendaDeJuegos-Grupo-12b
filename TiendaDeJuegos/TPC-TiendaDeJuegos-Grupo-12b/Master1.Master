@@ -9,14 +9,45 @@
     </asp:ContentPlaceHolder>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-
+    <%--link de la hoja e estilos--%>
+    <link href="StyleTPC/MasterStyle.css" rel="stylesheet" />
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server">  
+
+     <%--NAV--%>
+        <nav class= "navbar navbar-expand-lg border-bottom" style = "background-color: #050505; border-color: #E91E63;">
+
+            <div class= "container-fluid">
+
+                <%--logo/botón de la izq con bootstrap--%>
+                <a class= "navbar-brand text-white d-flex align-items-center" href = "Home.aspx" style = "font-weight: bolder; font-size: 1.4rem;" >
+                    <img src="Logo/logosfB.svg" alt="Logo" width = "60" height = "64" class= "me-2"/>
+                    NovaHub 
+                </a>
+
+                <%-- textbox y btn nav --%>
+                <div class= "d-flex mx-auto align-items-center" style = "gap:20px;" role = "search" >
+
+                    <asp:TextBox runat="server" ID = "txtBuscarNav" CssClass="TxtBuscar" placeholder="Buscá tu próximo juego..."/> 
+                    <asp:Button Text="BUSCAR" runat="server" ID = "btnBuscarNav" CssClass="btn-BuscarNav" OnClick="btnBuscarNav_Click"/>
+              
+                </div>
+
+            </div>
+
+        </nav>
+
+
+
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+     
+
     </form>
+
+   
 </body>
 </html>

@@ -13,5 +13,10 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         {
 
         }
+
+        protected void btnBuscarNav_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Home.aspx", false);
+        }
     }
 }

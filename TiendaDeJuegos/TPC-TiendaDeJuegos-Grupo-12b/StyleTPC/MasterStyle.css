@@ -1,0 +1,48 @@
+﻿/*btn buscar del nav*/
+.btn-BuscarNav {
+    background-color: transparent;
+    color: #FFFFFF;
+    border: 2px solid #673AB7;
+    border-radius: 50px;
+    padding: 8px 25px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/*hover*/
+.btn-BuscarNav:hover {
+        background-color: #b964ff;
+        color: #FFFFFF;
+        box-shadow: 0 0 15px rgba(103, 58, 183, 0.7);
+        transform: scale(1.05);
+}
+
+/* textbox del nav*/
+.TxtBuscar {
+    background-color: #000000;
+    color: #121212;
+    border: 2px solid #673AB7;
+    border-radius: 50px;
+    padding: 8px 20px;
+    width: 280px;
+    outline: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all 0.3s ease;
+}
+
+/*hover*/
+.TxtBuscar:focus {
+    background-color: #FFFFFF;
+    border: 2px solid #b964ff;
+    outline: none;
+    box-shadow: 0 0 10px #b964ff;
+}
+
+/*texto*/ 
+.TxtBuscar::placeholder {
+    color: #888888;
+    font-style: italic;
+    letter-spacing: 0.5px;
+}
