@@ -1,5 +1,3 @@
 <Solution>
-  <Project Path="AccesoDatos/AccesoDatos.csproj" Id="d475c5c3-a10f-4bbe-85c3-b92423ad82eb" />
-  <Project Path="Dominio/Dominio.csproj" Id="b7e3132b-2f4e-4e2f-90dc-242f417f49b9" />
   <Project Path="TPC-TiendaDeJuegos-Grupo-12b/TPC-TiendaDeJuegos-Grupo-12b.csproj" Id="47409f03-ebd7-4705-ad27-62610cd04a8a" />
 </Solution>
