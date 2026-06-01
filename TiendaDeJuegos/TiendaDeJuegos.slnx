@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="dominio/dominio.csproj" Id="b78eea10-6f0a-4c3f-aaca-6ae6f2fa5e55" />
   <Project Path="TPC-TiendaDeJuegos-Grupo-12b/TPC-TiendaDeJuegos-Grupo-12b.csproj" Id="47409f03-ebd7-4705-ad27-62610cd04a8a" />
 </Solution>
