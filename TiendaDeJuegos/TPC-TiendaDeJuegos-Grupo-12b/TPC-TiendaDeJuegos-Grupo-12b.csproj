@@ -68,9 +68,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Home.aspx" />
-    <Content Include="Logo\LogosfB.svg" />
-    <Content Include="Logo\LogosfN.svg" />
-    <Content Include="StyleTPC\MasterStyle.css" />
+    <Content Include="Resources\Logo\LogosfB.svg" />
+    <Content Include="Resources\Logo\LogosfN.svg" />
+    <Content Include="Resources\StyleTPC\MasterStyle.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
