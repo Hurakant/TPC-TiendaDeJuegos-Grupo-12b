@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace dominio
 {
     public class Producto
+        //Borraria Juegos y dejaria producto, pero ya la hice y me da flojera
     {
         public int IdProducto { get; set; }
         public string Nombre { get; set; }

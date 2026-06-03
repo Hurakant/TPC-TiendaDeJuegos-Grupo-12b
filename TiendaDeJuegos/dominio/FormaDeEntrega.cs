@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Class1
+    public enum FormaDeEntrega
     {
+        RetiroEnLocal = 1,
+        EnvioADomicilio = 2
     }
 }

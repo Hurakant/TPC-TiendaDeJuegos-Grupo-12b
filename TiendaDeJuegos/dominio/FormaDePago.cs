@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dominio
+namespace Dominio
 {
-    public class Cliente
+    public class FormaDePago
     {
-        public int Id { get; set; }
+        public int IdFormaDePago { get; set; }
         public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string Email { get; set; }
+        public bool Activa { get; set; }
     }
 }

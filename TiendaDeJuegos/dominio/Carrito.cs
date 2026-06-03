@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,10 +11,10 @@ namespace dominio
 
     public class Carrito
     {
-        public int Id { get; set; }
+        public int IdCarrito { get; set; }
 
-        public Cliente Cliente { get; set; }
+        public Usuario Cliente { get; set; }
 
-        public List<ItemCarrito> Items { get; set; } = new List<ItemCarrito>();
+        public List<CarritoItem> ItemCarrito { get; set; } = new List<CarritoItem>();
     }
 }

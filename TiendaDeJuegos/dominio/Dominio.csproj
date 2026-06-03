@@ -43,9 +43,15 @@
   <ItemGroup>
     <Compile Include="Carrito.cs" />
     <Compile Include="Categoria.cs" />
-    <Compile Include="Class1.cs" />
-    <Compile Include="Cliente.cs" />
-    <Compile Include="ItemCarrito.cs" />
+    <Compile Include="FormaDeEntrega.cs" />
+    <Compile Include="EstadoPedido.cs" />
+    <Compile Include="Direccion.cs" />
+    <Compile Include="Rol.cs" />
+    <Compile Include="FormaDePago.cs" />
+    <Compile Include="Pedido.cs" />
+    <Compile Include="Usuario.cs" />
+    <Compile Include="Juego.cs" />
+    <Compile Include="CarritoItem.cs" />
     <Compile Include="Producto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
