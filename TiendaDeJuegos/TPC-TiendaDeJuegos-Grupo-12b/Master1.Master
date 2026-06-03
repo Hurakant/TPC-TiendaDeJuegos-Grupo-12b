@@ -18,8 +18,10 @@
 </head>
 <body>
     <form id="form1" runat="server">
+
+        <%--NAV--%>
         <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(180deg, #0a0a0f 0%, #12121a 100%); border-bottom: 1px solid rgba(233, 30, 99, 0.3); padding: 0.5rem 1.5rem;">
-            <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; width: 100%;">
+            <div style="display: flex; align-items: center; width: 100%;">
 
                 <%-- Columna izquierda: Logo --%>
                 <asp:HyperLink ID="lnkLogo" runat="server" NavigateUrl="~/Home.aspx"
@@ -30,18 +32,30 @@
                     <span class="gradient-text">NovaHub</span>
                 </asp:HyperLink>
 
+                <%-- Buscador --%>
+                <asp:TextBox ID="txtBuscar" runat="server"
+                    CssClass="TxtBuscar"
+                    placeholder="Buscá tu próximo juego..."
+                    AutoCompleteType="Disabled" />
+
+                <asp:Button ID="btnBuscar" runat="server"
+                    Text="BUSCAR"
+                    CssClass="btn-BuscarNav"
+                    OnClick="btnBuscar_Click"
+                    Style="background: linear-gradient(135deg, #e91e63 0%, #9c27b0 100%); border: none;" />
+
                 <%-- Columna del medio: Links de navegación --%>
-                <ul class="navbar-nav d-flex flex-row gap-1" style="list-style: none; margin: 0; padding: 0;">
+                <ul class="navbar-nav d-flex flex-row gap-1 mx-auto" style="list-style: none; margin: 0; padding: 0;">
                     <li class="nav-item">
                         <asp:HyperLink ID="lnkInicio" runat="server" NavigateUrl="~/Home.aspx"
-                            CssClass="nav-link text-white-50">
+                            CssClass="nav-link">
                     <i class="bi bi-house-door me-1"></i>Inicio
                         </asp:HyperLink>
                     </li>
 
                     <%-- Dropdown Categorías --%>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white-50" href="#" role="button"
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-controller me-1"></i>Categorias
                         </a>
@@ -77,29 +91,20 @@
 
                     <li class="nav-item">
                         <asp:HyperLink ID="lnkOfertas" runat="server" NavigateUrl="~/Ofertas.aspx"
-                            CssClass="nav-link text-white-50">
+                            CssClass="nav-link">
                     <i class="bi bi-tags me-1"></i>Ofertas
                         </asp:HyperLink>
                     </li>
                     <li class="nav-item">
                         <asp:HyperLink ID="lnkNovedades" runat="server" NavigateUrl="~/Novedades.aspx"
-                            CssClass="nav-link text-white-50">
+                            CssClass="nav-link">
                     <i class="bi bi-newspaper me-1"></i>Novedades
                         </asp:HyperLink>
                     </li>
                 </ul>
 
                 <%-- Columna derecha: Sesión + Carrito + Buscador --%>
-                <div class="d-flex align-items-center gap-2" style="justify-content: flex-end;">
-
-                    <%-- Botón dinámico: cambia entre "Iniciar Sesión" y datos del usuario --%>
-                    <asp:LinkButton ID="lnkBtnSesion" runat="server"
-                        CssClass="btn btn-outline-light btn-sm rounded-pill px-3"
-                        OnClick="lnkBtnSesion_Click"
-                        Style="white-space: nowrap; text-decoration: none;">
-                        <i class="bi bi-person me-1"></i>
-                        <asp:Literal ID="litSesionTexto" runat="server" Text="Iniciar Sesion" />
-                    </asp:LinkButton>
+                <div class="d-flex align-items-center gap-2" style="margin-left: auto;">
 
                     <%-- Carrito con coso de cantidad --%>
                     <asp:LinkButton ID="lnkBtnCarrito" runat="server"
@@ -112,17 +117,16 @@
                     Style="background: linear-gradient(135deg, #e91e63, #9c27b0); font-size: 0.65rem; margin-left: 4px; padding: 2px 6px;" />
                     </asp:LinkButton>
 
-                    <%-- Buscador --%>
-                    <asp:TextBox ID="txtBuscar" runat="server"
-                        CssClass="TxtBuscar"
-                        placeholder="Buscá tu próximo juego..."
-                        AutoCompleteType="Disabled" />
+                    <%-- Botón dinámico: cambia entre "Iniciar Sesión" y datos del usuario --%>
+                    <asp:LinkButton ID="lnkBtnSesion" runat="server"
+                        CssClass="btn btn-outline-light btn-sm rounded-pill px-3"
+                        OnClick="lnkBtnSesion_Click"
+                        Style="white-space: nowrap; text-decoration: none;">
+                        <i class="bi bi-person me-1"></i>
+                        <asp:Literal ID="litSesionTexto" runat="server" Text="Iniciar Sesion" />
+                    </asp:LinkButton>
 
-                    <asp:Button ID="btnBuscar" runat="server"
-                        Text="BUSCAR"
-                        CssClass="btn-BuscarNav"
-                        OnClick="btnBuscar_Click"
-                        Style="background: linear-gradient(135deg, #e91e63 0%, #9c27b0 100%); border: none;" />
+
                 </div>
 
             </div>
@@ -209,10 +213,10 @@
                     </div>
 
                 </div>
-                
-            <%--linea qie divide y copy--%>
 
-            <hr class="footer-divider-line">
+                <%--linea qie divide y copy--%>
+
+                <hr class="footer-divider-line">
             </div>
 
             <div class="text-center text-white-50 small">

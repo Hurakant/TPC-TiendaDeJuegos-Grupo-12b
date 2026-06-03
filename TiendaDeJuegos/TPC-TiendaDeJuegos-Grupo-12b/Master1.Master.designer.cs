@@ -51,6 +51,24 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         protected global::System.Web.UI.WebControls.Image imgLogo;
 
         /// <summary>
+        /// txtBuscar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBuscar;
+
+        /// <summary>
+        /// btnBuscar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
+
+        /// <summary>
         /// lnkInicio control.
         /// </summary>
         /// <remarks>
@@ -87,24 +105,6 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         protected global::System.Web.UI.WebControls.HyperLink lnkNovedades;
 
         /// <summary>
-        /// lnkBtnSesion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkBtnSesion;
-
-        /// <summary>
-        /// litSesionTexto control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litSesionTexto;
-
-        /// <summary>
         /// lnkBtnCarrito control.
         /// </summary>
         /// <remarks>
@@ -123,22 +123,22 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         protected global::System.Web.UI.WebControls.Label lblCantidadCarrito;
 
         /// <summary>
-        /// txtBuscar control.
+        /// lnkBtnSesion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBuscar;
+        protected global::System.Web.UI.WebControls.LinkButton lnkBtnSesion;
 
         /// <summary>
-        /// btnBuscar control.
+        /// litSesionTexto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBuscar;
+        protected global::System.Web.UI.WebControls.Literal litSesionTexto;
 
         /// <summary>
         /// ContentPlaceHolder1 control.
