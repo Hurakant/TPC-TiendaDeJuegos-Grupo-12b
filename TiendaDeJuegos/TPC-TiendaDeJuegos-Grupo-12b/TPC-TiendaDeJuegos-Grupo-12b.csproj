@@ -68,8 +68,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Home.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="Resources\Logo\LogosfB.svg" />
     <Content Include="Resources\Logo\LogosfN.svg" />
+    <Content Include="Resources\StyleTPC\LoginStyle.css" />
     <Content Include="Resources\StyleTPC\MasterStyle.css" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -80,6 +82,13 @@
     </Compile>
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Master1.Master.cs">
       <DependentUpon>Master1.Master</DependentUpon>

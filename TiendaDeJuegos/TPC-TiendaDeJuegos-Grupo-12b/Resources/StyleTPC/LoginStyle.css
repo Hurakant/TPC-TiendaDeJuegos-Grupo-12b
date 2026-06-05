@@ -1,0 +1,93 @@
+﻿.login-container {
+    margin-top: 50px;
+    min-height: 70vh;
+    align-items: center;
+}
+
+/* login card*/
+.login-card {
+    background: rgba(18,18,26,.95);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 22px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(64,49,71,.45); 
+    backdrop-filter: blur(10px);
+    transition: .4s;
+}
+
+/*titulos de la card*/
+
+.login-titulo {
+    color: white;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.login-subtitulo {
+    color: #8f8f8f;
+    font-size: .9rem;
+}
+
+/*txt usuario y contraseña*/
+.txtUser,
+.txtPass {
+    width: 100%;
+    height: 45px;
+    background: #0d0d14;
+    color: white;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 12px;
+    padding: 0 15px;
+    transition: .3s;
+}
+
+.txtUser::placeholder {
+    color: #666;
+}
+
+.txtPass::placeholder {
+    color: #666;
+}
+
+.txtUser:focus {
+    border-color: #e91e63;
+    box-shadow: 0 0 12px rgba(233,30,99,.25);
+    outline: none;
+}
+
+.txtPass:focus {
+    border-color: #e91e63;
+    box-shadow: 0 0 12px rgba(233,30,99,.25);
+    outline: none;
+}
+
+/* boton ingresar*/
+.btnIngresar{
+    width:100%;
+    height:45px;
+    border:none;
+    border-radius:12px;
+    color:white;
+    font-weight:600;
+    letter-spacing:1px;
+    background:linear-gradient(135deg,#e91e63,#9c27b0);
+    transition:.3s;
+}
+
+.btnIngresar:hover{
+    transform:scale(1.02);
+    box-shadow:0 0 18px rgba(233,30,99,.35);
+}
+
+/*label cancelar*/
+
+.cancelar-link {
+    text-align: center;
+    color: rgb(209, 33, 128);
+    text-decoration: none;
+    transition: .3s;
+}
+
+.cancelar-link:hover{
+    color:white;
+}
