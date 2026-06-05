@@ -1,0 +1,201 @@
+﻿
+/* ---- VARIABLES ---- */
+:root {
+    --primary-pink: #e91e63;
+    --primary-purple: #9c27b0;
+    --gradient-pink-purple: linear-gradient(135deg, #e91e63 0%, #9c27b0 100%);
+    --bg-dark: #0a0a0f;
+    --bg-card: rgba(18, 18, 26, .95);
+    --border-subtle: rgba(233, 30, 99, 0.2);
+    --border-glass: rgba(255, 255, 255, .07);
+    --text-muted: #8f8f8f;
+}
+
+/* CARROUSEL */
+
+.home-carousel-wrapper {
+    margin-top: 28px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 0 40px rgba(233, 30, 99, .15), 0 20px 60px rgba(0,0,0,.6);
+    position: relative;
+}
+
+    /* Imagen del slide */
+    .home-carousel-wrapper .carousel-item img {
+        height: 500px;
+        object-fit: cover;
+        filter: brightness(.82);
+        transition: filter .4s ease;
+    }
+
+    .home-carousel-wrapper .carousel-item:hover img {
+        filter: brightness(.95);
+    }
+
+    /* Caption */
+    .home-carousel-wrapper .carousel-caption {
+        background: rgba(10, 10, 15, .82) !important;
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--border-subtle);
+        border-radius: 16px;
+        padding: 18px 24px !important;
+        bottom: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: max-content;
+        max-width: 80%;
+        text-align: left;
+    }
+
+        .home-carousel-wrapper .carousel-caption h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .home-carousel-wrapper .carousel-caption p {
+            color: var(--text-muted);
+            font-size: .85rem;
+            margin-bottom: 6px;
+        }
+
+        .home-carousel-wrapper .carousel-caption h5 {
+            background: var(--gradient-pink-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+    /* Controles del carousel */
+    .home-carousel-wrapper .carousel-control-prev,
+    .home-carousel-wrapper .carousel-control-next {
+        width: 46px;
+        height: 46px;
+        background: rgba(18, 18, 26, .85);
+        border: 1px solid var(--border-subtle);
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: background .3s, box-shadow .3s;
+        opacity: 1;
+    }
+
+    .home-carousel-wrapper .carousel-control-prev {
+        left: 18px;
+    }
+
+    .home-carousel-wrapper .carousel-control-next {
+        right: 18px;
+    }
+
+        .home-carousel-wrapper .carousel-control-prev:hover,
+        .home-carousel-wrapper .carousel-control-next:hover {
+            background: var(--primary-pink);
+            box-shadow: 0 0 16px rgba(233, 30, 99, .45);
+        }
+
+    .home-carousel-wrapper .carousel-control-prev-icon,
+    .home-carousel-wrapper .carousel-control-next-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+/* SECCIONES */
+
+.home-section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 3rem;
+    margin-bottom: 1.4rem;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 8px;
+}
+    .home-section-title::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--gradient-pink-purple);
+        border-radius: 50px;
+        opacity: .7;
+    }
+
+/* CARTAS */
+
+.game-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-glass);
+    border-radius: 18px;
+    overflow: hidden;
+    height: 100%;
+    transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    box-shadow: 0 6px 24px rgba(0,0,0,.4);
+    cursor: pointer;
+}
+
+    .game-card:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 14px 40px rgba(233, 30, 99, .3);
+        border-color: var(--border-subtle);
+    }
+
+    /* Imagen de la carta */
+    .game-card .card-img-top {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        transition: transform .4s ease;
+    }
+
+    .game-card:hover .card-img-top {
+        transform: scale(1.06);
+    }
+
+    /* Body de la carta */
+    .game-card .card-body {
+        background: var(--bg-card) !important;
+        padding: 14px 16px 18px;
+    }
+
+    .game-card .card-title {
+        color: #fff;
+        font-size: .95rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: unset;
+        word-break: break-word;
+    }
+
+    /* Precio */
+    .game-card .card-price {
+        background: var(--gradient-pink-purple);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 700;
+        font-size: .95rem;
+        margin: 0;
+    }
+
+/* Padding abajo global 
+    Yo la conocí bailando, perreando Rakatá, eh-eh
+    Bien suelta, desacatá'
+    Me miró y le dije: Échate pa' acá
+    Me dijo: Papi, vente tú, y me fui por detrá', tra
+*/
+
+.home-content-wrapper {
+    padding-bottom: 60px;
+}

@@ -79,6 +79,50 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                         }
                     }
                 },
+                new Producto
+                {
+                    IdProducto = 1,
+                    Nombre = "Elden Ring",
+                    Descripcion = "Action RPG de mundo abierto",
+                    ImagenUrl = "https://picsum.photos/id/1018/1200/500",
+                    Precio = 59999,
+                    Descuento = 0,
+                    Stock = 10,
+                    FechaLanzamiento = 2022,
+                    EsDigital = true,
+                    Activo = true,
+
+                    Categoria = new List<Categoria>
+                    {
+                        new Categoria
+                        {
+                            IdCategoria = 1,
+                            NombreCategoria = "RPG"
+                        }
+                    }
+                },
+                new Producto
+                {
+                    IdProducto = 1,
+                    Nombre = "Elden Ring",
+                    Descripcion = "Action RPG de mundo abierto",
+                    ImagenUrl = "https://picsum.photos/id/1018/1200/500",
+                    Precio = 59999,
+                    Descuento = 0,
+                    Stock = 10,
+                    FechaLanzamiento = 2022,
+                    EsDigital = true,
+                    Activo = true,
+
+                    Categoria = new List<Categoria>
+                    {
+                        new Categoria
+                        {
+                            IdCategoria = 1,
+                            NombreCategoria = "RPG"
+                        }
+                    }
+                },
 
                 new Producto
                 {

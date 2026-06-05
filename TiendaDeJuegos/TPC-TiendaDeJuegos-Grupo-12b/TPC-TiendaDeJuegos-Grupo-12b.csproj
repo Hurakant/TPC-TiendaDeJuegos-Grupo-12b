@@ -73,6 +73,7 @@
     <Content Include="Resources\Logo\LogosfN.svg" />
     <Content Include="Resources\StyleTPC\LoginStyle.css" />
     <Content Include="Resources\StyleTPC\MasterStyle.css" />
+    <Content Include="Resources\StyleTPC\Home.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
