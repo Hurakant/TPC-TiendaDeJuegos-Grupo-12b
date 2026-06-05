@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master1.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="TPC_TiendaDeJuegos_Grupo_12b.Home" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="Resources/StyleTPC/MasterStyle.css" rel="stylesheet" />
     <link href="Resources/StyleTPC/Home.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -58,41 +57,29 @@
 
         <h2 class="home-section-title">RPG</h2>
 
-        <div class="row">
-            <asp:Repeater ID="rptRpg" runat="server">
-                <ItemTemplate>
-                    <div class="col-md-3 mb-4">
-                        <div class="game-card card">
-                            <img src='<%# Eval("ImagenUrl") %>'
-                                class="card-img-top" />
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <%# Eval("Nombre") %>
-                                </h5>
-                                <p class="card-price">$ <%# Eval("Precio") %></p>
-                            </div>
+        <asp:Repeater ID="rptRpg" runat="server">
+            <ItemTemplate>
+                <div>
+                    <div>
+                        <img src='<%# Eval("ImagenUrl") %>'/>
+                        <div>
+                            <h5>
+                                <%# Eval("Nombre") %>
+                            </h5>
+                            <p>$ <%# Eval("Precio") %></p>
                         </div>
                     </div>
-                </ItemTemplate>
-            </asp:Repeater>
-        </div>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>
         <%-- ACCION --%>
         <h2 class="home-section-title">Acción</h2>
 
         <div class="row">
             <asp:Repeater ID="rptAccion" runat="server">
                 <ItemTemplate>
-                    <div class="col-md-3 mb-4">
-                        <div class="game-card card">
-                            <img src='<%# Eval("ImagenUrl") %>'
-                                class="card-img-top" />
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <%# Eval("Nombre") %>
-                                </h5>
-                                <p class="card-price">$ <%# Eval("Precio") %></p>
-                            </div>
-                        </div>
+                    <div>
+                        <%# Eval("Nombre") %>
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
@@ -103,17 +90,8 @@
         <div class="row">
             <asp:Repeater ID="rptShooter" runat="server">
                 <ItemTemplate>
-                    <div class="col-md-3 mb-4">
-                        <div class="game-card card">
-                            <img src='<%# Eval("ImagenUrl") %>'
-                                class="card-img-top" />
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <%# Eval("Nombre") %>
-                                </h5>
-                                <p class="card-price">$ <%# Eval("Precio") %></p>
-                            </div>
-                        </div>
+                    <div>
+                        <%# Eval("Nombre") %>
                     </div>
                 </ItemTemplate>
             </asp:Repeater>

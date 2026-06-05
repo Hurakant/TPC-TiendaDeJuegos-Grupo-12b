@@ -21,7 +21,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 rptCarousel.DataSource = productos;
                 rptCarousel.DataBind();
 
-                // Categorías wiwiwi
+                //categorías wiwiwi
                 rptRpg.DataSource = productos.Where(p =>
                     p.Categoria.Any(c => c.NombreCategoria == "RPG"));
 

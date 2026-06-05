@@ -131,53 +131,6 @@
     }
 
 /* CARTAS */
-
-.game-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-glass);
-    border-radius: 18px;
-    overflow: hidden;
-    height: 100%;
-    transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
-    box-shadow: 0 6px 24px rgba(0,0,0,.4);
-    cursor: pointer;
-}
-
-    .game-card:hover {
-        transform: translateY(-6px) scale(1.02);
-        box-shadow: 0 14px 40px rgba(233, 30, 99, .3);
-        border-color: var(--border-subtle);
-    }
-
-    /* Imagen de la carta */
-    .game-card .card-img-top {
-        width: 100%;
-        height: 180px;
-        object-fit: cover;
-        transition: transform .4s ease;
-    }
-
-    .game-card:hover .card-img-top {
-        transform: scale(1.06);
-    }
-
-    /* Body de la carta */
-    .game-card .card-body {
-        background: var(--bg-card) !important;
-        padding: 14px 16px 18px;
-    }
-
-    .game-card .card-title {
-        color: #fff;
-        font-size: .95rem;
-        font-weight: 600;
-        margin-bottom: 8px;
-        white-space: normal;
-        overflow: visible;
-        text-overflow: unset;
-        word-break: break-word;
-    }
-
     /* Precio */
     .game-card .card-price {
         background: var(--gradient-pink-purple);
