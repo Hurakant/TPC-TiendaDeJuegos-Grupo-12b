@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using System.Net.Http;
+using System.Data.SqlClient;
+using Newtonsoft.Json;
 
 namespace TPC_TiendaDeJuegos_Grupo_12b
 {
@@ -15,14 +18,14 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         {
             if (!IsPostBack)
             {
-                List<Producto> productos = ObtenerProductos();
+                List<Producto> productos = ObtenerProductosBD();
 
                 // Carousel principal de juegos
                 rptCarousel.DataSource = productos;
                 rptCarousel.DataBind();
 
                 //categorías wiwiwi
-                rptRpg.DataSource = productos.Where(p =>
+               /* rptRpg.DataSource = productos.Where(p =>
                     p.Categoria.Any(c => c.NombreCategoria == "RPG"));
 
                 rptAccion.DataSource = productos.Where(p =>
@@ -33,7 +36,9 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
                 rptRpg.DataBind();
                 rptAccion.DataBind();
-                rptShooter.DataBind();
+                rptShooter.DataBind();*/
+
+
             }
         }
 
@@ -51,6 +56,81 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                     : "carousel-item";
 
                 contador++;
+            }
+        }
+
+
+        protected async void btnProbar_Click(object sender, EventArgs e)
+        {
+            string apiKey = "049bd22f1dfb40d9b2a605b98f5b3621";
+
+            string url = $"https://api.rawg.io/api/games?key={apiKey}";
+
+            using (HttpClient cliente = new HttpClient())
+            {
+                HttpResponseMessage respuesta = await cliente.GetAsync(url);
+
+                if (!respuesta.IsSuccessStatusCode)
+                {
+                    txtResultado.Text = "Error: " + respuesta.StatusCode;
+                    return;
+                }
+
+                string json = await respuesta.Content.ReadAsStringAsync();
+
+                var datos = JsonConvert.DeserializeObject<RespuestaRAWG>(json);
+
+                string conexion =
+                               @"server=.\SQLEXPRESS;database=Productos;integrated security=true";
+
+                using (SqlConnection cn = new SqlConnection(conexion))
+                {
+                    cn.Open();
+
+                    foreach (var juego in datos.results.Take(20))
+                    {
+                        SqlCommand cmd = new SqlCommand(
+                        @"IF NOT EXISTS
+                  (
+                    SELECT 1
+                    FROM Juegos
+                    WHERE Id = @Id
+                  )
+                  INSERT INTO Juegos
+                  (
+                    Id,
+                    Nombre,
+                    FechaLanzamiento,
+                    Rating,
+                    Imagen
+                  )
+                  VALUES
+                  (
+                    @Id,
+                    @Nombre,
+                    @Fecha,
+                    @Rating,
+                    @Imagen
+                  )", cn);
+
+                        cmd.Parameters.AddWithValue("@Id", juego.id);
+                        cmd.Parameters.AddWithValue("@Nombre", juego.name);
+
+                        if (string.IsNullOrEmpty(juego.released))
+                            cmd.Parameters.AddWithValue("@Fecha", DBNull.Value);
+                        else
+                            cmd.Parameters.AddWithValue("@Fecha",
+                                DateTime.Parse(juego.released));
+
+                        cmd.Parameters.AddWithValue("@Rating", juego.rating);
+                        cmd.Parameters.AddWithValue("@Imagen",
+                            juego.background_image ?? "");
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                txtResultado.Text = "Juegos guardados correctamente.";
             }
         }
         private List<Producto> ObtenerProductos()
@@ -175,6 +255,45 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                     }
                 }
             };
+        }
+
+        private List<Producto> ObtenerProductosBD()
+        {
+            List<Producto> lista = new List<Producto>();
+
+            string conexion =
+                @"server=.\SQLEXPRESS;database=Productos;integrated security=true";
+
+            using (SqlConnection cn = new SqlConnection(conexion))
+            {
+                cn.Open();
+
+                SqlCommand cmd = new SqlCommand(
+                    "SELECT * FROM Juegos", cn);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    Producto aux = new Producto();
+
+                    aux.IdProducto = (int)dr["Id"];
+                    aux.Nombre = dr["Nombre"].ToString();
+
+                    // La imagen de RAWG está guardada en la columna Imagen
+                    aux.ImagenUrl = dr["Imagen"].ToString();
+
+                    // Valores temporales para que no se rompa el diseño
+                    aux.Descripcion = "Juego importado desde RAWG";
+                    aux.Precio = 0;
+
+                    aux.Categoria = new List<Categoria>();
+
+                    lista.Add(aux);
+                }
+            }
+
+            return lista;
         }
     }
 }

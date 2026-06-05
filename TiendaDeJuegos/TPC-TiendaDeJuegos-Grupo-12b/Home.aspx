@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master1.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="TPC_TiendaDeJuegos_Grupo_12b.Home" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master1.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="TPC_TiendaDeJuegos_Grupo_12b.Home" Async="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="Resources/StyleTPC/Home.css" rel="stylesheet" />
@@ -98,4 +98,23 @@
         </div>
     </div>
     <%-- TERMINAN LAS CARDS --%>
+
+    <%-- TERMINAN LAS CARDS --%>
+
+    <hr />
+
+    <h3>Prueba de Base de Datos</h3>
+
+    <asp:Button ID="btnProbar" runat="server"
+        Text="Obtener Juegos"
+        OnClick="btnProbar_Click" />
+
+    <br /><br />
+
+    <asp:TextBox ID="txtResultado"
+        runat="server"
+        TextMode="MultiLine"
+        Rows="5"
+        Width="800px">
+    </asp:TextBox>
 </asp:Content>
