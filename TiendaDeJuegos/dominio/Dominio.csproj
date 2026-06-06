@@ -47,6 +47,7 @@
     <Compile Include="FormaDeEntrega.cs" />
     <Compile Include="EstadoPedido.cs" />
     <Compile Include="Direccion.cs" />
+    <Compile Include="ImagenProducto.cs" />
     <Compile Include="Rol.cs" />
     <Compile Include="FormaDePago.cs" />
     <Compile Include="Pedido.cs" />
