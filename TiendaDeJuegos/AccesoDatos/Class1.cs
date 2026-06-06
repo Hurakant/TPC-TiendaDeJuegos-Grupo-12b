@@ -17,7 +17,7 @@ namespace AccesoDatos
         public AccesoDatos()
         {
             conexion = new SqlConnection(
-                @"server=.\SQLEXPRESS;database=Productos;integrated security=true");
+                @"Server=localhost,1433;Database=TP1;User Id=sa;Password=;TrustServerCertificate=True;");
         }
 
         public SqlConnection ObtenerConexion()

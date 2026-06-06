@@ -50,10 +50,7 @@
         </div>
         <%-- Termina Carrousel no wiiii --%>
         <%-- AQUI REPEATERS CARDS DE JUEGOS 
-  ♫ And when I felt like I was an old cardigan
-    Under someone's bed
-    You put me on and said I was your favorite ♫
-    RPG--%>
+        RPG--%>
 
         <h2 class="home-section-title">RPG</h2>
 
