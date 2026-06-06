@@ -1,0 +1,189 @@
+﻿.registrar-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 40px 15px;
+}
+
+.registro-card {
+    margin: auto;
+    background: rgba(18,18,26,.95);
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.07);
+    box-shadow: 0 10px 30px rgba(64,49,71,.45);
+    backdrop-filter: blur(10px);
+    max-width: 950px;
+    width: 100%;
+}
+
+.registro-form {
+    padding: 50px;
+}
+
+/* cosas izq*/
+
+.registro-info {
+    background: linear-gradient( 180deg, rgba(156,39,176,.12), rgba(10,10,15,.1) );
+    padding: 45px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-right: 1px solid rgba(255,255,255,.05);
+    align-items: center;
+    text-align: center;
+}
+
+.registro-info h2 {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    margin-top: 0;
+    line-height: 1.2;
+    white-space: normal;
+}
+
+.registro-info p {
+    color: #9c9c9c;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 260px;
+}
+
+/* form titulo*/
+
+.col-md-8 {
+    padding: 50px;
+}
+
+.TituloRegistro {
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+/*labels y txt*/
+
+.LblEmail {
+    text-align: left;
+    display: block;
+    color: #d4d4d4;
+    margin-bottom: 8px;
+    padding-left: 50px;
+}
+
+.lblPass {
+    text-align: left;
+    display: block;
+    color: #d4d4d4;
+    margin-bottom: 8px;
+    padding-left: 50px;
+}
+
+.TxtEmail {
+    display: block;
+    margin: 0 auto;
+    width: 500px;
+    height: 45px;
+    background: #0d0d14;
+    color: white;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.08);
+    padding: 0 15px;
+    transition: .3s;
+}
+
+.txtPass {
+    display: block;
+    margin: 0 auto;
+    width: 500px;
+    height: 45px;
+    background: #0d0d14;
+    color: white;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.08);
+    padding: 0 15px;
+    transition: .3s;
+}
+
+
+.TxtEmail::placeholder {
+    color: #666;
+}
+
+.txtPass::placeholder {
+    color: #666;
+}
+
+.txtPass:focus {
+    outline: none;
+    border-color: #9c27b0;
+    box-shadow: 0 0 12px rgba(156,39,176,.3);
+}
+
+.TxtEmail:focus {
+    outline: none;
+    border-color: #9c27b0;
+    box-shadow: 0 0 12px rgba(156,39,176,.3);
+}
+
+/*boton registrarse*/
+
+.btnRegistrarse {
+    justify-self: center;
+    width: 200px;
+    height: 45px;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+    background: linear-gradient( 135deg, #9c27b0, #673ab7 );
+    transition: .3s;
+}
+
+.btnRegistrarse:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 18px rgba(156,39,176,.4);
+}
+
+/*cancelar*/
+.cancelar-link {
+    text-align: center;
+    text-decoration: none;
+    color: #8d8d8d;
+    transition: .3s;
+}
+
+.cancelar-link:hover {
+    color: #e91e63;
+    text-shadow: 0 0 10px rgba(233,30,99,.5);
+}
+
+/*iniciar secion*/
+.InSec-link {
+    text-align: center;
+    color: rgb(209, 33, 128);
+    text-decoration: none;
+    transition: .3s;
+}
+
+.InSec-link:hover {
+    color: white;
+}
+
+
+/*img*/
+.imgLogo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+    margin-bottom: 40px;
+    pointer-events: none;
+}

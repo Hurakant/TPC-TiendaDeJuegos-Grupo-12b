@@ -1,7 +1,10 @@
 ﻿.login-container {
-    margin-top: 50px;
-    min-height: 70vh;
+    min-height: 80vh;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 40px 15px;
 }
 
 /* login card*/
@@ -12,7 +15,6 @@
     padding: 40px;
     box-shadow: 0 10px 30px rgba(64,49,71,.45); 
     backdrop-filter: blur(10px);
-    transition: .4s;
 }
 
 /*titulos de la card*/
@@ -90,4 +92,35 @@
 
 .cancelar-link:hover{
     color:white;
+}
+
+/*label registrarse*/
+
+.Registrarse-link {
+    text-align: center;
+    color: rgb(187, 99, 250);
+    text-decoration: none;
+    transition: .3s;
+}
+
+.Registrarse-link:hover {
+    color: white;
+}
+
+/* img encabezado*/
+
+.contEncabezado {
+    position: relative;
+    padding-top: 40px;
+}
+
+.loginlogo {
+    position: absolute;
+    top: -65px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: auto;
+    z-index: 10;
+    pointer-events: none;
 }

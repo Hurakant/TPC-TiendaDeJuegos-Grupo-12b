@@ -262,7 +262,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             List<Producto> lista = new List<Producto>();
 
             string conexion =
-                @"server=localhost; database=TP1; integrated security=false; User Id=sa; Password=Ansa543361@;";
+                "server=.\\SQLEXPRESS; database=Productos; integrated security=true;";
 
             using (SqlConnection cn = new SqlConnection(conexion))
             {

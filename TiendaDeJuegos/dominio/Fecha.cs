@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    internal class Fecha
+    public class Fecha
     {
     }
 }
