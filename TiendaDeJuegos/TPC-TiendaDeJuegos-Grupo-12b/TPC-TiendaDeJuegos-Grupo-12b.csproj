@@ -125,6 +125,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AccesoBD\AccesoBD.csproj">
+      <Project>{4e29237f-0e1b-4087-9120-e0130679d919}</Project>
+      <Name>AccesoBD</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AccesoDatos\Negocio.csproj">
       <Project>{6a3040e7-d8ef-4f3b-9e8e-b0706745805b}</Project>
       <Name>Negocio</Name>

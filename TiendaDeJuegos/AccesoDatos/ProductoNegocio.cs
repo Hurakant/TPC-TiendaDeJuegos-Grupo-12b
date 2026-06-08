@@ -6,8 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using AccesoBD;
 
-namespace AccesoDatos
+namespace dominio
 {
     internal class ProductoNegocio
     {

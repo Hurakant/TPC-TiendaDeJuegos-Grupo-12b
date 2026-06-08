@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6A3040E7-D8EF-4F3B-9E8E-B0706745805B}</ProjectGuid>
+    <ProjectGuid>{4E29237F-0E1B-4087-9120-E0130679D919}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AccesoDatos</RootNamespace>
-    <AssemblyName>AccesoDatos</AssemblyName>
-    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <RootNamespace>AccesoBD</RootNamespace>
+    <AssemblyName>AccesoBD</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -41,19 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CarritoNegocio.cs" />
-    <Compile Include="ProductoNegocio.cs" />
+    <Compile Include="AccesoDatos.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AccesoBD\AccesoBD.csproj">
-      <Project>{4e29237f-0e1b-4087-9120-e0130679d919}</Project>
-      <Name>AccesoBD</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\dominio\dominio.csproj">
-      <Project>{1dad7902-cd57-4dbf-9563-7c3ed3fd44c3}</Project>
-      <Name>dominio</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
