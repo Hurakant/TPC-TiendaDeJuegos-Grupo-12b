@@ -283,7 +283,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                     // La imagen de RAWG está guardada en la columna Imagen
                     aux.ImagenUrl = dr["Imagen"].ToString();
 
-                    // Valores temporales para que no se rompa el diseño
+                    //  para que no se rompa el diseño
                     aux.Descripcion = "Juego importado desde RAWG";
                     aux.Precio = 0;
 
