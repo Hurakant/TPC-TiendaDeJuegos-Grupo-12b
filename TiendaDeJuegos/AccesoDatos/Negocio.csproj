@@ -7,8 +7,8 @@
     <ProjectGuid>{6A3040E7-D8EF-4F3B-9E8E-B0706745805B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AccesoDatos</RootNamespace>
-    <AssemblyName>AccesoDatos</AssemblyName>
+    <RootNamespace>Negocio</RootNamespace>
+    <AssemblyName>Negocio</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CarritoNegocio.cs" />
+    <Compile Include="FormaDeEntregaNegocio.cs" />
+    <Compile Include="FormaDePagoNegocio.cs" />
+    <Compile Include="PedidoNegocio.cs" />
     <Compile Include="ProductoNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
