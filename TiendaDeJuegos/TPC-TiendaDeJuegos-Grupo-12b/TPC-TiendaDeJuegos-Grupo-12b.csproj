@@ -74,11 +74,13 @@
   <ItemGroup>
     <Content Include="Home.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="Registro.aspx" />
     <Content Include="Resources\Logo\LogosfB.svg" />
     <Content Include="Resources\Logo\LogosfN.svg" />
     <Content Include="Resources\StyleTPC\LoginStyle.css" />
     <Content Include="Resources\StyleTPC\MasterStyle.css" />
     <Content Include="Resources\StyleTPC\Home.css" />
+    <Content Include="Resources\StyleTPC\RegistroStyle.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +106,13 @@
       <DependentUpon>Master1.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registro.aspx.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registro.aspx.designer.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Master1.Master" />
@@ -116,13 +125,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AccesoDatos\AccesoDatos.csproj">
+    <ProjectReference Include="..\AccesoDatos\Negocio.csproj">
       <Project>{6a3040e7-d8ef-4f3b-9e8e-b0706745805b}</Project>
-      <Name>AccesoDatos</Name>
+      <Name>Negocio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dominio\Dominio.csproj">
+    <ProjectReference Include="..\dominio\dominio.csproj">
       <Project>{1dad7902-cd57-4dbf-9563-7c3ed3fd44c3}</Project>
-      <Name>Dominio</Name>
+      <Name>dominio</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

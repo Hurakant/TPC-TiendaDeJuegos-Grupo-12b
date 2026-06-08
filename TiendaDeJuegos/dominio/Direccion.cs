@@ -16,6 +16,6 @@ namespace Dominio
         public string CodigoPostal { get; set; }
         public string Observaciones { get; set; }
         public bool EsPrincipal { get; set; }
-        public bool DireccionActiva {  get; set; }
+        public bool Activa {  get; set; }
     }
 }

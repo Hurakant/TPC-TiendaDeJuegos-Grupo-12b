@@ -1,52 +1,55 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master1.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="TPC_TiendaDeJuegos_Grupo_12b.Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+     <link href="Resources/StyleTPC/LoginStyle.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    
-   <div class="row justify-content-center login-container">
-    <div class="col-md-5">
 
-        <div class="login-card">
+    <div class="row justify-content-center login-container">
+        <div class="col-md-5">
 
-            <div class="text-center mb-4">
-                <h2 class="login-titulo">Iniciar sesión</h2>
-                <p class="login-subtitulo">
-                    Accedé a tu cuenta de NovaHub
-                </p>
-            </div>
+            <div class="login-card">
 
-            <div class="mb-3">
+                <div class="text-center mb-4" cssClass="contEncabezado">
+                     <asp:Image ID="imgLogoLogin" runat="server" ImageUrl="Resources/Logo/logosfB.svg" CssClass="loginlogo" AlternateText="NovaHub" />
 
-                <%-- usuario --%>
-                <label class="form-label login-label">Usuario</label>
+                    <h2 class="login-titulo">Iniciar sesión</h2>
+                    <p class="login-subtitulo">
+                        Accedé a tu cuenta de NovaHub
+                    </p>
+                </div>
 
-                <asp:TextBox ID="TxtUser" runat="server" placeholder="Nombre de usuario" CssClass="txtUser">
-                </asp:TextBox>
+                <div class="mb-3">
 
-            </div>
+                    <%-- usuario --%>
+                    <label class="form-label login-label">Email</label>
 
-            <div class="mb-4">
-                <%-- contraseña --%>
-                <label class="form-label login-label">Contraseña</label>
+                    <asp:TextBox ID="TxtUser" runat="server" placeholder="TuEmail@gmail.com" CssClass="txtUser"> </asp:TextBox>
 
-                <asp:TextBox ID="TxtPass" runat="server" placeholder="Contraseña" TextMode="Password" CssClass="txtPass">
-                </asp:TextBox>
+                </div>
 
-            </div>
+                <div class="mb-4">
+                    <%-- contraseña --%>
+                    <label class="form-label login-label">Contraseña</label>
 
-            <div class="d-grid gap-3">
+                    <asp:TextBox ID="TxtPass" runat="server" placeholder="Contraseña" TextMode="Password" CssClass="txtPass">
+                    </asp:TextBox>
 
-                <asp:Button Text="Ingresar" CssClass="btnIngresar" id="btnLogin" OnClick="btnLogin_Click" runat="server" />
+                </div>
 
-                <a href="Home.aspx" class="cancelar-link"> Cancelar </a>
+                <div class="d-grid gap-3">
+
+                    <asp:Button Text="Ingresar" CssClass="btnIngresar" ID="btnLogin" OnClick="btnLogin_Click" runat="server" />
+
+                    <a href="Home.aspx" class="cancelar-link">Cancelar </a>
+                    <a href="Registro.aspx" class="Registrarse-link">No tienes una cuenta? Registrate! </a>
+
+                </div>
 
             </div>
 
         </div>
-
     </div>
-</div>
 
 </asp:Content>

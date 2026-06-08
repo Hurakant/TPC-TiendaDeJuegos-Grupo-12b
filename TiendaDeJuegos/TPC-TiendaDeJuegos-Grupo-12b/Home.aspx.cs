@@ -81,7 +81,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 var datos = JsonConvert.DeserializeObject<RespuestaRAWG>(json);
 
                 string conexion =
-                               @"server=.\SQLEXPRESS;database=Productos;integrated security=true";
+                               @"Server=localhost,1433;Database=TP1;User Id=sa;Password=;TrustServerCertificate=True;";
 
                 using (SqlConnection cn = new SqlConnection(conexion))
                 {
@@ -262,7 +262,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             List<Producto> lista = new List<Producto>();
 
             string conexion =
-                @"server=.\SQLEXPRESS;database=Productos;integrated security=true";
+                "server=.\\SQLEXPRESS; database=Productos; integrated security=true;";
 
             using (SqlConnection cn = new SqlConnection(conexion))
             {

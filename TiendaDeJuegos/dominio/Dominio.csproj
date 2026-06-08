@@ -43,9 +43,11 @@
   <ItemGroup>
     <Compile Include="Carrito.cs" />
     <Compile Include="Categoria.cs" />
+    <Compile Include="Fecha.cs" />
     <Compile Include="FormaDeEntrega.cs" />
     <Compile Include="EstadoPedido.cs" />
     <Compile Include="Direccion.cs" />
+    <Compile Include="ImagenProducto.cs" />
     <Compile Include="Rol.cs" />
     <Compile Include="FormaDePago.cs" />
     <Compile Include="Pedido.cs" />

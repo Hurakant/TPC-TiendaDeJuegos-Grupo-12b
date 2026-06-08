@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public enum Rol
+    public class Fecha
     {
-        Cliente = 1,
-        Vendedor = 2,
-        Admin = 3
     }
 }
