@@ -9,6 +9,7 @@ namespace dominio
     public enum FormaDeEntrega
     {
         RetiroEnLocal = 1,
-        EnvioADomicilio = 2
+        EnvioADomicilio = 2,
+        CodigoPorEmail = 3
     }
 }
