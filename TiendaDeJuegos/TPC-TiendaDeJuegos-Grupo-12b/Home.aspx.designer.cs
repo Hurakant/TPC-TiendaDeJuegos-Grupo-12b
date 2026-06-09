@@ -15,6 +15,15 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
     {
 
         /// <summary>
+        /// lblBienvenida control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBienvenida;
+
+        /// <summary>
         /// rptCarousel control.
         /// </summary>
         /// <remarks>

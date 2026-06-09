@@ -1,4 +1,6 @@
-﻿using System;
+﻿using dominio;
+using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,12 +13,39 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["usuarioLogueado"] != null)
+            {
+                Response.Redirect("~/Home.aspx");
+            }
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Home.aspx");
+            Usuario usuario;
+            UsuarioNegocio negocio = new UsuarioNegocio();
+
+            try
+            {
+                usuario = new Usuario();
+
+                usuario.Email = TxtUser.Text;
+                usuario.Contraseña = TxtPass.Text;
+
+                if (negocio.Loguear(usuario))
+                {
+                    Session.Add("usuarioLogueado", usuario);
+                    Response.Redirect("Home.aspx");
+                }
+                else
+                {
+                    lblError.Visible = true;
+                    lblError.Text = "Email o contraseña incorrectos, vuelva a intentar!";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

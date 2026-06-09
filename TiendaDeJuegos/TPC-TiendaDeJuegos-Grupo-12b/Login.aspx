@@ -42,6 +42,7 @@
 
                     <asp:Button Text="Ingresar" CssClass="btnIngresar" ID="btnLogin" OnClick="btnLogin_Click" runat="server" />
 
+                    <asp:Label Text="Error" runat="server" ID="lblError" Visible="false" />
                     <a href="Home.aspx" class="cancelar-link">Cancelar </a>
                     <a href="Registro.aspx" class="Registrarse-link">No tienes una cuenta? Registrate! </a>
 

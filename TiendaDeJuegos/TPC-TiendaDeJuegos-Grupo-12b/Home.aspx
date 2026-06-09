@@ -4,6 +4,10 @@
     <link href="Resources/StyleTPC/Home.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <%-- lbl de bienvenida de user logueado --%>
+    <asp:Label Text="nombre" runat="server" ID="lblBienvenida" Visible="false" />
+
     <%-- Carrousel wiiii --%>
     <div class="home-content-wrapper">
         <div class="container mt-4">
@@ -58,7 +62,7 @@
             <ItemTemplate>
                 <div>
                     <div>
-                        <img src='<%# Eval("ImagenUrl") %>'/>
+                        <img src='<%# Eval("ImagenUrl") %>' />
                         <div>
                             <h5>
                                 <%# Eval("Nombre") %>
@@ -106,7 +110,8 @@
         Text="Obtener Juegos"
         OnClick="btnProbar_Click" />
 
-    <br /><br />
+    <br />
+    <br />
 
     <asp:TextBox ID="txtResultado"
         runat="server"

@@ -25,19 +25,30 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 rptCarousel.DataBind();
 
                 //categorías wiwiwi
-               /* rptRpg.DataSource = productos.Where(p =>
-                    p.Categoria.Any(c => c.NombreCategoria == "RPG"));
+                /* rptRpg.DataSource = productos.Where(p =>
+                     p.Categoria.Any(c => c.NombreCategoria == "RPG"));
 
-                rptAccion.DataSource = productos.Where(p =>
-                    p.Categoria.Any(c => c.NombreCategoria == "Accion"));
+                 rptAccion.DataSource = productos.Where(p =>
+                     p.Categoria.Any(c => c.NombreCategoria == "Accion"));
 
-                rptShooter.DataSource = productos.Where(p =>
-                    p.Categoria.Any(c => c.NombreCategoria == "Shooter"));
+                 rptShooter.DataSource = productos.Where(p =>
+                     p.Categoria.Any(c => c.NombreCategoria == "Shooter"));
 
-                rptRpg.DataBind();
-                rptAccion.DataBind();
-                rptShooter.DataBind();*/
+                 rptRpg.DataBind();
+                 rptAccion.DataBind();
+                 rptShooter.DataBind();*/
 
+
+                if (Session["usuarioLogueado"] != null)
+                {
+                    Usuario user = (Usuario)Session["usuarioLogueado"];
+                    lblBienvenida.Visible = true;
+                    lblBienvenida.Text = "Bienvenid@, " + user.Nombre;
+                }
+                else
+                {
+                    lblBienvenida.Visible = false;
+                }
 
             }
         }
