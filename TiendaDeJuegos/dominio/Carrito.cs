@@ -18,4 +18,6 @@ namespace dominio
 
         public List<CarritoItem> ItemCarrito { get; set; } = new List<CarritoItem>();
     }
+
+
 }

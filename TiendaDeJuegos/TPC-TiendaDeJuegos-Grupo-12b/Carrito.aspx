@@ -11,7 +11,6 @@
 
             <div class="login-card">
 
-               
                 <div class="text-center mb-4">
 
                     <asp:Image ID="imgCarrito" runat="server"
@@ -26,13 +25,37 @@
                     </p>
                 </div>
 
-                <!-- LISTA DE PRODUCTOS (BÁSICO) -->
+                <!-- LISTA DE PRODUCTOS -->
                 <div class="mb-3">
 
                     <asp:GridView ID="gvCarrito" runat="server"
-                        CssClass="table table-dark table-hover"
-                        AutoGenerateColumns="true">
-                    </asp:GridView>
+    CssClass="table table-dark table-hover"
+    AutoGenerateColumns="False"
+    OnRowCommand="gvCarrito_RowCommand">
+
+    <Columns>
+
+        <asp:BoundField DataField="Nombre" HeaderText="Producto" />
+        <asp:BoundField DataField="Precio" HeaderText="Precio" />
+        <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
+        <asp:BoundField DataField="Subtotal" HeaderText="Subtotal" />
+
+        <asp:TemplateField HeaderText="Acción">
+            <ItemTemplate>
+                <asp:Button ID="btnEliminar"
+                    runat="server"
+                    Text="Eliminar"
+                    CssClass="btn btn-danger btn-sm"
+                    CommandName="Eliminar"
+                    CommandArgument='<%# Eval("IdProducto") %>' />
+            </ItemTemplate>
+        </asp:TemplateField>
+
+    </Columns>
+
+</asp:GridView>
+
+                    
 
                 </div>
 
@@ -46,6 +69,8 @@
                     <asp:Label ID="lblTotal" runat="server"
                         Text="$0"
                         CssClass="login-titulo" />
+                    <asp:Label ID="lblMensaje" runat="server" CssClass="text-success" />
+                    <asp:Label ID="lblDebug" runat="server" ForeColor="Red" />
 
                 </div>
 
@@ -63,6 +88,17 @@
                         Text="Vaciar carrito"
                         CssClass="btn btn-outline-danger"
                         OnClick="btnVaciar_Click" />
+
+                    <asp:DropDownList ID="ddlEntrega" runat="server">
+                        <asp:ListItem Value="1">Retiro en local</asp:ListItem>
+                        <asp:ListItem Value="2">Envío a domicilio</asp:ListItem>
+                        <asp:ListItem Value="3">Código por email</asp:ListItem>
+                    </asp:DropDownList>
+
+                    <asp:Button ID="btnAgregarTest" runat="server"
+    Text="Agregar producto de prueba"
+    CssClass="btn btn-primary"
+    OnClick="btnAgregarTest_Click" />
 
                 </div>
 

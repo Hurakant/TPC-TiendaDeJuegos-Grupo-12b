@@ -51,6 +51,24 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         protected global::System.Web.UI.WebControls.Label lblTotal;
 
         /// <summary>
+        /// lblMensaje control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMensaje;
+
+        /// <summary>
+        /// lblDebug control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDebug;
+
+        /// <summary>
         /// btnComprar control.
         /// </summary>
         /// <remarks>
@@ -67,5 +85,23 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnVaciar;
+
+        /// <summary>
+        /// ddlEntrega control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlEntrega;
+
+        /// <summary>
+        /// btnAgregarTest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarTest;
     }
 }

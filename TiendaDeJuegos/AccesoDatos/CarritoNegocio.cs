@@ -1,15 +1,10 @@
 ﻿using dominio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
+using System.Linq;
 
 namespace Negocio
 {
     public class CarritoNegocio
-
     {
         private Carrito carrito;
 
@@ -17,12 +12,15 @@ namespace Negocio
         {
             this.carrito = carrito;
         }
+
+        // AGREGAR PRODUCTO
         public void AgregarProducto(Producto producto, int cantidad)
         {
-            var item = carrito.ItemCarrito
-        .FirstOrDefault(x => x.IdProducto == producto.IdProducto);
+            if (producto == null || cantidad <= 0)
+                return;
 
-            decimal precioFinal = producto.Precio;
+            var item = carrito.ItemCarrito
+                .FirstOrDefault(x => x.IdProducto == producto.IdProducto);
 
             if (item != null)
             {
@@ -34,31 +32,48 @@ namespace Negocio
                 {
                     IdProducto = producto.IdProducto,
                     Nombre = producto.Nombre,
-                    Precio = precioFinal,
+                    Precio = producto.Precio,
                     Cantidad = cantidad
                 });
             }
-
         }
 
+        // ELIMINAR PRODUCTO
         public void EliminarProducto(int idProducto)
         {
             var item = carrito.ItemCarrito
-        .FirstOrDefault(x => x.IdProducto == idProducto);
+                .FirstOrDefault(x => x.IdProducto == idProducto);
 
             if (item != null)
                 carrito.ItemCarrito.Remove(item);
-
         }
 
-        public void ModificarCantidad()
+        // MODIFICAR CANTIDAD
+        public void ModificarCantidad(int idProducto, int cantidad)
         {
+            var item = carrito.ItemCarrito
+                .FirstOrDefault(x => x.IdProducto == idProducto);
 
+            if (item != null)
+                item.Cantidad = cantidad;
         }
 
+        // VACIAR CARRITO
+        public void VaciarCarrito()
+        {
+            carrito.ItemCarrito.Clear();
+        }
+
+        // CALCULAR TOTAL
         public decimal CalcularTotal()
         {
-            return 0;
+            return carrito.ItemCarrito.Sum(x => x.Subtotal);
+        }
+
+        // CANTIDAD ITEMS
+        public int CantidadTotalItems()
+        {
+            return carrito.ItemCarrito.Sum(x => x.Cantidad);
         }
     }
 }
