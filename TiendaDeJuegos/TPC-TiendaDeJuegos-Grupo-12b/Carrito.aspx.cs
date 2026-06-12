@@ -1,6 +1,8 @@
 ﻿using dominio;
 using Negocio;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI;
 
 namespace TPC_TiendaDeJuegos_Grupo_12b
@@ -53,10 +55,38 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 return;
             }
 
+            // 1. Crear lista de pedidos si no existe
+            if (Session["Pedidos"] == null)
+                Session["Pedidos"] = new List<Pedido>();
+
+            var pedidos = (List<Pedido>)Session["Pedidos"];
+
+            // 2. Crear pedido
+            Pedido pedido = new Pedido
+            {
+                IdPedido = pedidos.Count + 1,
+                Fecha = DateTime.Now,
+                Estado = EstadoPedido.Pendiente,
+                FormaDeEntrega = (FormaDeEntrega)Convert.ToInt32(ddlEntrega.SelectedValue),
+
+                Detalle = carrito.ItemCarrito.ToList()
+            };
+
+            // 3. Guardar pedido
+            pedidos.Add(pedido);
+
+            // 4. Vaciar carrito
             carritoNegocio.VaciarCarrito();
             CargarCarrito();
 
-            lblMensaje.Text = "Compra realizada correctamente ✔";
+          //  lblMensaje.Text = "Pedido generado correctamente ";
+
+            var ultimo = pedidos.Last();
+
+            lblMensaje.Text =
+            "Pedido OK  | ID: " + ultimo.IdPedido +
+            " | Total: $" + ultimo.Total +
+            " | Items: " + ultimo.Detalle.Count;
         }
 
         protected void btnAgregarTest_Click(object sender, EventArgs e)
@@ -89,6 +119,8 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 lblMensaje.Text = "Producto eliminado ✔";
             }
         }
+
+        
 
     }
 }
