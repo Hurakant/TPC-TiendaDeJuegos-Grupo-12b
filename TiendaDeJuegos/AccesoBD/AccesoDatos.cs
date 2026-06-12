@@ -72,6 +72,34 @@ namespace AccesoBD
             }
         }
 
+        public int ejecutarAccionScalar()
+        {
+            comando.Connection = conexion;
+            try
+            {
+                conexion.Open();
+                return int.Parse(comando.ExecuteScalar().ToString());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            //CREATE PROCEDURE SP_InsertarUsuario
+            //    @Nombre VARCHAR(50),
+            //    @Apellido VARCHAR(50),
+            //    @Email VARCHAR(100),
+            //    @Contrasena VARCHAR(50),
+            //    @Telefono VARCHAR(20)
+            //AS
+            //BEGIN
+            //    INSERT INTO Usuario(Nombre, Apellido, Email, Contrasena, Telefono, Rol)
+            //    VALUES(@Nombre, @Apellido, @Email, @Contrasena, @Telefono, 1)
+
+            //    SELECT scope_identity()
+            //END
+        }
+
         //Cerrar conexion
         public void cerrarConexion()
         {

@@ -37,8 +37,8 @@ IDProducto INT IDENTITY(1,1) PRIMARY KEY,
 Titulo NVARCHAR(200) NOT NULL,
 Descripcion NVARCHAR(MAX),
 
-Precio DECIMAL(18,2) NOT NULL,
-Stock INT NOT NULL DEFAULT 0,
+Precio DECIMAL(18,2) NOT NULL CHECK (Precio > 0),
+Stock INT NOT NULL DEFAULT 0 CHECK (Stock >= 0) ,
 
 Activo BIT NOT NULL DEFAULT 1,
 
@@ -47,7 +47,6 @@ IDCategoria INT NOT NULL,
 CONSTRAINT FK_Producto_Categoria
     FOREIGN KEY (IDCategoria)
     REFERENCES Categoria(IDCategoria)
-
 
 );
 GO
@@ -69,7 +68,7 @@ Contrasena NVARCHAR(255) NOT NULL,
 
 Telefono NVARCHAR(20),
 
-Rol NVARCHAR(50) NOT NULL DEFAULT 'Cliente',
+Rol INT NOT NULL CHECK (Rol BETWEEN 1 AND 3),
 
 Activo BIT NOT NULL DEFAULT 1,
 
@@ -184,8 +183,9 @@ CREATE TABLE Pedido
 (
 IDPedido INT IDENTITY(1,1) PRIMARY KEY,
 
-
 IDUsuario INT NOT NULL,
+
+ImagenUrl NVARCHAR(500),
 
 FechaCreacion DATETIME NOT NULL DEFAULT GETDATE(),
 
@@ -227,9 +227,9 @@ IDDetallePedido INT IDENTITY(1,1) PRIMARY KEY,
 IDPedido INT NOT NULL,
 IDProducto INT NOT NULL,
 
-Cantidad INT NOT NULL,
+Cantidad INT NOT NULL CHECK (Cantidad > 0),
 
-PrecioUnitario DECIMAL(18,2) NOT NULL,
+PrecioUnitario DECIMAL(18,2) NOT NULL CHECK (PrecioUnitario >= 0),
 Subtotal DECIMAL(18,2) NOT NULL,
 
 CONSTRAINT FK_DetallePedido_Pedido
@@ -270,4 +270,48 @@ VALUES
 ('Entregado'),
 ('Cancelado');
 GO
+
+
+
+INSERT INTO Usuario
+(
+    Nombre,
+    Apellido,
+    Email,
+    Contrasena,
+    Telefono,
+    Rol
+)
+VALUES
+
+-- ADMIN
+('Admin', 'NovaHub', 'admin@gmail.com', '1234', '111111111', 3),
+
+-- VENDEDORES
+('Juan', 'Perez', 'vendedor1@gmail.com', '1234', '222222222', 2),
+('Maria', 'Gomez', 'vendedor2@gmail.com', '1234', '333333333', 2),
+
+-- CLIENTES
+('Carlos', 'Lopez', 'cliente1@gmail.com', '1234', '444444444', 1),
+('Ana', 'Martinez', 'cliente2@gmail.com', '1234', '555555555', 1),
+('Lucas', 'Fernandez', 'cliente3@gmail.com', '1234', '666666666', 1),
+('Sofia', 'Rodriguez', 'cliente4@gmail.com', '1234', '777777777', 1);
+GO
+
+
+-- sp para el registro :D
+--CREATE PROCEDURE SP_InsertarUsuario
+--    @Nombre VARCHAR(50),
+--    @Apellido VARCHAR(50),
+--    @Email VARCHAR(100),
+--    @Contrasena VARCHAR(50),
+--    @Telefono VARCHAR(20)
+--AS
+--BEGIN
+--    INSERT INTO Usuario (Nombre, Apellido, Email, Contrasena, Telefono, Rol) 
+--    VALUES (@Nombre, @Apellido, @Email, @Contrasena, @Telefono, 1)
+
+--    SELECT scope_identity() 
+--END
+
 

@@ -127,7 +127,6 @@
                         <asp:Literal ID="litSesionTexto" runat="server" Text="Iniciar Sesion" />
                     </asp:LinkButton>
 
-
                 </div>
 
             </div>

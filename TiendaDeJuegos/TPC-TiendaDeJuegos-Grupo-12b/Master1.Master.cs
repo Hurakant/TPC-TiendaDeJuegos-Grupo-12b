@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using dominio;
 
 namespace TPC_TiendaDeJuegos_Grupo_12b
 {
@@ -22,6 +23,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         {
             if (!IsPostBack)
             {
+
                 Session["CantidadCarrito"] = 777;
                 CargarCategorias();
                 ActualizarSesion();
@@ -45,13 +47,15 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
         public void ActualizarSesion()
         {
-            if (Session["Usuario"] != null)
+            if (Session["usuarioLogueado"] != null)
             {
-                litSesionTexto.Text = Session["Usuario"].ToString();
+                Usuario user = (Usuario)Session["usuarioLogueado"];
+
+                litSesionTexto.Text = "Mi Cuenta";
             }
             else
             {
-                litSesionTexto.Text = "Iniciar Sesion";
+                litSesionTexto.Text = "Iniciar Sesión";
             }
         }
 
@@ -67,10 +71,16 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
         protected void lnkBtnSesion_Click(object sender, EventArgs e)
         {
-            if (Session["Usuario"] != null)
-                Response.Redirect("~/MiCuenta.aspx");
+            if (Session["usuarioLogueado"] != null)
+            {
+                Response.Redirect("MiCuenta.aspx");
+            }
+
             else
-                Response.Redirect("~/Login.aspx");
+            {
+                Response.Redirect("Login.aspx");
+            }
+                
         }
 
         protected void lnkBtnCarrito_Click(object sender, EventArgs e)
@@ -84,5 +94,6 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             if (!string.IsNullOrEmpty(termino))
                 Response.Redirect($"~/Busqueda.aspx?q={Server.UrlEncode(termino)}");
         }
+
     }
 }
