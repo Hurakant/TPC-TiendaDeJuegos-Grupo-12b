@@ -23,7 +23,7 @@ namespace AccesoBD
             //Conexion a la base de datos, aqui use la mia pero cambienla cuando la vayan a usar, o usamos env path
             //server=.\\SQLEXPRESS; database=CATALOGO_P3_DB; integrated security=true;
             //server=localhost; database=NovaHub; integrated security=false; User Id=sa; Password=;
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=NovaHub; integrated security=true;");
+            conexion = new SqlConnection("server=localhost; database=NovaHub; integrated security=false; User Id=sa; Password=;");
             comando = new SqlCommand();
         }
         //Esto es para colocar la consulta

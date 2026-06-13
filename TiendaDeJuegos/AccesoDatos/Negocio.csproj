@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CarritoNegocio.cs" />
+    <Compile Include="CategoriaNegocio.cs" />
     <Compile Include="FormaDeEntregaNegocio.cs" />
     <Compile Include="FormaDePagoNegocio.cs" />
     <Compile Include="PedidoNegocio.cs" />

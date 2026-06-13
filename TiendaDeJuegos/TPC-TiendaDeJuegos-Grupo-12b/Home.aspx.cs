@@ -18,7 +18,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         {
             if (!IsPostBack)
             {
-                List<Producto> productos = ObtenerProductosBD();
+                List<Producto> productos = ObtenerProductos();
 
                 // Carousel principal de juegos
                 rptCarousel.DataSource = productos;
@@ -157,7 +157,6 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                     Precio = 59999,
                     Descuento = 0,
                     Stock = 10,
-                    FechaLanzamiento = 2022,
                     EsDigital = true,
                     Activo = true,
 
@@ -179,7 +178,6 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                     Precio = 59999,
                     Descuento = 0,
                     Stock = 10,
-                    FechaLanzamiento = 2022,
                     EsDigital = true,
                     Activo = true,
 
@@ -201,7 +199,6 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                     Precio = 59999,
                     Descuento = 0,
                     Stock = 10,
-                    FechaLanzamiento = 2022,
                     EsDigital = true,
                     Activo = true,
 
@@ -224,7 +221,6 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                     Precio = 44999,
                     Descuento = 15,
                     Stock = 5,
-                    FechaLanzamiento = 2020,
                     EsDigital = true,
                     Activo = true,
 
@@ -252,7 +248,6 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                     Precio = 39999,
                     Descuento = 0,
                     Stock = 20,
-                    FechaLanzamiento = 2023,
                     EsDigital = true,
                     Activo = true,
 
@@ -266,45 +261,6 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                     }
                 }
             };
-        }
-
-        private List<Producto> ObtenerProductosBD()
-        {
-            List<Producto> lista = new List<Producto>();
-
-            string conexion =
-                "server=.\\SQLEXPRESS; database=Productos; integrated security=true;";
-
-            using (SqlConnection cn = new SqlConnection(conexion))
-            {
-                cn.Open();
-
-                SqlCommand cmd = new SqlCommand(
-                    "SELECT * FROM Juegos", cn);
-
-                SqlDataReader dr = cmd.ExecuteReader();
-
-                while (dr.Read())
-                {
-                    Producto aux = new Producto();
-
-                    aux.IdProducto = (int)dr["Id"];
-                    aux.Nombre = dr["Nombre"].ToString();
-
-                    // La imagen de RAWG está guardada en la columna Imagen
-                    aux.ImagenUrl = dr["Imagen"].ToString();
-
-                    //  para que no se rompa el diseño
-                    aux.Descripcion = "Juego importado desde RAWG";
-                    aux.Precio = 0;
-
-                    aux.Categoria = new List<Categoria>();
-
-                    lista.Add(aux);
-                }
-            }
-
-            return lista;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace dominio
         public DateTime FechaLanzamiento { get; set; }
         public bool EsDigital { get; set; }
         public bool Activo { get; set; }
-        public List<Categoria> Categoria { get; set; } = new();
-        public List<Accesibilidad> Accesibilidad { get; set; } = new();
+        public List<Categoria> Categoria { get; set; } = new List<Categoria>();
+        public List<Accesibilidad> Accesibilidad { get; set; } = new List<Accesibilidad>();
     }
 }
