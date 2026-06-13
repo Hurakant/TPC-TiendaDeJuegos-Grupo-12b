@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,10 +16,10 @@ namespace dominio
         public decimal Precio { get; set; }
         public decimal Descuento { get; set; }
         public int Stock { get; set; }
-        public int FechaLanzamiento { get; set; }
+        public DateTime FechaLanzamiento { get; set; }
         public bool EsDigital { get; set; }
         public bool Activo { get; set; }
-
-        public List<Categoria> Categoria { get; set; } = new List<Categoria>();
+        public List<Categoria> Categoria { get; set; } = new();
+        public List<Accesibilidad> Accesibilidad { get; set; } = new();
     }
 }

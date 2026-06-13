@@ -20,37 +20,114 @@ CATEGORIAS
 
 CREATE TABLE Categoria
 (
-IDCategoria INT IDENTITY(1,1) PRIMARY KEY,
-NombreCategoria NVARCHAR(100) NOT NULL
+    IDCategoria INT IDENTITY(1,1),
+
+    NombreCategoria NVARCHAR(100) NOT NULL,
+    Activo BIT NOT NULL
+        CONSTRAINT DF_Categoria_Activo DEFAULT (1),
+
+    CONSTRAINT PK_Categoria
+        PRIMARY KEY (IDCategoria),
+
+    CONSTRAINT UQ_Categoria_NombreCategoria
+        UNIQUE (NombreCategoria)
 );
 GO
+/*=========================================================
+ACCESIBILIDAD
+=========================================================*/
+CREATE TABLE Accesibilidad
+(
+    IDAccesibilidad INT IDENTITY(1,1),
 
+    NombreAccesibilidad NVARCHAR(100) NOT NULL,
+    Activo BIT NOT NULL
+        CONSTRAINT DF_Accesibilidad_Activo DEFAULT (1),
+
+    CONSTRAINT PK_Accesibilidad
+        PRIMARY KEY (IDAccesibilidad),
+
+    CONSTRAINT UQ_Accesibilidad_Nombre
+        UNIQUE (NombreAccesibilidad)
+);
+GO
 /*=========================================================
 PRODUCTOS
 =========================================================*/
-
 CREATE TABLE Producto
 (
-IDProducto INT IDENTITY(1,1) PRIMARY KEY,
+    IDProducto INT IDENTITY(1,1),
 
+    Nombre NVARCHAR(200) NOT NULL,
+    Descripcion NVARCHAR(MAX) NULL,
+    ImagenUrl NVARCHAR(500) NULL,
 
-Titulo NVARCHAR(200) NOT NULL,
-Descripcion NVARCHAR(MAX),
+    Precio DECIMAL(18,2) NOT NULL
+        CONSTRAINT CK_Producto_Precio
+        CHECK (Precio > 0),
 
-Precio DECIMAL(18,2) NOT NULL CHECK (Precio > 0),
-Stock INT NOT NULL DEFAULT 0 CHECK (Stock >= 0) ,
+    Descuento DECIMAL(18,2) NOT NULL
+        CONSTRAINT DF_Producto_Descuento DEFAULT (0)
+        CONSTRAINT CK_Producto_Descuento
+        CHECK (Descuento >= 0),
 
-Activo BIT NOT NULL DEFAULT 1,
+    Stock INT NOT NULL
+        CONSTRAINT DF_Producto_Stock DEFAULT (0)
+        CONSTRAINT CK_Producto_Stock
+        CHECK (Stock >= 0),
 
-IDCategoria INT NOT NULL,
+    FechaLanzamiento DATE NOT NULL,
 
-CONSTRAINT FK_Producto_Categoria
-    FOREIGN KEY (IDCategoria)
-    REFERENCES Categoria(IDCategoria)
+    EsDigital BIT NOT NULL
+        CONSTRAINT DF_Producto_EsDigital DEFAULT (0),
 
+    Activo BIT NOT NULL
+        CONSTRAINT DF_Producto_Activo DEFAULT (1),
+
+    CONSTRAINT PK_Producto
+        PRIMARY KEY (IDProducto)
 );
 GO
+/*=========================================================
+PRODUCTO CATEGORIA
+=========================================================*/
+CREATE TABLE ProductoCategoria
+(
+    IDProducto INT NOT NULL,
+    IDCategoria INT NOT NULL,
 
+    CONSTRAINT PK_ProductoCategoria
+        PRIMARY KEY (IDProducto, IDCategoria),
+
+    CONSTRAINT FK_ProductoCategoria_Producto
+        FOREIGN KEY (IDProducto)
+        REFERENCES Producto(IDProducto),
+
+    CONSTRAINT FK_ProductoCategoria_Categoria
+        FOREIGN KEY (IDCategoria)
+        REFERENCES Categoria(IDCategoria)
+);
+GO
+/*=========================================================
+PRODUCTO ACCESIBILIDAD
+=========================================================*/
+CREATE TABLE ProductoAccesibilidad
+(
+    IDProducto INT NOT NULL,
+    IDAccesibilidad INT NOT NULL,
+
+    CONSTRAINT PK_ProductoAccesibilidad
+        PRIMARY KEY (IDProducto, IDAccesibilidad),
+
+    CONSTRAINT FK_ProductoAccesibilidad_Producto
+        FOREIGN KEY (IDProducto)
+        REFERENCES Producto(IDProducto),
+
+    CONSTRAINT FK_ProductoAccesibilidad_Accesibilidad
+        FOREIGN KEY (IDAccesibilidad)
+        REFERENCES Accesibilidad(IDAccesibilidad)
+);
+GO
 /*=========================================================
 USUARIOS
 =========================================================*/
@@ -314,4 +391,48 @@ GO
 --    SELECT scope_identity() 
 --END
 
+--SP que trae el producto completo para recorrerlo con datareader.nextresult
+CREATE PROCEDURE SP_Producto_ObtenerPorId
+(
+    @IDProducto INT
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
 
+    -- Producto
+    SELECT
+        IDProducto,
+        Nombre,
+        Descripcion,
+        ImagenUrl,
+        Precio,
+        Descuento,
+        Stock,
+        FechaLanzamiento,
+        EsDigital,
+        Activo
+    FROM Producto
+    WHERE IDProducto = @IDProducto;
+
+    -- Categorías
+    SELECT
+        c.IDCategoria,
+        c.NombreCategoria,
+        c.Activo
+    FROM Categoria c
+        INNER JOIN ProductoCategoria pc
+            ON c.IDCategoria = pc.IDCategoria
+    WHERE pc.IDProducto = @IDProducto;
+
+    -- Accesibilidades
+    SELECT
+        a.IDAccesibilidad,
+        a.NombreAccesibilidad,
+        a.Activo
+    FROM Accesibilidad a
+        INNER JOIN ProductoAccesibilidad pa
+            ON a.IDAccesibilidad = pa.IDAccesibilidad
+    WHERE pa.IDProducto = @IDProducto;
+END
+GO

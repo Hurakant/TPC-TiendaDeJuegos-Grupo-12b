@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dominio
+namespace Dominio
 {
-    public class Categoria
+    public class Accesibilidad
     {
-        public int IdCategoria { get; set; }
-        public string NombreCategoria { get; set; }
+        public int IdAccesibilidad { get; set; }
+        public string NombreAccesibilidad { get; set; }
         public bool Activo { get; set; }
     }
 }
