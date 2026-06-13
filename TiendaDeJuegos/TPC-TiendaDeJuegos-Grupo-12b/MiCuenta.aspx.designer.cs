@@ -15,6 +15,15 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
     {
 
         /// <summary>
+        /// Info control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Info;
+
+        /// <summary>
         /// lblNombre control.
         /// </summary>
         /// <remarks>
@@ -22,6 +31,15 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNombre;
+
+        /// <summary>
+        /// lblApellido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblApellido;
 
         /// <summary>
         /// lblEmail control.
@@ -33,13 +51,85 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         protected global::System.Web.UI.WebControls.Label lblEmail;
 
         /// <summary>
-        /// lblRol control.
+        /// lblTelefono control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRol;
+        protected global::System.Web.UI.WebControls.Label lblTelefono;
+
+        /// <summary>
+        /// btnModificar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModificar;
+
+        /// <summary>
+        /// Editar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Editar;
+
+        /// <summary>
+        /// txtNombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNombre;
+
+        /// <summary>
+        /// txtApellido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtApellido;
+
+        /// <summary>
+        /// txtEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
+
+        /// <summary>
+        /// txtTelefono control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTelefono;
+
+        /// <summary>
+        /// btnGuardar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
+
+        /// <summary>
+        /// btnCancelar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
 
         /// <summary>
         /// btnCerrarSesion control.

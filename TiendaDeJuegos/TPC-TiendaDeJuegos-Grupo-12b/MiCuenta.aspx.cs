@@ -1,4 +1,5 @@
 ﻿using dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +23,19 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             {
                 Usuario user = (Usuario)Session["usuarioLogueado"];
 
-                lblNombre.Text = user.Nombre + " " + user.Apellido;
+                lblNombre.Text = user.Nombre;
+                lblApellido.Text = user.Apellido;
                 lblEmail.Text = user.Email;
-                lblRol.Text = user.Rol.ToString();
+                lblTelefono.Text = user.Telefono;
+
+                txtNombre.Text = user.Nombre;
+                txtApellido.Text = user.Apellido;
+                txtEmail.Text = user.Email;
+                txtTelefono.Text = user.Telefono;
+
+                Info.Visible = true;
+                Editar.Visible = false;
+
             }
         }
 
@@ -34,6 +45,61 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             Session.Abandon();
 
             Response.Redirect("~/Home.aspx");
+        }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Usuario usuario = (Usuario)Session["usuarioLogueado"];
+                UsuarioNegocio negocio = new UsuarioNegocio();
+
+                usuario.Nombre = txtNombre.Text;
+                usuario.Apellido = txtApellido.Text;
+                usuario.Email = txtEmail.Text;
+                usuario.Telefono = txtTelefono.Text;
+
+                negocio.ModificarUser(usuario);
+
+                lblNombre.Text = usuario.Nombre;
+                lblApellido.Text = usuario.Apellido;
+                lblEmail.Text = usuario.Email;
+                lblTelefono.Text = usuario.Telefono;
+
+                Info.Visible = true;
+                Editar.Visible = false;
+
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+            }
+        }
+
+        protected void btnModificar_Click(object sender, EventArgs e)
+        {
+            Usuario user = (Usuario)Session["usuarioLogueado"];
+
+            txtNombre.Text = user.Nombre;
+            txtApellido.Text = user.Apellido;
+            txtEmail.Text = user.Email;
+            txtTelefono.Text = user.Telefono;
+
+            Info.Visible = false;
+            Editar.Visible = true;
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Usuario user = (Usuario)Session["usuarioLogueado"];
+
+            txtNombre.Text = user.Nombre;
+            txtApellido.Text = user.Apellido;
+            txtEmail.Text = user.Email;
+            txtTelefono.Text = user.Telefono;
+
+            Info.Visible = true;
+            Editar.Visible = false;
         }
     }
 }

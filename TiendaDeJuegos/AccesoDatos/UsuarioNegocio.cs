@@ -55,7 +55,7 @@ namespace Negocio
                 datos.setParametro("@nombre",nuevo.Nombre);
                 datos.setParametro("@Apellido", nuevo.Apellido);
                 datos.setParametro("@Email", nuevo.Email);
-                datos.setParametro("@Contrasena", nuevo.Contraseña);
+                datos.setParametro("@Contraseña", nuevo.Contraseña);
                 datos.setParametro("@Telefono", nuevo.Telefono);
 
                 return datos.ejecutarAccionScalar();
@@ -70,5 +70,33 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void ModificarUser(Usuario usuario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setConsulta("UPDATE Usuario SET Nombre = @Nombre, Apellido = @Apellido, Email = @Email, Telefono = @Telefono WHERE IdUsuario = @Id");
+                datos.setParametro("@Nombre", usuario.Nombre);
+                datos.setParametro("@Apellido", usuario.Apellido);
+                datos.setParametro("@Email", usuario.Email);
+                datos.setParametro("@Telefono", usuario.Telefono);
+                datos.setParametro("@Id", usuario.IdUsuario);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+
     }
 }

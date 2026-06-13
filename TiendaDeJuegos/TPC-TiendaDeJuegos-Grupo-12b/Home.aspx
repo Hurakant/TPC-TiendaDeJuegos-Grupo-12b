@@ -8,8 +8,8 @@
     <%-- lbl de bienvenida de user logueado --%>
     <asp:Label Text="nombre" runat="server" ID="lblBienvenida" Visible="false" />
 
-    <%-- Carrousel wiiii --%>
-    <div class="home-content-wrapper">
+   <%-- <%-- Carrousel wiiii --%>
+ <div class="home-content-wrapper">
         <div class="container mt-4">
 
             <div class="home-carousel-wrapper">
