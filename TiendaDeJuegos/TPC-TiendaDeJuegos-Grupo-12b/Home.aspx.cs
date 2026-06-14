@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Net.Http;
 using System.Data.SqlClient;
 using Newtonsoft.Json;
+using Negocio;
 
 namespace TPC_TiendaDeJuegos_Grupo_12b
 {
@@ -18,7 +19,8 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         {
             if (!IsPostBack)
             {
-                List<Producto> productos = ObtenerProductos();
+                ProductoNegocio negocio = new ProductoNegocio();
+                List<Producto> productos = negocio.listar();
 
                 //Carousel principal de juegos
 
@@ -26,7 +28,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 rptCarousel.DataBind();
 
                 //categorías wiwiwi
-                /* rptRpg.DataSource = productos.Where(p =>
+                rptRpg.DataSource = productos.Where(p =>
                      p.Categoria.Any(c => c.NombreCategoria == "RPG"));
 
                  rptAccion.DataSource = productos.Where(p =>
@@ -37,8 +39,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
                  rptRpg.DataBind();
                  rptAccion.DataBind();
-                 rptShooter.DataBind();*/
-
+                 rptShooter.DataBind();
 
                 if (Session["usuarioLogueado"] != null)
                 {
@@ -50,10 +51,8 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 {
                     lblBienvenida.Visible = false;
                 }
-
             }
         }
-
         protected void rptCarousel_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.Item ||
@@ -70,8 +69,6 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 contador++;
             }
         }
-
-
         protected async void btnProbar_Click(object sender, EventArgs e)
         {
             string apiKey = "049bd22f1dfb40d9b2a605b98f5b3621";
@@ -144,124 +141,6 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
                 txtResultado.Text = "Juegos guardados correctamente.";
             }
-        }
-        private List<Producto> ObtenerProductos()
-        {
-            return new List<Producto>
-            {
-                new Producto
-                {
-                    IdProducto = 1,
-                    Nombre = "Elden Ring",
-                    Descripcion = "Action RPG de mundo abierto",
-                    ImagenUrl = "https://picsum.photos/id/1018/1200/500",
-                    Precio = 59999,
-                    Descuento = 0,
-                    Stock = 10,
-                    EsDigital = true,
-                    Activo = true,
-
-                    Categoria = new List<Categoria>
-                    {
-                        new Categoria
-                        {
-                            IdCategoria = 1,
-                            NombreCategoria = "RPG"
-                        }
-                    }
-                },
-                //new Producto
-                //{
-                //    IdProducto = 1,
-                //    Nombre = "Elden Ring",
-                //    Descripcion = "Action RPG de mundo abierto",
-                //    ImagenUrl = "https://picsum.photos/id/1018/1200/500",
-                //    Precio = 59999,
-                //    Descuento = 0,
-                //    Stock = 10,
-                //    EsDigital = true,
-                //    Activo = true,
-
-                //    Categoria = new List<Categoria>
-                //    {
-                //        new Categoria
-                //        {
-                //            IdCategoria = 1,
-                //            NombreCategoria = "RPG"
-                //        }
-                //    }
-                //},
-                //new Producto
-                //{
-                //    IdProducto = 1,
-                //    Nombre = "Elden Ring",
-                //    Descripcion = "Action RPG de mundo abierto",
-                //    ImagenUrl = "https://picsum.photos/id/1018/1200/500",
-                //    Precio = 59999,
-                //    Descuento = 0,
-                //    Stock = 10,
-                //    EsDigital = true,
-                //    Activo = true,
-
-                //    Categoria = new List<Categoria>
-                //    {
-                //        new Categoria
-                //        {
-                //            IdCategoria = 1,
-                //            NombreCategoria = "RPG"
-                //        }
-                //    }
-                //},
-
-                new Producto
-                {
-                    IdProducto = 2,
-                    Nombre = "Cyberpunk 2077",
-                    Descripcion = "RPG futurista",
-                    ImagenUrl = "https://picsum.photos/id/1015/1200/500",
-                    Precio = 44999,
-                    Descuento = 15,
-                    Stock = 5,
-                    EsDigital = true,
-                    Activo = true,
-
-                    Categoria = new List<Categoria>
-                    {
-                        new Categoria
-                        {
-                            IdCategoria = 1,
-                            NombreCategoria = "RPG"
-                        },
-                        new Categoria
-                        {
-                            IdCategoria = 2,
-                            NombreCategoria = "Accion"
-                        }
-                    }
-                },
-
-                new Producto
-                {
-                    IdProducto = 3,
-                    Nombre = "Call Of Duty",
-                    Descripcion = "Shooter militar",
-                    ImagenUrl = "https://picsum.photos/id/1019/1200/500",
-                    Precio = 39999,
-                    Descuento = 0,
-                    Stock = 20,
-                    EsDigital = true,
-                    Activo = true,
-
-                    Categoria = new List<Categoria>
-                    {
-                        new Categoria
-                        {
-                            IdCategoria = 3,
-                            NombreCategoria = "Shooter"
-                        }
-                    }
-                }
-            };
         }
     }
 }
