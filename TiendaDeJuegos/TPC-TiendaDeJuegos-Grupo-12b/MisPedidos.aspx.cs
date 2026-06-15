@@ -29,3 +29,34 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         }
     }
 }
+
+
+/*  protected void btnAgregar_Click(object sender, EventArgs e)
+{
+    int id = Convert.ToInt32(((Button)sender).CommandArgument);
+
+    var carrito = (dominio.Carrito)Session["Carrito"];
+
+    var item = carrito.ItemCarrito.FirstOrDefault(x => x.IdProducto == id);
+
+    if (item != null)
+    {
+        item.Cantidad++;
+    }
+    else
+    {
+        Producto p = productoNegocio.obtenerPorId(id);
+
+        carrito.ItemCarrito.Add(new CarritoItem
+        {
+            IdProducto = p.IdProducto,
+            Nombre = p.Nombre,
+            Precio = p.Precio,
+            Cantidad = 1
+        });
+    }
+
+    Session["Carrito"] = carrito;
+
+    Response.Redirect("Carrito.aspx");
+}  Metogo agregar al carrito que debe ir en catalogo */

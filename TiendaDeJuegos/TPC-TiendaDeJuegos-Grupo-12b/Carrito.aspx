@@ -89,11 +89,11 @@
                         CssClass="btn btn-outline-danger"
                         OnClick="btnVaciar_Click" />
 
-                    <asp:DropDownList ID="ddlEntrega" runat="server">
-                        <asp:ListItem Value="1">Retiro en local</asp:ListItem>
-                        <asp:ListItem Value="2">Envío a domicilio</asp:ListItem>
-                        <asp:ListItem Value="3">Código por email</asp:ListItem>
-                    </asp:DropDownList>
+                    <p>Forma de entrega:</p>
+<asp:DropDownList ID="ddlEntrega" runat="server" />
+
+<p>Forma de pago:</p>
+<asp:DropDownList ID="ddlPago" runat="server" />
 
                     <asp:Button ID="btnAgregarTest" runat="server"
     Text="Agregar producto de prueba"

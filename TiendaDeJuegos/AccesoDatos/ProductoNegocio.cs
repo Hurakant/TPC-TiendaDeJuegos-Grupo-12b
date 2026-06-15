@@ -15,50 +15,58 @@ namespace Negocio
         //POR HACER:
         //Añadir procedures en todas las operaciones, expandir Actualizar stock para que sea:
         //Actualizar, Aumentar, Disminuir para no hacerlo de forma arcaica cuando se hagan las compras
-        public List<Producto> listar()
-        {
-            List<Producto> lista = new List<Producto>();
-            AccesoDatos datos = new AccesoDatos();
 
-            try
-            {
-                datos.setConsulta("SELECT P.IDProducto, P.Nombre, P.Descripcion, P.Precio, P.Descuento, P.Stock, P.EsDigital, P.Activo, P.ImagenUrl, P.IDCategoria, C.NombreCategoria FROM Producto P LEFT JOIN Categoria C ON P.IDCategoria = C.IDCategoria WHERE P.Activo = 1 ORDER BY P.Nombre ASC");
-                datos.ejecutarLectura();
+        
 
-                while (datos.Lector.Read())
-                {
-                    Producto aux = new Producto();
 
-                    aux.IdProducto = (int)datos.Lector["IDProducto"];
-                    aux.Nombre = (string)datos.Lector["Nombre"];
-                    aux.Descripcion = datos.Lector["Descripcion"] is DBNull ? "" : (string)datos.Lector["Descripcion"];
-                    aux.Precio = (decimal)datos.Lector["Precio"];
-                    aux.Descuento = (decimal)datos.Lector["Descuento"];
-                    aux.Stock = (int)datos.Lector["Stock"];
-                    aux.EsDigital = (bool)datos.Lector["EsDigital"];
-                    aux.Activo = (bool)datos.Lector["Activo"];
-                    aux.ImagenUrl = datos.Lector["ImagenUrl"] is DBNull ? "" : (string)datos.Lector["ImagenUrl"];
 
-                    Categoria cat = new Categoria();
-                    cat.IdCategoria = (int)datos.Lector["IDCategoria"];
-                    cat.NombreCategoria = datos.Lector["NombreCategoria"] is DBNull ? "Sin Categoría" : (string)datos.Lector["NombreCategoria"];
-                    aux.Categoria.Add(cat);
 
-                    lista.Add(aux);
-                }
 
-                datos.cerrarConexion();
-                return lista;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
+
+         public List<Producto> listar()
+         {
+             List<Producto> lista = new List<Producto>();
+             AccesoDatos datos = new AccesoDatos();
+
+             try
+             {
+                 datos.setConsulta("SELECT P.IDProducto, P.Nombre, P.Descripcion, P.Precio, P.Descuento, P.Stock, P.EsDigital, P.Activo, P.ImagenUrl, P.IDCategoria, C.NombreCategoria FROM Producto P LEFT JOIN Categoria C ON P.IDCategoria = C.IDCategoria WHERE P.Activo = 1 ORDER BY P.Nombre ASC");
+                 datos.ejecutarLectura();
+
+                 while (datos.Lector.Read())
+                 {
+                     Producto aux = new Producto();
+
+                     aux.IdProducto = (int)datos.Lector["IDProducto"];
+                     aux.Nombre = (string)datos.Lector["Nombre"];
+                     aux.Descripcion = datos.Lector["Descripcion"] is DBNull ? "" : (string)datos.Lector["Descripcion"];
+                     aux.Precio = (decimal)datos.Lector["Precio"];
+                     aux.Descuento = (decimal)datos.Lector["Descuento"];
+                     aux.Stock = (int)datos.Lector["Stock"];
+                     aux.EsDigital = (bool)datos.Lector["EsDigital"];
+                     aux.Activo = (bool)datos.Lector["Activo"];
+                     aux.ImagenUrl = datos.Lector["ImagenUrl"] is DBNull ? "" : (string)datos.Lector["ImagenUrl"];
+
+                     Categoria cat = new Categoria();
+                     cat.IdCategoria = (int)datos.Lector["IDCategoria"];
+                     cat.NombreCategoria = datos.Lector["NombreCategoria"] is DBNull ? "Sin Categoría" : (string)datos.Lector["NombreCategoria"];
+                     aux.Categoria.Add(cat);
+
+                     lista.Add(aux);
+                 }
+
+                 datos.cerrarConexion();
+                 return lista;
+             }
+             catch (Exception ex)
+             {
+                 throw ex;
+             }
+             finally
+             {
+                 datos.cerrarConexion();
+             }
+         }
         public Producto listarPorId(int idProducto)
         {
             AccesoDatos datos = new AccesoDatos();

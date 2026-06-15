@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace TPC_TiendaDeJuegos_Grupo_12b
 {
@@ -13,16 +14,34 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Carrito"] == null)
-            {
-                Session["Carrito"] = new dominio.Carrito();
-            }
+            InicializarSesion();
 
             carritoNegocio = new CarritoNegocio((dominio.Carrito)Session["Carrito"]);
 
             if (!IsPostBack)
             {
                 CargarCarrito();
+                CargarCombos();
+            }
+        }
+
+        private void InicializarSesion()
+        {
+            if (Session["Carrito"] == null)
+                Session["Carrito"] = new dominio.Carrito();
+
+            if (Session["Pedidos"] == null)
+                Session["Pedidos"] = new List<Pedido>();
+
+            if (Session["FormasDePago"] == null)
+            {
+                Session["FormasDePago"] = new List<FormaDePago>
+                {
+                    new FormaDePago { IdFormaDePago = 1, Nombre = "Efectivo", Activa = true },
+                    new FormaDePago { IdFormaDePago = 2, Nombre = "Transferencia bancaria", Activa = true },
+                    new FormaDePago { IdFormaDePago = 3, Nombre = "Tarjeta", Activa = true },
+                    new FormaDePago { IdFormaDePago = 4, Nombre = "MercadoPago", Activa = true }
+                };
             }
         }
 
@@ -34,59 +53,29 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             gvCarrito.DataBind();
 
             lblTotal.Text = "$" + carritoNegocio.CalcularTotal().ToString("0.00");
-            lblDebug.Text = "Session items: " + carrito.ItemCarrito.Count;
+            lblDebug.Text = "Items: " + carrito.ItemCarrito.Count;
+        }
+
+        private void CargarCombos()
+        {
+            ddlEntrega.Items.Clear();
+            ddlEntrega.Items.Add(new ListItem("Retiro en local", "1"));
+            ddlEntrega.Items.Add(new ListItem("Envío a domicilio", "2"));
+            ddlEntrega.Items.Add(new ListItem("Código por email", "3"));
+
+            var formas = (List<FormaDePago>)Session["FormasDePago"];
+
+            ddlPago.DataSource = formas;
+            ddlPago.DataTextField = "Nombre";
+            ddlPago.DataValueField = "IdFormaDePago";
+            ddlPago.DataBind();
         }
 
         protected void btnVaciar_Click(object sender, EventArgs e)
         {
             carritoNegocio.VaciarCarrito();
             CargarCarrito();
-
             lblMensaje.Text = "Carrito vaciado 🧹";
-        }
-
-        protected void btnComprar_Click(object sender, EventArgs e)
-        {
-            var carrito = (dominio.Carrito)Session["Carrito"];
-
-            if (carrito.ItemCarrito.Count == 0)
-            {
-                lblMensaje.Text = "El carrito está vacío";
-                return;
-            }
-
-            // 1. Crear lista de pedidos si no existe
-            if (Session["Pedidos"] == null)
-                Session["Pedidos"] = new List<Pedido>();
-
-            var pedidos = (List<Pedido>)Session["Pedidos"];
-
-            // 2. Crear pedido
-            Pedido pedido = new Pedido
-            {
-                IdPedido = pedidos.Count + 1,
-                Fecha = DateTime.Now,
-                Estado = EstadoPedido.Pendiente,
-                FormaDeEntrega = (FormaDeEntrega)Convert.ToInt32(ddlEntrega.SelectedValue),
-
-                Detalle = carrito.ItemCarrito.ToList()
-            };
-
-            // 3. Guardar pedido
-            pedidos.Add(pedido);
-
-            // 4. Vaciar carrito
-            carritoNegocio.VaciarCarrito();
-            CargarCarrito();
-
-          //  lblMensaje.Text = "Pedido generado correctamente ";
-
-            var ultimo = pedidos.Last();
-
-            lblMensaje.Text =
-            "Pedido OK  | ID: " + ultimo.IdPedido +
-            " | Total: $" + ultimo.Total +
-            " | Items: " + ultimo.Detalle.Count;
         }
 
         protected void btnAgregarTest_Click(object sender, EventArgs e)
@@ -102,25 +91,57 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             });
 
             CargarCarrito();
-
-            lblMensaje.Text = "Producto agregado al carrito ✔";
+            lblMensaje.Text = "Producto agregado ✔";
         }
 
-        protected void gvCarrito_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
+        protected void gvCarrito_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Eliminar")
             {
                 int idProducto = Convert.ToInt32(e.CommandArgument);
-
                 carritoNegocio.EliminarProducto(idProducto);
-
                 CargarCarrito();
-
                 lblMensaje.Text = "Producto eliminado ✔";
             }
         }
 
-        
+        protected void btnComprar_Click(object sender, EventArgs e)
+        {
+            var carrito = (dominio.Carrito)Session["Carrito"];
 
+            if (carrito.ItemCarrito.Count == 0)
+            {
+                lblMensaje.Text = "El carrito está vacío";
+                return;
+            }
+
+            var pedidos = (List<Pedido>)Session["Pedidos"];
+            var formas = (List<FormaDePago>)Session["FormasDePago"];
+
+            FormaDePago pago = formas.FirstOrDefault(x =>
+                x.IdFormaDePago == Convert.ToInt32(ddlPago.SelectedValue));
+
+            Pedido pedido = new Pedido
+            {
+                IdPedido = pedidos.Count + 1,
+                Fecha = DateTime.Now,
+                Estado = EstadoPedido.Pendiente,
+                FormaDeEntrega = (FormaDeEntrega)Convert.ToInt32(ddlEntrega.SelectedValue),
+                FormaDePago = pago,
+                Detalle = carrito.ItemCarrito.ToList()
+            };
+
+            pedidos.Add(pedido);
+
+            carritoNegocio.VaciarCarrito();
+            CargarCarrito();
+
+            var ultimo = pedidos.Last();
+
+            lblMensaje.Text =
+                "Pedido OK | ID: " + ultimo.IdPedido +
+                " | Total: $" + ultimo.Total +
+                " | Items: " + ultimo.Detalle.Count;
+        }
     }
 }

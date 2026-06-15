@@ -41,6 +41,7 @@
 
                             <asp:BoundField DataField="Estado" HeaderText="Estado" />
                             <asp:BoundField DataField="FormaDeEntrega" HeaderText="Entrega" />
+                            <asp:BoundField DataField="FormaDePagoTexto" HeaderText="Pago" />
 
                             <asp:BoundField DataField="Total" HeaderText="Total" />
 
