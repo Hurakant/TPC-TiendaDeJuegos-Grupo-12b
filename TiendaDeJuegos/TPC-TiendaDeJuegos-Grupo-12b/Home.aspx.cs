@@ -45,11 +45,33 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 {
                     Usuario user = (Usuario)Session["usuarioLogueado"];
                     lblBienvenida.Visible = true;
-                    lblBienvenida.Text = "Bienvenid@, " + user.Nombre;
+                    lblBienvenida.Text = "Bienvenid@, " + user.Nombre + " :) ";
+
+                    if (user.Rol == Rol.Admin)
+                    {
+                        divAdmin.Visible = true;
+                        divVendedor.Visible = false;
+                        divCliente.Visible = false;
+                    }
+                    else if (user.Rol == Rol.Vendedor)
+                    {
+                        divAdmin.Visible = false;
+                        divVendedor.Visible = true;
+                        divCliente.Visible = false;
+                    }
+                    else //cliente
+                    {
+                        divAdmin.Visible = false;
+                        divVendedor.Visible = false;
+                        divCliente.Visible = true;
+                    }
                 }
                 else
                 {
                     lblBienvenida.Visible = false;
+                    divAdmin.Visible = false;
+                    divVendedor.Visible = false;
+                    divCliente.Visible = true;
                 }
             }
         }
@@ -140,6 +162,90 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 }
 
                 txtResultado.Text = "Juegos guardados correctamente.";
+            }
+        }
+
+        protected void btnCategoria_Click(object sender, EventArgs e)
+        {
+            Usuario user = (Usuario)Session["usuarioLogueado"];
+            if (user.Rol == Rol.Admin)
+            {
+
+                Response.Redirect("AdminCategorias.aspx");
+            }
+            else
+            {
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void btnProductos_Click(object sender, EventArgs e)
+        {
+            Usuario user = (Usuario)Session["usuarioLogueado"];
+            if (user.Rol == Rol.Admin)
+            {
+
+                Response.Redirect("AdminProductos.aspx");
+            }
+            else
+            {
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            Usuario user = (Usuario)Session["usuarioLogueado"];
+            if (user.Rol == Rol.Admin)
+            {
+
+                Response.Redirect("AdminUsuarios.aspx");
+            }
+            else
+            {
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void btnPedidos_Click(object sender, EventArgs e)
+        {
+            Usuario user = (Usuario)Session["usuarioLogueado"];
+            if (user.Rol == Rol.Admin)
+            {
+
+                Response.Redirect("AdminPedidos.aspx");
+            }
+            else
+            {
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void btnVendedorProductos_Click(object sender, EventArgs e)
+        {
+            Usuario user = (Usuario)Session["usuarioLogueado"];
+            if (user.Rol == Rol.Vendedor)
+            {
+
+                Response.Redirect("VendedorProductos.aspx");
+            }
+            else
+            {
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void btnVendedorPedidos_Click(object sender, EventArgs e)
+        {
+            Usuario user = (Usuario)Session["usuarioLogueado"];
+            if (user.Rol == Rol.Vendedor)
+            {
+
+                Response.Redirect("VendedorPedidos.aspx");
+            }
+            else
+            {
+                Response.Redirect("Error.aspx", false);
             }
         }
     }

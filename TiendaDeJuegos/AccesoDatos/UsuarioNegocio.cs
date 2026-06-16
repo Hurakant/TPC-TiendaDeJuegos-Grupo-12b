@@ -16,7 +16,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setConsulta("SELECT IDUsuario, Nombre, Apellido, Rol FROM USUARIO WHERE Email = @email AND Contrasena = @pass AND Activo = 1");
+                datos.setConsulta("SELECT IDUsuario, Nombre, Apellido, Rol , Telefono FROM USUARIO WHERE Email = @email AND Contrasena = @pass AND Activo = 1");
                 datos.setParametro("@email", usuario.Email);
                 datos.setParametro("@pass", usuario.Contraseña);
 
@@ -27,8 +27,9 @@ namespace Negocio
                     usuario.IdUsuario = (int)(datos.Lector["IDUsuario"]);
                     usuario.Nombre = datos.Lector["Nombre"].ToString();
                     usuario.Apellido = datos.Lector["Apellido"].ToString();
+                    usuario.Telefono = datos.Lector["Telefono"].ToString();
 
-                    usuario.Rol = (Rol)datos.Lector["Rol"]; 
+                    usuario.Rol = (Rol)(datos.Lector["Rol"]);
                     return true;
                 }
 

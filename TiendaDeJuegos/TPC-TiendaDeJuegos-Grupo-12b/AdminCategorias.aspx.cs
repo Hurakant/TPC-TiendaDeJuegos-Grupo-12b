@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,16 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Usuario user = (Usuario)Session["usuarioLogueado"];
+            if (Session["usuarioLogueado"] == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
 
+            if (user.Rol != Rol.Admin)
+            {
+                Response.Redirect("Error.aspx", false);
+            }
         }
     }
 }

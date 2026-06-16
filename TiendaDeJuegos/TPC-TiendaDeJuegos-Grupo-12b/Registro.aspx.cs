@@ -37,7 +37,6 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             }
             catch (Exception ex)
             {
-
                 Session.Add("error", ex.ToString());
             }
 
