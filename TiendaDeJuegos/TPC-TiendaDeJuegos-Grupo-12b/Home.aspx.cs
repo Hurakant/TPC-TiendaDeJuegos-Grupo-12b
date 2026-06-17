@@ -1,13 +1,14 @@
 ﻿using dominio;
+using Negocio;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Http;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using System.Net.Http;
-using System.Data.SqlClient;
-using Newtonsoft.Json;
-using Negocio;
 
 namespace TPC_TiendaDeJuegos_Grupo_12b
 {
@@ -94,7 +95,6 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         protected async void btnProbar_Click(object sender, EventArgs e)
         {
             string apiKey = "049bd22f1dfb40d9b2a605b98f5b3621";
-
             string url = $"https://api.rawg.io/api/games?key={apiKey}";
 
             using (HttpClient cliente = new HttpClient())
@@ -119,41 +119,45 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
                     foreach (var juego in datos.results.Take(20))
                     {
-                        SqlCommand cmd = new SqlCommand(
-                        @"IF NOT EXISTS
-            (
-                SELECT 1
-                FROM Producto
-                WHERE Id = @Id
-            )
-            INSERT INTO Producto
-            (
-                Id,
-                Nombre,
-                FechaLanzamiento,
-                Rating,
-                Imagen
-            )
-            VALUES
-            (
-                @Id,
-                @Nombre,
-                @Fecha,
-                @Rating,
-                @Imagen
-            )", cn);
+                        using (SqlCommand cmd = new SqlCommand(@"
+IF NOT EXISTS (
+    SELECT 1 FROM Producto WHERE Nombre = @Nombre
+)
+BEGIN
+    INSERT INTO Producto
+    (
+        Nombre, Descripcion, ImagenUrl, FechaLanzamiento,
+        Precio, Descuento, Stock, EsDigital, Activo, IDCategoria
+    )
+    VALUES
+    (
+        @Nombre, @Descripcion, @ImagenUrl, @Fecha,
+        @Precio, @Descuento, @Stock, @EsDigital, @Activo, @IDCategoria
+    )
+END", cn))
+                        {
+                            cmd.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = juego.name;
+                            cmd.Parameters.Add("@Descripcion", SqlDbType.VarChar).Value = "Importado desde API RAWG";
+                            cmd.Parameters.Add("@ImagenUrl", SqlDbType.VarChar).Value = juego.background_image ?? "";
 
-                        cmd.Parameters.AddWithValue("@Id", juego.id);
-                        cmd.Parameters.AddWithValue("@Nombre", juego.name);
-                        cmd.Parameters.AddWithValue("@Rating", juego.rating);
-                        cmd.Parameters.AddWithValue("@Imagen", juego.background_image ?? "");
+                            cmd.Parameters.Add("@Fecha", SqlDbType.Date).Value =
+                                DateTime.TryParse(juego.released, out DateTime fecha)
+                                ? fecha
+                                : (object)DBNull.Value;
 
-                        if (string.IsNullOrEmpty(juego.released))
-                            cmd.Parameters.AddWithValue("@Fecha", DBNull.Value);
-                        else
-                            cmd.Parameters.AddWithValue("@Fecha", DateTime.Parse(juego.released));
+                            var precioParam = cmd.Parameters.Add("@Precio", SqlDbType.Decimal);
+                            precioParam.Value = 1000m;
+                            precioParam.Precision = 18;
+                            precioParam.Scale = 2;
 
-                        cmd.ExecuteNonQuery();
+                            cmd.Parameters.Add("@Descuento", SqlDbType.Int).Value = 0;
+                            cmd.Parameters.Add("@Stock", SqlDbType.Int).Value = 10;
+                            cmd.Parameters.Add("@EsDigital", SqlDbType.Bit).Value = true;
+                            cmd.Parameters.Add("@Activo", SqlDbType.Bit).Value = true;
+                            cmd.Parameters.Add("@IDCategoria", SqlDbType.Int).Value = 1;
+
+                            cmd.ExecuteNonQuery();
+                        }
                     }
                 }
 
