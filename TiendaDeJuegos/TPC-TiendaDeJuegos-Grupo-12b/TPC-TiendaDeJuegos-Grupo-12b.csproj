@@ -89,6 +89,7 @@
     <Content Include="Resources\StyleTPC\Home.css" />
     <Content Include="Resources\StyleTPC\RegistroStyle.css" />
     <Content Include="Resources\StyleTPC\VerProductoStyle.css" />
+    <Content Include="VendedorPedidos.aspx" />
     <Content Include="VerProducto.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -163,6 +164,13 @@
     </Compile>
     <Compile Include="Registro.aspx.designer.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VendedorPedidos.aspx.cs">
+      <DependentUpon>VendedorPedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VendedorPedidos.aspx.designer.cs">
+      <DependentUpon>VendedorPedidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="VerProducto.aspx.cs">
       <DependentUpon>VerProducto.aspx</DependentUpon>

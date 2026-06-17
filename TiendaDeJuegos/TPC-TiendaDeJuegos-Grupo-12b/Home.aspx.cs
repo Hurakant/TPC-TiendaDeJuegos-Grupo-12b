@@ -111,8 +111,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
                 var datos = JsonConvert.DeserializeObject<RespuestaRAWG>(json);
 
-                string conexion =
-                               @"Server=localhost,1433;Database=TP1;User Id=sa;Password=;TrustServerCertificate=True;";
+                string conexion = @"Server=.\SQLEXPRESS;Database=NovaHub;Trusted_Connection=True;TrustServerCertificate=True;";
 
                 using (SqlConnection cn = new SqlConnection(conexion))
                 {
@@ -122,46 +121,43 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                     {
                         SqlCommand cmd = new SqlCommand(
                         @"IF NOT EXISTS
-                  (
-                    SELECT 1
-                    FROM Juegos
-                    WHERE Id = @Id
-                  )
-                  INSERT INTO Juegos
-                  (
-                    Id,
-                    Nombre,
-                    FechaLanzamiento,
-                    Rating,
-                    Imagen
-                  )
-                  VALUES
-                  (
-                    @Id,
-                    @Nombre,
-                    @Fecha,
-                    @Rating,
-                    @Imagen
-                  )", cn);
+            (
+                SELECT 1
+                FROM Producto
+                WHERE Id = @Id
+            )
+            INSERT INTO Producto
+            (
+                Id,
+                Nombre,
+                FechaLanzamiento,
+                Rating,
+                Imagen
+            )
+            VALUES
+            (
+                @Id,
+                @Nombre,
+                @Fecha,
+                @Rating,
+                @Imagen
+            )", cn);
 
                         cmd.Parameters.AddWithValue("@Id", juego.id);
                         cmd.Parameters.AddWithValue("@Nombre", juego.name);
+                        cmd.Parameters.AddWithValue("@Rating", juego.rating);
+                        cmd.Parameters.AddWithValue("@Imagen", juego.background_image ?? "");
 
                         if (string.IsNullOrEmpty(juego.released))
                             cmd.Parameters.AddWithValue("@Fecha", DBNull.Value);
                         else
-                            cmd.Parameters.AddWithValue("@Fecha",
-                                DateTime.Parse(juego.released));
-
-                        cmd.Parameters.AddWithValue("@Rating", juego.rating);
-                        cmd.Parameters.AddWithValue("@Imagen",
-                            juego.background_image ?? "");
+                            cmd.Parameters.AddWithValue("@Fecha", DateTime.Parse(juego.released));
 
                         cmd.ExecuteNonQuery();
                     }
                 }
 
-                txtResultado.Text = "Juegos guardados correctamente.";
+                txtResultado.Text = "Productos guardados correctamente.";
             }
         }
 
@@ -237,15 +233,21 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
         protected void btnVendedorPedidos_Click(object sender, EventArgs e)
         {
+            if (Session["usuarioLogueado"] == null)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+
             Usuario user = (Usuario)Session["usuarioLogueado"];
+
             if (user.Rol == Rol.Vendedor)
             {
-
-                Response.Redirect("VendedorPedidos.aspx");
+                Response.Redirect("~/VendedorPedidos.aspx");
             }
             else
             {
-                Response.Redirect("Error.aspx", false);
+                Response.Redirect("Error.aspx");
             }
         }
     }
