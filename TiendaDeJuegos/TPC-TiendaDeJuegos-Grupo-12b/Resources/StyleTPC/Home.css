@@ -118,6 +118,7 @@
     display: inline-block;
     padding-bottom: 8px;
 }
+
     .home-section-title::after {
         content: "";
         position: absolute;
@@ -131,15 +132,24 @@
     }
 
 /* CARTAS */
-    /* Precio */
-    .game-card .card-price {
-        background: var(--gradient-pink-purple);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-weight: 700;
-        font-size: .95rem;
-        margin: 0;
+.game-card .card-price {
+    background: var(--gradient-pink-purple);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: .95rem;
+    margin: 0;
+}
+
+.card-title-link {
+    color: #fff;
+    text-decoration: none;
+    transition: color .2s;
+}
+
+    .card-title-link:hover {
+        color: var(--primary-pink);
     }
 
 /* Padding abajo global */
@@ -147,3 +157,149 @@
 .home-content-wrapper {
     padding-bottom: 60px;
 }
+
+/* Grid que contiene las game-card de cada seccion por ahora */
+.home-games-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-bottom: 10px;
+}
+
+/* Base de la card */
+.game-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    overflow: hidden;
+    width: 220px;
+    transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+
+    .game-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(233, 30, 99, .18);
+        border-color: var(--primary-pink);
+    }
+
+    .game-card .card-img {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .game-card .card-body {
+        padding: 12px 14px;
+    }
+
+    .game-card .card-title {
+        color: #fff;
+        font-size: .95rem;
+        font-weight: 600;
+        margin: 0 0 6px 0;
+    }
+
+/* Label de bienvenida del usuario logueado */
+.home-bienvenida {
+    display: block;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 20px 0 0 0;
+}
+
+/* Paneles de gestion (admin / vendedor) */
+.home-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 22px 24px;
+    color: #fff;
+}
+
+.panel-title {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid;
+    border-image: var(--gradient-pink-purple) 1;
+}
+
+.panel-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btn-panel {
+    background: transparent;
+    border: 1px solid var(--primary-pink);
+    color: var(--primary-pink);
+    border-radius: 10px;
+    padding: 0 18px;
+    height: 42px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s;
+}
+
+    .btn-panel:hover {
+        background: var(--gradient-pink-purple);
+        color: #fff;
+        border-color: transparent;
+    }
+
+/* Caja de prueba de base de datos */
+.home-test-box {
+    background: var(--bg-card);
+    border: 1px dashed var(--border-subtle);
+    border-radius: 16px;
+    padding: 22px 24px;
+    margin-top: 30px;
+    color: #fff;
+}
+
+.test-title {
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.btn-test {
+    background: var(--gradient-pink-purple);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0 22px;
+    height: 42px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s;
+}
+
+    .btn-test:hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 14px rgba(233, 30, 99, .35);
+    }
+
+.test-result {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    background: #0d0d14;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-top: 14px;
+    outline: none;
+    transition: .2s;
+}
+
+    .test-result:focus {
+        border-color: var(--primary-pink);
+        box-shadow: 0 0 10px rgba(233, 30, 99, .25);
+    }

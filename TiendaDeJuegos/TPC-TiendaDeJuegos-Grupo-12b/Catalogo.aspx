@@ -82,7 +82,7 @@
                                 <div class="game-row-actions">
                                     <asp:HyperLink ID="lnkVerDetalle" runat="server"
                                         CssClass="game-row-link"
-                                        NavigateUrl='<%# "Producto.aspx?id=" + Eval("IdProducto") %>'>
+                                        NavigateUrl='<%# "VerProducto.aspx?id=" + Eval("IdProducto") %>'>
                                         Ver detalle
                                     </asp:HyperLink>
                                 </div>

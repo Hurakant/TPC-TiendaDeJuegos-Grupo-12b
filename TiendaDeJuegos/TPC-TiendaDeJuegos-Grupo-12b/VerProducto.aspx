@@ -4,57 +4,63 @@
     <link href="Resources/StyleTPC/VerProductoStyle.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div>
+    <div class="producto-wrapper">
         <div class="container">
-            <asp:Panel runat="server">
-                <p></p>
+
+            <asp:Panel ID="pnlNoEncontrado" runat="server" Visible="false">
+                <p>El producto solicitado no existe o no está disponible.</p>
                 <a href="Catalogo.aspx">Volver al catálogo</a>
             </asp:Panel>
-            <asp:panel ID="pnlProducto" runat="server">
+
+            <asp:Panel ID="pnlProducto" runat="server">
                 <div class="row">
                     <!-- Columna izquierda IMAGEN -->
 
-                    <div>
-                        <div>
-                            <asp:image imageurl="imgProducto" runat="server" CssClass="producto-imagen" AlternateText="Imagen del producto" />
+                    <div class="col-md-5 mb-3">
+                        <div class="producto-imagen-box">
+                            <asp:Image ID="imgProducto" runat="server" CssClass="producto-imagen" AlternateText="Imagen del producto" />
                         </div>
                     </div>
                     <!-- info y botones -->
-                    <div>
-                        <div>
+                    <div class="col-md-7 mb-3">
+                        <div class="producto-info-box">
                             <h1 class="producto-titulo">
                                 <!-- NOMBRE PRODUCTO -->
                                 <asp:Label ID="lblNombre" runat="server" Text="ESTE ES EL NOMBRE DEL PRODUCTO"></asp:Label>
                             </h1>
 
-                            <p class="producto-precio"> <!-- Precio del producto -->
+                            <p class="producto-precio">
+                                <!-- Precio del producto -->
                                 $<asp:Label ID="lblPrecio" runat="server" Text="0.00"></asp:Label>
                             </p>
 
                             <div class="producto-cats">
-                                <asp:repeater ID="rptCategorias" runat="server">
-                                    <itemtemplate>
-                                        <span>Capsula de categoria</span>
-                                    </itemtemplate>
-                                </asp:repeater>
+                                <asp:Repeater ID="rptCategorias" runat="server">
+                                    <ItemTemplate>
+                                        <span class="cat-capsula">Capsula de categoria</span>
+                                    </ItemTemplate>
+                                </asp:Repeater>
                             </div>
-                            <asp:label ID="lblStock" text="Aqui va el stock" runat="server" /> <!-- STOCK -->
+                            <asp:Label ID="lblStock" Text="Aqui va el stock" runat="server" CssClass="producto-stock" />
+                            <!-- STOCK -->
                             <!-- Boton carrito -->
-                            <asp:button ID="btnAgregarCarrito" text="Añadir al carrito" runat="server" /> 
+                            <asp:Button ID="btnAgregarCarrito" Text="Añadir al carrito" runat="server" CssClass="btnIngresar producto-btn-carrito" OnClick="btnAgregarCarrito_Click" />
 
-                            <a href="Catalogo.aspx">Volver al catalogo</a>
+                            <asp:Label ID="lblMensaje" runat="server" Text="" CssClass="producto-mensaje"></asp:Label>
+
+                            <a href="Catalogo.aspx" class="producto-volver">Volver al catalogo</a>
 
                         </div>
                     </div>
 
                 </div>
                 <!-- Descripcion -->
-                <div>
-                    <div>Descripción</div>
-                        <asp:textbox ID="txtDescripcion" runat="server" Textmode="MultiLine" ReadOnly="True" Rows="10" 
-                            text="Aqui va la descripcion del producto"/>
+                <div class="producto-desc-box">
+                    <div class="producto-desc-titulo">Descripción</div>
+                    <asp:TextBox ID="txtDescripcion" runat="server" TextMode="MultiLine" ReadOnly="True" Rows="10" CssClass="producto-desc-texto"
+                        Text="Aqui va la descripcion del producto" />
                 </div>
-            </asp:panel>
+            </asp:Panel>
             <%-- Aqui termina el panel producto --%>
         </div>
     </div>

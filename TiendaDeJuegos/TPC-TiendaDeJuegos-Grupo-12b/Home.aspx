@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <%-- lbl de bienvenida de user logueado --%>
-    <asp:Label Text="nombre" runat="server" ID="lblBienvenida" Visible="false" />
+    <asp:Label Text="nombre" runat="server" ID="lblBienvenida" Visible="false" CssClass="home-bienvenida" />
 
 
     <%--admin--%>
@@ -15,17 +15,19 @@
 
         <div class="container mt-4">
 
-            <div class="card p-3 mb-3">
+            <div class="home-panel">
 
-                <h4>Gestión Admin</h4>
+                <h4 class="panel-title">Gestión Admin</h4>
 
-                <asp:Button ID="btnCategoria" runat="server" Text="Administrar Categorias" OnClick="btnCategoria_Click" />
+                <div class="panel-buttons">
+                    <asp:Button ID="btnCategoria" runat="server" Text="Administrar Categorias" OnClick="btnCategoria_Click" CssClass="btn-panel" />
 
-                <asp:Button ID="btnProductos" runat="server" Text="Administrar Productos" OnClick="btnProductos_Click" />
+                    <asp:Button ID="btnProductos" runat="server" Text="Administrar Productos" OnClick="btnProductos_Click" CssClass="btn-panel" />
 
-                <asp:Button ID="btnUsuarios" runat="server" Text="Administrar Usuarios" OnClick="btnUsuarios_Click" />
+                    <asp:Button ID="btnUsuarios" runat="server" Text="Administrar Usuarios" OnClick="btnUsuarios_Click" CssClass="btn-panel" />
 
-                <asp:Button ID="btnPedidos" runat="server" Text="Administrar Pedidos" OnClick="btnPedidos_Click" />
+                    <asp:Button ID="btnPedidos" runat="server" Text="Administrar Pedidos" OnClick="btnPedidos_Click" CssClass="btn-panel" />
+                </div>
             </div>
 
         </div>
@@ -38,14 +40,15 @@
 
         <div class="container mt-4">
 
-            <div class="card p-3 mb-3">
+            <div class="home-panel">
 
-                <h4>Gestión Vendedor</h4>
+                <h4 class="panel-title">Gestión Vendedor</h4>
 
-                <asp:Button ID="btnVendedorProductos" runat="server" Text="Administrar Productos" OnClick="btnVendedorProductos_Click" />
+                <div class="panel-buttons">
+                    <asp:Button ID="btnVendedorProductos" runat="server" Text="Administrar Productos" OnClick="btnVendedorProductos_Click" CssClass="btn-panel" />
 
-                <asp:Button ID="btnVendedorPedidos" runat="server" Text="Administrar Pedidos" OnClick="btnVendedorPedidos_Click" />
-
+                    <asp:Button ID="btnVendedorPedidos" runat="server" Text="Administrar Pedidos" OnClick="btnVendedorPedidos_Click" CssClass="btn-panel" />
+                </div>
             </div>
 
         </div>
@@ -54,7 +57,7 @@
 
 
     <div id="divCliente" runat="server" visible="false">
-        <%-- <%-- Carrousel wiiii --%>
+        <%-- Carrusel principal de juegos --%>
         <div class="home-content-wrapper">
             <div class="container mt-4">
 
@@ -70,11 +73,15 @@
                                     <div id="slideContainer" runat="server">
                                         <img src='<%# Eval("ImagenUrl") %>'
                                             class="d-block w-100"
-                                            style="height: 500px; object-fit: cover;"
                                             alt='<%# Eval("Nombre") %>' />
                                         <div class="carousel-caption d-none d-md-block">
-                                            <h3><%# Eval("Nombre") %></h3>
-                                            <p><%# Eval("Descripcion") %></p>
+                                            <h3>
+                                                <asp:HyperLink ID="lnkVerDetalleCarousel" runat="server"
+                                                    CssClass="card-title-link"
+                                                    NavigateUrl='<%# "VerProducto.aspx?id=" + Eval("IdProducto") %>'>
+                                                    <%# Eval("Nombre") %>
+                                                </asp:HyperLink>
+                                            </h3>
                                             <h5>$ <%# Eval("Precio", "{0:N2}") %>
                                             </h5>
                                         </div>
@@ -98,73 +105,94 @@
                 </div>
 
             </div>
-            <%-- Termina Carrousel no wiiii --%>
-            <%-- AQUI REPEATERS CARDS DE JUEGOS 
-        RPG--%>
+            <%-- Termina carrusel --%>
 
+            <%-- RPG --%>
             <h2 class="home-section-title">RPG</h2>
 
-            <asp:Repeater ID="rptRpg" runat="server">
-                <ItemTemplate>
-                    <div>
-                        <div>
-                            <img src='<%# Eval("ImagenUrl") %>' />
-                            <div>
-                                <h5>
-                                    <%# Eval("Nombre") %>
-                                </h5>
-                                <p>$ <%# Eval("Precio") %></p>
-                            </div>
-                        </div>
-                    </div>
-                </ItemTemplate>
-            </asp:Repeater>
-            <%-- ACCION --%>
-            <h2 class="home-section-title">Acción</h2>
-
-            <div class="row">
-                <asp:Repeater ID="rptAccion" runat="server">
+            <div class="home-games-grid">
+                <asp:Repeater ID="rptRpg" runat="server">
                     <ItemTemplate>
-                        <div>
-                            <%# Eval("Nombre") %>
+                        <div class="game-card">
+                            <img src='<%# Eval("ImagenUrl") %>' class="card-img" alt='<%# Eval("Nombre") %>' />
+                            <div class="card-body">
+                                <h5>
+                                    <asp:HyperLink ID="lnkVerDetalleCarousel" runat="server"
+                                        CssClass="card-title-link"
+                                        NavigateUrl='<%# "VerProducto.aspx?id=" + Eval("IdProducto") %>'>
+                                                    <%# Eval("Nombre") %>
+                                    </asp:HyperLink>
+                                </h5>
+                                <p class="card-price">$ <%# Eval("Precio", "{0:N2}") %></p>
+                            </div>
                         </div>
                     </ItemTemplate>
                 </asp:Repeater>
             </div>
+
+            <%-- ACCION --%>
+            <h2 class="home-section-title">Acción</h2>
+
+            <div class="home-games-grid">
+                <asp:Repeater ID="rptAccion" runat="server">
+                    <ItemTemplate>
+                        <div class="game-card">
+                            <img src='<%# Eval("ImagenUrl") %>' class="card-img" alt='<%# Eval("Nombre") %>' />
+                            <div class="card-body">
+                                <h5>
+                                    <asp:HyperLink ID="lnkVerDetalleCarousel" runat="server"
+                                        CssClass="card-title-link"
+                                        NavigateUrl='<%# "VerProducto.aspx?id=" + Eval("IdProducto") %>'>
+                                                    <%# Eval("Nombre") %>
+                                    </asp:HyperLink>
+                                </h5>
+                                <p class="card-price">$ <%# Eval("Precio", "{0:N2}") %></p>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </div>
+
             <%-- SHOOTER --%>
             <h2 class="home-section-title">Shooter</h2>
 
-            <div class="row">
+            <div class="home-games-grid">
                 <asp:Repeater ID="rptShooter" runat="server">
                     <ItemTemplate>
-                        <div>
-                            <%# Eval("Nombre") %>
+                        <div class="game-card">
+                            <img src='<%# Eval("ImagenUrl") %>' class="card-img" alt='<%# Eval("Nombre") %>' />
+                            <div class="card-body">
+                                <h5>
+                                    <asp:HyperLink ID="lnkVerDetalleCarousel" runat="server"
+                                        CssClass="card-title-link"
+                                        NavigateUrl='<%# "VerProducto.aspx?id=" + Eval("IdProducto") %>'>
+                                                    <%# Eval("Nombre") %>
+                                    </asp:HyperLink>
+                                </h5>
+                                <p class="card-price">$ <%# Eval("Precio", "{0:N2}") %></p>
+                            </div>
                         </div>
                     </ItemTemplate>
                 </asp:Repeater>
             </div>
         </div>
-        <%-- TERMINAN LAS CARDS --%>
+        <%-- Termina seccion de juegos --%>
 
-        <%-- TERMINAN LAS CARDS --%>
+        <div class="home-test-box">
+            <h3 class="test-title">Prueba de Base de Datos</h3>
 
-        <hr />
+            <asp:Button ID="btnProbar" runat="server"
+                Text="Obtener Juegos"
+                OnClick="btnProbar_Click"
+                CssClass="btn-test" />
 
-        <h3>Prueba de Base de Datos</h3>
-
-        <asp:Button ID="btnProbar" runat="server"
-            Text="Obtener Juegos"
-            OnClick="btnProbar_Click" />
-
-        <br />
-        <br />
-
-        <asp:TextBox ID="txtResultado"
-            runat="server"
-            TextMode="MultiLine"
-            Rows="5"
-            Width="800px">
-        </asp:TextBox>
+            <asp:TextBox ID="txtResultado"
+                runat="server"
+                TextMode="MultiLine"
+                Rows="5"
+                CssClass="test-result">
+            </asp:TextBox>
+        </div>
 
     </div>
 </asp:Content>

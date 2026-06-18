@@ -1,4 +1,4 @@
-﻿using dominio;
+﻿ using dominio;
 using Negocio;
 using Newtonsoft.Json;
 using System;
