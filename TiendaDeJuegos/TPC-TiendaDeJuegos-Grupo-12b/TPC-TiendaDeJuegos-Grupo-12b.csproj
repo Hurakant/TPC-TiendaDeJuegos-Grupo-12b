@@ -73,8 +73,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminCategorias.aspx" />
+    <Content Include="AdminUsuarios.aspx" />
     <Content Include="Carrito.aspx" />
     <Content Include="Catalogo.aspx" />
+    <Content Include="EditarUsuarioAdmin.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="Login.aspx" />
@@ -102,6 +104,13 @@
     <Compile Include="AdminCategorias.aspx.designer.cs">
       <DependentUpon>AdminCategorias.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminUsuarios.aspx.cs">
+      <DependentUpon>AdminUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminUsuarios.aspx.designer.cs">
+      <DependentUpon>AdminUsuarios.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Carrito.aspx.cs">
       <DependentUpon>Carrito.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -115,6 +124,13 @@
     </Compile>
     <Compile Include="Catalogo.aspx.designer.cs">
       <DependentUpon>Catalogo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditarUsuarioAdmin.aspx.cs">
+      <DependentUpon>EditarUsuarioAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditarUsuarioAdmin.aspx.designer.cs">
+      <DependentUpon>EditarUsuarioAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>

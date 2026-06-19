@@ -56,7 +56,7 @@ namespace Negocio
                 datos.setParametro("@nombre",nuevo.Nombre);
                 datos.setParametro("@Apellido", nuevo.Apellido);
                 datos.setParametro("@Email", nuevo.Email);
-                datos.setParametro("@Contraseña", nuevo.Contraseña);
+                datos.setParametro("@Contrasena", nuevo.Contraseña);
                 datos.setParametro("@Telefono", nuevo.Telefono);
 
                 return datos.ejecutarAccionScalar();
@@ -99,5 +99,107 @@ namespace Negocio
 
         }
 
+        public List<Usuario> listar()
+        {
+            List<Usuario> lista = new List<Usuario>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setConsulta("SELECT IDUsuario,Nombre, Apellido, Email, Telefono, Activo, Rol FROM USUARIO");
+
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Usuario aux = new Usuario();
+
+                    aux.IdUsuario = (int)datos.Lector["IDUsuario"];
+                    aux.Nombre = datos.Lector["Nombre"].ToString();
+                    aux.Apellido = datos.Lector["Apellido"].ToString();
+                    aux.Email = datos.Lector["Email"].ToString();
+                    aux.Telefono = datos.Lector["Telefono"].ToString();
+                    aux.Activo = (bool)datos.Lector["Activo"];
+
+                    aux.Rol = (Rol)datos.Lector["Rol"];
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminar(int id) // logico
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setConsulta("UPDATE Usuario SET Activo = 0 WHERE IdUsuario = @id");
+                datos.setParametro("@id", id);
+                datos.ejecutarAccion();
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void activar(int id) // logco
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setConsulta("UPDATE Usuario SET Activo = 1 WHERE IdUsuario = @id");
+                datos.setParametro("@id", id);
+                datos.ejecutarAccion();
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public Usuario obtenerPorId(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            Usuario user = new Usuario();
+
+            try
+            {
+                datos.setConsulta("SELECT IDUsuario, Nombre, Apellido, Email, Telefono,Rol, Activo FROM Usuario WHERE IDUsuario = @id");
+                datos.setParametro("@id", id);
+
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    user.IdUsuario = (int)datos.Lector["IdUsuario"];
+                    user.Nombre = (string)datos.Lector["Nombre"];
+                    user.Apellido = (string)datos.Lector["Apellido"];
+                    user.Email = (string)datos.Lector["Email"];
+                    user.Telefono = (string)datos.Lector["Telefono"];
+                    user.Activo = (bool)(datos.Lector["Activo"]);
+
+                    user.Rol = (Rol)datos.Lector["Rol"]; 
+                }
+
+                return user;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

@@ -9,13 +9,13 @@
     <asp:Label Text="nombre" runat="server" ID="lblBienvenida" Visible="false" CssClass="home-bienvenida" />
 
 
-    <%--admin--%>
+  <%--admin--%>
 
-    <div id="divAdmin" runat="server" visible="false">
+    <div  id="divAdmin" runat="server" visible="false">
 
         <div class="container mt-4">
 
-            <div class="home-panel">
+            <div Class="home-panel">
 
                 <h4 class="panel-title">Gestión Admin</h4>
 
