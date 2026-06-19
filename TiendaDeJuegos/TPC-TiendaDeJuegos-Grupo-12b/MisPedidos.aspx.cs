@@ -8,6 +8,13 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuarioLogueado"] == null)
+            {
+                lblMensaje.Text = "Debés iniciar sesión para ver tus pedidos";
+                gvPedidos.Visible = false;
+                return;
+            }
+
             if (!IsPostBack)
             {
                 CargarPedidos();
@@ -16,14 +23,16 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
         private void CargarPedidos()
         {
-            if (Session["Pedidos"] == null)
+            var pedidos = Session["Pedidos"] as List<Pedido>;
+
+            if (pedidos == null || pedidos.Count == 0)
             {
-                lblMensaje.Text = "No tenés pedidos aún";
+                lblMensaje.Text = "Aún no realizaste compras";
+                gvPedidos.Visible = false;
                 return;
             }
 
-            var pedidos = (List<Pedido>)Session["Pedidos"];
-
+            gvPedidos.Visible = true;
             gvPedidos.DataSource = pedidos;
             gvPedidos.DataBind();
         }

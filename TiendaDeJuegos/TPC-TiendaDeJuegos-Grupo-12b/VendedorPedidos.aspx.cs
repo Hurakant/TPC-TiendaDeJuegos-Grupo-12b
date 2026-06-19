@@ -8,7 +8,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // CONTROL DE ACCESO CORRECTO
+            
             if (Session["usuarioLogueado"] == null)
             {
                 Response.Redirect("Login.aspx");
@@ -17,13 +17,23 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
             Usuario user = (Usuario)Session["usuarioLogueado"];
 
-            if (user.Rol != Rol.Vendedor)
+            if (user.Rol != Rol.Vendedor &&
+    user.Rol != Rol.Admin)
             {
                 Response.Redirect("Home.aspx");
                 return;
             }
 
-            // SOLO si pasa el control entra acá
+            if (user.Rol == Rol.Admin)
+            {
+                lblTitulo.Text = "Gestión de Pedidos (Administrador)";
+            }
+            else
+            {
+                lblTitulo.Text = "Gestión de Pedidos";
+            }
+
+
             if (!IsPostBack)
             {
                 CargarPedidos();

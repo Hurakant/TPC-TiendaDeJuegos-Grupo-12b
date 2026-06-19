@@ -10,7 +10,7 @@
 
         <div class="card p-3">
 
-            <h3>Gestión de Pedidos (Vendedor)</h3>
+            <asp:Label ID="lblTitulo" runat="server" />
 
             <asp:Label ID="lblMensaje" runat="server" ForeColor="Red" />
 

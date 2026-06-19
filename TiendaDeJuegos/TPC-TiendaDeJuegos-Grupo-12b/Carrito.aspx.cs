@@ -14,9 +14,23 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            InicializarSesion();
+            if (Session["usuarioLogueado"] == null)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
 
-            carritoNegocio = new CarritoNegocio((dominio.Carrito)Session["Carrito"]);
+            Usuario user = (Usuario)Session["usuarioLogueado"];
+
+            if (user.Rol != Rol.Cliente)
+            {
+                Response.Redirect("Home.aspx");
+                return;
+            }
+
+            InicializarSesion(user);
+
+            carritoNegocio = new CarritoNegocio(ObtenerCarrito());
 
             if (!IsPostBack)
             {
@@ -25,10 +39,10 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             }
         }
 
-        private void InicializarSesion()
+        private void InicializarSesion(Usuario user)
         {
-            if (Session["Carrito"] == null)
-                Session["Carrito"] = new dominio.Carrito();
+            if (Session["Carrito_" + user.IdUsuario] == null)
+                Session["Carrito_" + user.IdUsuario] = new dominio.Carrito();
 
             if (Session["Pedidos"] == null)
                 Session["Pedidos"] = new List<Pedido>();
@@ -36,24 +50,23 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             if (Session["FormasDePago"] == null)
             {
                 Session["FormasDePago"] = new List<FormaDePago>
-                {
-                    new FormaDePago { IdFormaDePago = 1, Nombre = "Efectivo", Activa = true },
-                    new FormaDePago { IdFormaDePago = 2, Nombre = "Transferencia bancaria", Activa = true },
-                    new FormaDePago { IdFormaDePago = 3, Nombre = "Tarjeta", Activa = true },
-                    new FormaDePago { IdFormaDePago = 4, Nombre = "MercadoPago", Activa = true }
-                };
+        {
+            new FormaDePago { IdFormaDePago = 1, Nombre = "Efectivo", Activa = true },
+            new FormaDePago { IdFormaDePago = 2, Nombre = "Transferencia bancaria", Activa = true },
+            new FormaDePago { IdFormaDePago = 3, Nombre = "Tarjeta", Activa = true },
+            new FormaDePago { IdFormaDePago = 4, Nombre = "MercadoPago", Activa = true }
+        };
             }
         }
 
         private void CargarCarrito()
         {
-            var carrito = (dominio.Carrito)Session["Carrito"];
+            var carrito = ObtenerCarrito();
 
             gvCarrito.DataSource = carrito.ItemCarrito;
             gvCarrito.DataBind();
 
             lblTotal.Text = "$" + carritoNegocio.CalcularTotal().ToString("0.00");
-            lblDebug.Text = "Items: " + carrito.ItemCarrito.Count;
         }
 
         private void CargarCombos()
@@ -73,14 +86,17 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
         protected void btnVaciar_Click(object sender, EventArgs e)
         {
-            carritoNegocio.VaciarCarrito();
+            var carrito = ObtenerCarrito();
+
+            carrito.ItemCarrito.Clear(); 
+
             CargarCarrito();
             lblMensaje.Text = "Carrito vaciado 🧹";
         }
 
         protected void btnAgregarTest_Click(object sender, EventArgs e)
         {
-            var carrito = (dominio.Carrito)Session["Carrito"];
+            var carrito = ObtenerCarrito();
 
             carrito.ItemCarrito.Add(new CarritoItem
             {
@@ -98,8 +114,12 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         {
             if (e.CommandName == "Eliminar")
             {
+                var carrito = ObtenerCarrito();
+
                 int idProducto = Convert.ToInt32(e.CommandArgument);
-                carritoNegocio.EliminarProducto(idProducto);
+
+                carrito.ItemCarrito.RemoveAll(x => x.IdProducto == idProducto);
+
                 CargarCarrito();
                 lblMensaje.Text = "Producto eliminado ✔";
             }
@@ -107,7 +127,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
         protected void btnComprar_Click(object sender, EventArgs e)
         {
-            var carrito = (dominio.Carrito)Session["Carrito"];
+            var carrito = ObtenerCarrito();
 
             if (carrito.ItemCarrito.Count == 0)
             {
@@ -133,7 +153,8 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
             pedidos.Add(pedido);
 
-            carritoNegocio.VaciarCarrito();
+            carrito.ItemCarrito.Clear(); // IMPORTANTE
+
             CargarCarrito();
 
             var ultimo = pedidos.Last();
@@ -142,6 +163,18 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 "Pedido OK | ID: " + ultimo.IdPedido +
                 " | Total: $" + ultimo.Total +
                 " | Items: " + ultimo.Detalle.Count;
+        }
+
+
+        private dominio.Carrito ObtenerCarrito()
+        {
+            Usuario user = (Usuario)Session["usuarioLogueado"];
+            string key = "Carrito_" + user.IdUsuario;
+
+            if (Session[key] == null)
+                Session[key] = new dominio.Carrito();
+
+            return (dominio.Carrito)Session[key];
         }
     }
 }
