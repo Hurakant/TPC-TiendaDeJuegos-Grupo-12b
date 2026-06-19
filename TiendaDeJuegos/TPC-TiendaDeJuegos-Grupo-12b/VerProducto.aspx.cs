@@ -78,6 +78,9 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         {
             try
             {
+                Usuario user = (Usuario)Session["usuarioLogueado"];
+                string key = "Carrito_" + user.IdUsuario;
+
                 ProductoNegocio negocio = new ProductoNegocio();
                 dominio.Producto prod = negocio.listarPorId(idProducto);
 
@@ -88,20 +91,20 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                     return;
                 }
 
-                if (Session["Carrito"] == null)
-                    Session["Carrito"] = new dominio.Carrito();
+                if (Session[key] == null)
+                    Session[key] = new dominio.Carrito();
 
-                dominio.Carrito carrito = (dominio.Carrito)Session["Carrito"];
+                dominio.Carrito carrito = (dominio.Carrito)Session[key];
+
                 CarritoNegocio carritoNegocio = new CarritoNegocio(carrito);
                 carritoNegocio.AgregarProducto(prod, 1);
 
                 lblMensaje.Text = "✔ Producto agregado al carrito";
-                lblMensaje.ForeColor = System.Drawing.Color.LightGreen;
+                lblMensaje.ForeColor = System.Drawing.Color.Green;
             }
             catch (Exception ex)
             {
                 lblMensaje.Text = "Error: " + ex.Message;
-                lblMensaje.ForeColor = System.Drawing.Color.Red;
             }
         }
     }
