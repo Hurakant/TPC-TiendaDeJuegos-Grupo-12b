@@ -85,6 +85,23 @@
     padding-left: 50px;
 }
 
+.lblNombre {
+    text-align: left;
+    display: block;
+    color: #d4d4d4;
+    margin-bottom: 8px;
+    padding-left: 50px;
+}
+
+.lblTelefono {
+    text-align: left;
+    display: block;
+    color: #d4d4d4;
+    margin-bottom: 8px;
+    padding-left: 50px;
+}
+
+
 .TxtEmail {
     display: block;
     margin: 0 auto;
@@ -111,12 +128,62 @@
     transition: .3s;
 }
 
+.TxtNombre {
+    display: block;
+    margin: 0 auto 15px auto; /* Centrado y con margen inferior */
+    width: 500px;
+    height: 45px;
+    background: #0d0d14;
+    color: white;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.08);
+    padding: 0 15px;
+    transition: .3s;
+}
+
+.txtApellido {
+    display: block;
+    margin: 0 auto 15px auto; /* Centrado y con margen inferior */
+    width: 500px;
+    height: 45px;
+    background: #0d0d14;
+    color: white;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.08);
+    padding: 0 15px;
+    transition: .3s;
+}
+
+.TxtTelefono {
+    display: block;
+    margin: 0 auto 15px auto; /* Centrado y con margen inferior */
+    width: 500px;
+    height: 45px;
+    background: #0d0d14;
+    color: white;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.08);
+    padding: 0 15px;
+    transition: .3s;
+}
 
 .TxtEmail::placeholder {
     color: #666;
 }
 
 .txtPass::placeholder {
+    color: #666;
+}
+
+.TxtNombre::placeholder {
+    color: #666;
+}
+
+.txtApellido::placeholder {
+    color: #666;
+}
+
+.TxtTelefono::placeholder {
     color: #666;
 }
 
@@ -127,6 +194,24 @@
 }
 
 .TxtEmail:focus {
+    outline: none;
+    border-color: #9c27b0;
+    box-shadow: 0 0 12px rgba(156,39,176,.3);
+}
+
+.TxtNombre:focus {
+    outline: none;
+    border-color: #9c27b0;
+    box-shadow: 0 0 12px rgba(156,39,176,.3);
+}
+
+.txtApellido:focus {
+    outline: none;
+    border-color: #9c27b0;
+    box-shadow: 0 0 12px rgba(156,39,176,.3);
+}
+
+.TxtTelefono:focus {
     outline: none;
     border-color: #9c27b0;
     box-shadow: 0 0 12px rgba(156,39,176,.3);
@@ -163,6 +248,16 @@
 .cancelar-link:hover {
     color: #e91e63;
     text-shadow: 0 0 10px rgba(233,30,99,.5);
+}
+
+.lblError {
+    color: #ff3366; 
+    font-size: 0.95rem;
+    text-align: center;
+    display: block;
+    margin-top: 15px;
+    font-weight: 600;
+    text-shadow: 0 0 8px rgba(255, 51, 102, 0.3);
 }
 
 /*iniciar secion*/

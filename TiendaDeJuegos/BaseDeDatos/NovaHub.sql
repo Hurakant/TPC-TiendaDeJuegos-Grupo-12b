@@ -351,46 +351,43 @@ GO
 
 
 
-INSERT INTO Usuario
-(
+INSERT INTO Usuario (
     Nombre,
     Apellido,
     Email,
     Contrasena,
     Telefono,
     Rol
-)
-VALUES
-
+) VALUES
 -- ADMIN
-('Admin', 'NovaHub', 'admin@gmail.com', '1234', '111111111', 3),
+('Admin', 'NovaHub', 'admin@gmail.com', '123456789', '1111111111', 3),
 
 -- VENDEDORES
-('Juan', 'Perez', 'vendedor1@gmail.com', '1234', '222222222', 2),
-('Maria', 'Gomez', 'vendedor2@gmail.com', '1234', '333333333', 2),
+('Juan', 'Perez', 'vendedor1@gmail.com', '123456789', '1122222222', 2),
+('Maria', 'Gomez', 'vendedor2@gmail.com', '123456789', '1133333333', 2),
 
 -- CLIENTES
-('Carlos', 'Lopez', 'cliente1@gmail.com', '1234', '444444444', 1),
-('Ana', 'Martinez', 'cliente2@gmail.com', '1234', '555555555', 1),
-('Lucas', 'Fernandez', 'cliente3@gmail.com', '1234', '666666666', 1),
-('Sofia', 'Rodriguez', 'cliente4@gmail.com', '1234', '777777777', 1);
+('Carlos', 'Lopez', 'cliente1@gmail.com', '123456789', '1144444444', 1),
+('Ana', 'Martinez', 'cliente2@gmail.com', '123456789', '1155555555', 1),
+('Lucas', 'Fernandez', 'cliente3@gmail.com', '123456789', '1166666666', 1),
+('Sofia', 'Rodriguez', 'cliente4@gmail.com', '123456789', '1177777777', 1);
 GO
 
 
 -- sp para el registro :D
---CREATE PROCEDURE SP_InsertarUsuario
---    @Nombre VARCHAR(50),
---    @Apellido VARCHAR(50),
---    @Email VARCHAR(100),
---    @Contrasena VARCHAR(50),
---    @Telefono VARCHAR(20)
---AS
---BEGIN
---    INSERT INTO Usuario (Nombre, Apellido, Email, Contrasena, Telefono, Rol) 
---    VALUES (@Nombre, @Apellido, @Email, @Contrasena, @Telefono, 1)
+CREATE PROCEDURE SP_InsertarUsuario
+    @Nombre VARCHAR(50),
+    @Apellido VARCHAR(50),
+    @Email VARCHAR(100),
+    @Contrasena VARCHAR(50),
+    @Telefono VARCHAR(20)
+AS
+BEGIN
+    INSERT INTO Usuario (Nombre, Apellido, Email, Contrasena, Telefono, Rol) 
+    VALUES (@Nombre, @Apellido, @Email, @Contrasena, @Telefono, 1)
 
---    SELECT scope_identity() 
---END
+    SELECT scope_identity() 
+END
 
 --SP que trae el producto completo para recorrerlo con datareader.nextresult
 CREATE PROCEDURE SP_Producto_ObtenerPorId

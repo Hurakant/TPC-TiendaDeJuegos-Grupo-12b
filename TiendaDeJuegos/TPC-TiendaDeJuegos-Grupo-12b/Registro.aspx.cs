@@ -20,6 +20,37 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(TxtEmail.Text) || string.IsNullOrWhiteSpace(TxtNombre.Text) || string.IsNullOrWhiteSpace(txtApellido.Text) || string.IsNullOrWhiteSpace(TxtTelefono.Text) || string.IsNullOrWhiteSpace(txtPass.Text))
+                {
+                    lblMsjError.Text = "Todos los campos son obligatorios.";
+                    lblMsjError.Visible = true;
+                    return;
+                }
+
+                // que el mail tenga arroab
+                if (!TxtEmail.Text.Contains("@") || !TxtEmail.Text.Contains("."))
+                {
+                    lblMsjError.Text = "El formato del correo no es valido.";
+                    lblMsjError.Visible = true;
+                    return;
+                }
+
+                // que el tel tenga solo numeros y qu sean 10 caracteres
+                if (TxtTelefono.Text.Length != 10 || !TxtTelefono.Text.All(char.IsDigit))
+                {
+                    lblMsjError.Text = "El telefono debe contener exactamente 10 dígitos numéricos.";
+                    lblMsjError.Visible = true;
+                    return;
+                }
+
+                // pass con 8 caracteres
+                if (txtPass.Text.Length < 8)
+                {
+                    lblMsjError.Text = "La contraseña debe tener al menos 8 caracteres.";
+                    lblMsjError.Visible = true;
+                    return;
+                }
+
                 Usuario usuario = new Usuario();
                 UsuarioNegocio negocio = new UsuarioNegocio();
 
@@ -37,9 +68,10 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             }
             catch (Exception ex)
             {
+                lblMsjError.Text = "Ocurrio un error al procesar el registro. Intentelo de nuevo.";
+                lblMsjError.Visible = true;
                 Session.Add("error", ex.ToString());
             }
-
             
         }
     }
