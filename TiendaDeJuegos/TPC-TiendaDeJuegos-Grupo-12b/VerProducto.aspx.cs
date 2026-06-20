@@ -79,6 +79,14 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             try
             {
                 Usuario user = (Usuario)Session["usuarioLogueado"];
+
+                if (user == null)
+                {
+                    lblMensaje.Text = "Inicie sesión para continuar con la compra.";
+                    lblMensaje.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+
                 string key = "Carrito_" + user.IdUsuario;
 
                 ProductoNegocio negocio = new ProductoNegocio();
@@ -105,7 +113,9 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             catch (Exception ex)
             {
                 lblMensaje.Text = "Error: " + ex.Message;
+                lblMensaje.ForeColor = System.Drawing.Color.Red;
             }
         }
+    
     }
 }
