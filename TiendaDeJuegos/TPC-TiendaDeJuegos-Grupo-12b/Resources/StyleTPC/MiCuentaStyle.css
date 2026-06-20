@@ -1,0 +1,98 @@
+﻿.cuenta-container {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 70px 15px;
+}
+
+.cuenta-card {
+    width: 100%;
+    max-width: 600px;
+    background: rgba(18,18,26,.95);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 22px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(64,49,71,.45);
+    backdrop-filter: blur(10px);
+}
+
+.cuenta-titulo {
+    color: white;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.info-item {
+    color: white;
+    margin-bottom: 15px;
+}
+
+.info-item strong {
+    color: #e91e63;
+}
+
+.txtCuenta {
+    width: 100%;
+    height: 45px;
+    background: #0d0d14;
+    color: white;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 12px;
+    padding: 0 15px;
+    margin-bottom: 15px;
+    transition: .3s;
+}
+
+.txtCuenta:focus {
+    border-color: #e91e63;
+    box-shadow: 0 0 12px rgba(233,30,99,.25);
+    outline: none;
+}
+
+.btnPrincipal {
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    color: white;
+    font-weight: 600;
+    background: linear-gradient(135deg,#e91e63,#9c27b0);
+    transition: .3s;
+}
+
+    .btnPrincipal:hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 18px rgba(233,30,99,.35);
+    }
+
+.btnSecundario {
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 12px;
+    padding: 12px 20px;
+    background: transparent;
+    color: white;
+    margin-left: 10px;
+}
+
+.btnCerrar {
+    width: 100%;
+    margin-top: 25px;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    background: #1d1d2a;
+    color: #ff5f8f;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.btnCerrar:hover {
+    color: white;
+    background: #29293a;
+}
+
+.error {
+    display: block;
+    color: #ff5f8f;
+    margin-bottom: 15px;
+}

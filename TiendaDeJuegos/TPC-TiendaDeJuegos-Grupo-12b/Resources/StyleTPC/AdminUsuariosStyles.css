@@ -1,0 +1,125 @@
+﻿
+.adminUsuarios-container {
+    padding: 40px 15px;
+}
+
+.adminUsuarios-card {
+    background: rgba(18,18,26,.95);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(64,49,71,.45);
+    backdrop-filter: blur(10px);
+}
+
+/* titiulo */
+
+.adminUsuarios-titulo {
+    color: white;
+    font-weight: 700;
+    margin-bottom: 25px;
+    font-size: 2rem;
+}
+
+/* lbl mensaje */
+
+.lblMensaje {
+    display: block;
+    margin-bottom: 15px;
+    color: #e91e63;
+    font-weight: 600;
+}
+
+/* grid */
+
+.tablaUsuarios {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+    margin-top: 15px;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.tablaUsuarios th {
+    background: transparent;
+    color: #bdbdbd;
+    padding: 16px;
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.tablaUsuarios td {
+    background: #141420;
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+
+.tablaUsuarios tr:hover td {
+    background: #232338;
+}
+
+.tablaUsuarios table {
+    width: 100%;
+}
+
+.tablaUsuarios tbody tr td {
+    vertical-align: middle;
+}
+
+/* btn */
+
+.btnEditar {
+    border: none;
+    border-radius: 10px;
+    padding: 8px 15px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+    margin: 2px;
+}
+
+.btnEstado {
+    border: none;
+    border-radius: 10px;
+    padding: 8px 15px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+    margin: 2px;
+}
+
+.btnEditar {
+    background: linear-gradient(135deg,#e91e63,#9c27b0);
+}
+
+.btnEditar:hover {
+transform: scale(1.05);
+box-shadow: 0 0 15px rgba(233,30,99,.35);
+}
+
+/* activar y desac */
+
+.btnEstado {
+    background: #2d2d42;
+}
+
+.btnEstado:hover {
+background: #3b3b57;
+transform: scale(1.05);
+}
+
+/* estado deshabiliatdo */
+
+.btnEditar:disabled,
+.btnEstado:disabled,
+input[disabled] {
+    opacity: .4;
+    cursor: not-allowed;
+}
+

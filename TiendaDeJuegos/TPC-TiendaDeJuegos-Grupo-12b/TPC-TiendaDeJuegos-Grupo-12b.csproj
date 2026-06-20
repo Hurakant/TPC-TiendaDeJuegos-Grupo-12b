@@ -86,10 +86,12 @@
     <Content Include="Resources\Logo\LogosfB.svg" />
     <Content Include="Resources\Logo\LogosfN.svg" />
     <Content Include="Resources\StyleTPC\AdminCategoriasStyle.css" />
+    <Content Include="Resources\StyleTPC\AdminUsuariosStyles.css" />
     <Content Include="Resources\StyleTPC\CatalogoStyle.css" />
     <Content Include="Resources\StyleTPC\LoginStyle.css" />
     <Content Include="Resources\StyleTPC\MasterStyle.css" />
     <Content Include="Resources\StyleTPC\Home.css" />
+    <Content Include="Resources\StyleTPC\MiCuentaStyle.css" />
     <Content Include="Resources\StyleTPC\RegistroStyle.css" />
     <Content Include="Resources\StyleTPC\VerProductoStyle.css" />
     <Content Include="VendedorPedidos.aspx" />
