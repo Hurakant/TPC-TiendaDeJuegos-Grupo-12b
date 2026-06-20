@@ -64,7 +64,7 @@
 
                                 <asp:Button Text="Registrarse" runat="server" CssClass="btnRegistrarse" ID="btnRegistrarse" OnClick="btnRegistrarse_Click" />
 
-
+                                <asp:Label ID="lblMsjError" runat="server" CssClass="error" Visible="false"></asp:Label>
                                 <a href="Home.aspx" class="cancelar-link">Cancelar </a>
                                 <a href="Login.aspx" class="InSec-link">Tienes una cuenta? Inicia Sesión! </a>
 

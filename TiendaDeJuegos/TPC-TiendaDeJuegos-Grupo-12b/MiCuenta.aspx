@@ -39,6 +39,8 @@
 
     <asp:TextBox ID="txtTelefono" runat="server" />
 
+    <asp:Label ID="lblMsjError" runat="server" CssClass="error" Visible="false"></asp:Label>
+
 
     <asp:Button ID="btnGuardar" runat="server" Text="Guardar Cambios" OnClick="btnGuardar_Click" />
 

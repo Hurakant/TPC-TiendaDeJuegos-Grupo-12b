@@ -26,6 +26,27 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
             try
             {
+                if (string.IsNullOrWhiteSpace(TxtUser.Text) ||  string.IsNullOrWhiteSpace(TxtPass.Text))
+                {
+                    lblError.Text = "Todos los campos son obligatorios.";
+                    lblError.Visible = true;
+                    return;
+                }
+
+                if (!TxtUser.Text.Contains("@") || !TxtUser.Text.Contains("."))
+                {
+                    lblError.Text = "El formato del correo no es valido.";
+                    lblError.Visible = true;
+                    return;
+                }
+
+                if (TxtPass.Text.Length < 8)
+                {
+                    lblError.Text = "La contraseña debe tener al menos 8 caracteres.";
+                    lblError.Visible = true;
+                    return;
+                }
+
                 usuario = new Usuario();
 
                 usuario.Email = TxtUser.Text;
