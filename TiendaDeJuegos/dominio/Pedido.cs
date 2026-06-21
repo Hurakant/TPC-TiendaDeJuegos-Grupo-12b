@@ -9,6 +9,7 @@ namespace dominio
     public class Pedido
     {
         public int IdPedido { get; set; }
+
         public Usuario Cliente { get; set; }
 
         public List<CarritoItem> Detalle { get; set; } = new List<CarritoItem>();
@@ -23,12 +24,8 @@ namespace dominio
 
         public decimal Total => Detalle.Sum(x => x.Subtotal);
 
-        public string FormaDePagoTexto
-        {
-            get
-            {
-                return FormaDePago != null ? FormaDePago.Nombre : "";
-            }
-        }
+        public string FormaDePagoTexto =>
+            FormaDePago != null ? FormaDePago.Nombre : "";
+        public decimal MontoTotal { get; set; }
     }
 }

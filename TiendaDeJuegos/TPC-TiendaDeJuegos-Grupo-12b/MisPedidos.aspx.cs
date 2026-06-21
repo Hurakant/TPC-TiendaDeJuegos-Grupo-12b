@@ -1,4 +1,5 @@
 ﻿using dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 
@@ -23,7 +24,11 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
         private void CargarPedidos()
         {
-            var pedidos = Session["Pedidos"] as List<Pedido>;
+            Usuario user = (Usuario)Session["usuarioLogueado"];
+
+            PedidoNegocio negocio = new PedidoNegocio();
+
+            var pedidos = negocio.ListarPorUsuario(user.IdUsuario);
 
             if (pedidos == null || pedidos.Count == 0)
             {

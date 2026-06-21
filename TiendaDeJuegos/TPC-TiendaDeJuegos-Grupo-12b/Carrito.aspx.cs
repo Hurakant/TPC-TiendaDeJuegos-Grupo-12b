@@ -54,7 +54,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             new FormaDePago { IdFormaDePago = 1, Nombre = "Efectivo", Activa = true },
             new FormaDePago { IdFormaDePago = 2, Nombre = "Transferencia bancaria", Activa = true },
             new FormaDePago { IdFormaDePago = 3, Nombre = "Tarjeta", Activa = true },
-            new FormaDePago { IdFormaDePago = 4, Nombre = "MercadoPago", Activa = true }
+            
         };
             }
         }
@@ -128,6 +128,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         protected void btnComprar_Click(object sender, EventArgs e)
         {
             var carrito = ObtenerCarrito();
+            Usuario user = (Usuario)Session["usuarioLogueado"];
 
             if (carrito.ItemCarrito.Count == 0)
             {
@@ -135,36 +136,52 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 return;
             }
 
-            var pedidos = (List<Pedido>)Session["Pedidos"];
-            var formas = (List<FormaDePago>)Session["FormasDePago"];
+            // Forma de pago
+            FormaDePago pago = ((List<FormaDePago>)Session["FormasDePago"])
+                .FirstOrDefault(x => x.IdFormaDePago == Convert.ToInt32(ddlPago.SelectedValue));
 
-            FormaDePago pago = formas.FirstOrDefault(x =>
-                x.IdFormaDePago == Convert.ToInt32(ddlPago.SelectedValue));
+            if (pago == null)
+            {
+                lblMensaje.Text = "Seleccione una forma de pago válida";
+                return;
+            }
 
+            // Forma de entrega (ENUM)
+            FormaDeEntrega formaEntrega =
+                (FormaDeEntrega)Convert.ToInt32(ddlEntrega.SelectedValue);
+
+            // Crear pedido
             Pedido pedido = new Pedido
             {
-                IdPedido = pedidos.Count + 1,
-                Fecha = DateTime.Now,
-                Estado = EstadoPedido.Pendiente,
-                FormaDeEntrega = (FormaDeEntrega)Convert.ToInt32(ddlEntrega.SelectedValue),
+                Cliente = user,
                 FormaDePago = pago,
+                FormaDeEntrega = formaEntrega,
                 Detalle = carrito.ItemCarrito.ToList()
             };
 
-            pedidos.Add(pedido);
+            PedidoNegocio negocio = new PedidoNegocio();
 
-            carrito.ItemCarrito.Clear(); // IMPORTANTE
+            // INSERT PEDIDO
+            int idPedido = negocio.CrearPedido(pedido);
 
+            if (idPedido == 0)
+            {
+                lblMensaje.Text = "Error al crear el pedido";
+                return;
+            }
+
+            // INSERT DETALLE
+            foreach (CarritoItem item in carrito.ItemCarrito)
+            {
+                negocio.AgregarDetalle(idPedido, item);
+            }
+
+            // LIMPIAR CARRITO
+            carrito.ItemCarrito.Clear();
             CargarCarrito();
 
-            var ultimo = pedidos.Last();
-
-            lblMensaje.Text =
-                "Pedido OK | ID: " + ultimo.IdPedido +
-                " | Total: $" + ultimo.Total +
-                " | Items: " + ultimo.Detalle.Count;
+            lblMensaje.Text = "Pedido creado ✔ ID: " + idPedido;
         }
-
 
         private dominio.Carrito ObtenerCarrito()
         {
