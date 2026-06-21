@@ -66,11 +66,10 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
                 Response.Redirect("~/Home.aspx",false);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 lblMsjError.Text = "Ocurrio un error al procesar el registro. Intentelo de nuevo.";
                 lblMsjError.Visible = true;
-                Session.Add("error", ex.ToString());
             }
             
         }

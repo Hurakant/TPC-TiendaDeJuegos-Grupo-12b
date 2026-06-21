@@ -24,6 +24,15 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         protected global::System.Web.UI.WebControls.Label lblTitulo;
 
         /// <summary>
+        /// btnVolver control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVolver;
+
+        /// <summary>
         /// lblMensaje control.
         /// </summary>
         /// <remarks>

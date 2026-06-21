@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Pedidos Vendedor" Language="C#" MasterPageFile="~/Master1.Master" AutoEventWireup="true" CodeBehind="VendedorPedidos.aspx.cs" Inherits="TPC_TiendaDeJuegos_Grupo_12b.VendedorPedidos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="Resources/StyleTPC/Home.css" rel="stylesheet" />
+    <link href="Resources/StyleTPC/VendedorPedidosStyle.css" rel="stylesheet" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -10,7 +10,15 @@
 
         <div class="card p-3">
 
-            <asp:Label ID="lblTitulo" runat="server" />
+            <div class="adminUsuariosHeader">
+
+                <div class="tituloConBoton">
+                    <asp:Label ID="lblTitulo" runat="server" />
+
+                    <asp:Button Text="Volver" ID="btnVolver" CssClass="btnVolver" OnClick="btnVolver_Click" runat="server" />
+                </div>
+
+            </div>
 
             <asp:Label ID="lblMensaje" runat="server" ForeColor="Red" />
 

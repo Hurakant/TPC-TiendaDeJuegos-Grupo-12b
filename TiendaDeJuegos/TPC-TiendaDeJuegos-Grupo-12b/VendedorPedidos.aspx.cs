@@ -17,11 +17,10 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
             Usuario user = (Usuario)Session["usuarioLogueado"];
 
-            if (user.Rol != Rol.Vendedor &&
-    user.Rol != Rol.Admin)
+            if (user.Rol != Rol.Vendedor && user.Rol != Rol.Admin)
             {
-                Response.Redirect("Home.aspx");
-                return;
+                Session["ErrorNoPermisos"] = true;
+                Response.Redirect("Error.aspx");
             }
 
             if (user.Rol == Rol.Admin)
@@ -60,6 +59,11 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
             lblMensaje.Text = "Estado actualizado (conectar a BD después)";
+        }
+
+        protected void btnVolver_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Home.aspx");
         }
     }
 }

@@ -7,7 +7,15 @@
     <div class="categorias-contenedor">
         <div class="container">
 
-            <h2 class="categorias-titulo">Administrar categorías</h2>
+            <div class="adminCatHeader">
+
+                <div class="tituloConBoton">
+                    <h2 class="categorias-titulo">Administrar categorías</h2>
+
+                    <asp:Button Text="Volver" ID="btnVolver" CssClass="btnVolver"  OnClick="btnVolver_Click" runat="server" />
+                </div>
+
+            </div>
 
             <div class="categorias-barra-herramientas">
                 <asp:TextBox ID="txtBuscar" runat="server"

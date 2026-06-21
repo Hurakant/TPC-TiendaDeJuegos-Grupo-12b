@@ -115,6 +115,6 @@
     transition: color .2s;
 }
 
-    .producto-volver:hover {
-        color: var(--primary-pink, #e91e63);
-    }
+.producto-volver:hover {
+    color: var(--primary-pink, #e91e63);
+}

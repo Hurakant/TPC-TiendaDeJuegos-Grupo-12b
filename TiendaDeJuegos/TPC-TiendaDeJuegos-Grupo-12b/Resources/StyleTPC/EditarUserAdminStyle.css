@@ -1,0 +1,100 @@
+﻿.edit-user-cont {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+.edit-user-cont h2 {
+    text-align: center;
+    color: white;
+    margin-bottom: 25px;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.lblform {
+    display: block;
+    margin-bottom: 6px;
+    color: white;
+    font-weight: 600;
+}
+
+.txtform {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    background-color: #2d2d2d;
+    color: white;
+    box-sizing: border-box;
+}
+
+.txtform:focus {
+    outline: none;
+    border-color: #7c5cff;
+}
+
+/*lbl defs error*/
+.mensaje {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.botones {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn-guardar {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+
+.btnVolver {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-guardar {
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+    background: linear-gradient(135deg,#e91e63,#9c27b0);
+}
+
+.btn-guardar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(233,30,99,.35);
+}
+
+.btnVolver {
+    background-color: #555;
+    color: white;
+}
+
+.btnVolver:hover {
+    background-color: #444;
+}

@@ -11,7 +11,18 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+ 
+            if (Session["ErrorNoPermisos"] == null)
+            {
+                Response.Redirect("Home.aspx");
+            }
 
+            Session.Remove("ErrorNoPermisos");
+        }
+
+        protected void btnVolver_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Home.aspx");
         }
     }
 }

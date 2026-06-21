@@ -23,29 +23,6 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         private void cargarUsuario()
         {
 
-            if (string.IsNullOrWhiteSpace(txtEmail.Text) || string.IsNullOrWhiteSpace(txtNombre.Text) || string.IsNullOrWhiteSpace(txtApellido.Text) || string.IsNullOrWhiteSpace(txtTelefono.Text))
-            {
-                lblMsjError.Text = "Todos los campos son obligatorios.";
-                lblMsjError.Visible = true;
-                return;
-            }
-
-            // que el mail tenga arroab
-            if (!txtEmail.Text.Contains("@") || !txtEmail.Text.Contains("."))
-            {
-                lblMsjError.Text = "El formato del correo no es valido.";
-                lblMsjError.Visible = true;
-                return;
-            }
-
-            // que el tel tenga solo numeros y qu sean 10 caracteres
-            if (txtTelefono.Text.Length != 10 || !txtTelefono.Text.All(char.IsDigit))
-            {
-                lblMsjError.Text = "El telefono debe contener exactamente 10 dígitos numéricos.";
-                lblMsjError.Visible = true;
-                return;
-            }
-
             int id = Convert.ToInt32(Request.QueryString["id"]);
 
             UsuarioNegocio negocio = new UsuarioNegocio();
@@ -56,19 +33,69 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             txtEmail.Text = user.Email;
             txtTelefono.Text = user.Telefono;
 
-            ddlRol.SelectedValue = user.Rol.ToString();
+            ddlRol.SelectedValue = ((int)user.Rol).ToString();
+
         }
 
         private void cargarRoles()
         {
-            ddlRol.DataSource = Enum.GetValues(typeof(Rol));
+            ddlRol.Items.Clear();
+            ddlRol.Items.Add(new ListItem("Cliente", "1"));
+            ddlRol.Items.Add(new ListItem("Vendedor", "2"));
             ddlRol.DataBind();
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            
+            if (string.IsNullOrWhiteSpace(txtEmail.Text) || string.IsNullOrWhiteSpace(txtNombre.Text) || string.IsNullOrWhiteSpace(txtApellido.Text) || string.IsNullOrWhiteSpace(txtTelefono.Text))
+            {
+                lblMsjError.Text = "Todos los campos son obligatorios.";
+                lblMsjError.Visible = true;
+                return;
+            }
+            // que el mail tenga arroab
+            if (!txtEmail.Text.Contains("@") || !txtEmail.Text.Contains("."))
+            {
+                lblMsjError.Text = "El formato del correo no es valido.";
+                lblMsjError.Visible = true;
+                return;
+            }
+            // que el tel tenga solo numeros y qu sean 10 caracteres
+            if (txtTelefono.Text.Length != 10 || !txtTelefono.Text.All(char.IsDigit))
+            {
+                lblMsjError.Text = "El telefono debe contener exactamente 10 dígitos numéricos.";
+                lblMsjError.Visible = true;
+                return;
+            }
+
+
+            try
+            {
+                Usuario usuario = new Usuario();
+
+                usuario.IdUsuario = Convert.ToInt32(Request.QueryString["id"]);
+                usuario.Nombre = txtNombre.Text;
+                usuario.Apellido = txtApellido.Text;
+                usuario.Email = txtEmail.Text;
+                usuario.Telefono = txtTelefono.Text;
+                usuario.Rol = (Rol)Convert.ToInt32(ddlRol.SelectedValue);
+
+                UsuarioNegocio negocio = new UsuarioNegocio();
+                negocio.ModificarUserAdmin(usuario);
+
+                lblMsjError.Text = "Cambios guardados correctamente!";
+                lblMsjError.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                lblMsjError.Text = ex.Message;
+                lblMsjError.Visible = true;
+            }
         }
 
+        protected void btnVolver_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AdminUsuarios.aspx");
+        }
     }
 }

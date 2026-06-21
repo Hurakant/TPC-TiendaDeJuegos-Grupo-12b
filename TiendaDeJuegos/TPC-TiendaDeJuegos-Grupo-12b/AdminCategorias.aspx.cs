@@ -21,7 +21,8 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
             if (user.Rol != Rol.Admin)
             {
-                Response.Redirect("Error.aspx", false);
+                Session["ErrorNoPermisos"] = true;
+                Response.Redirect("Error.aspx");
             }
             if (!IsPostBack)
             {
@@ -225,6 +226,11 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             pnlSinSeleccion.Visible = true;
             lblMensaje.Text = "";
             lblMensaje.CssClass = "";
+        }
+
+        protected void btnVolver_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Home.aspx");
         }
     }
 }

@@ -9,9 +9,17 @@
 
     <div class="adminUsuarios-container">
 
-        <div class="adminUsuarios-card" >
+        <div class="adminUsuarios-card">
 
-            <h3  class="adminUsuarios-titulo" >Gestión de Usuarios</h3>
+            <div class="adminUsuariosHeader">
+
+                <div class="tituloConBoton">
+                    <h3 class="adminUsuariosTitulo">Gestión de Usuarios</h3>
+
+                    <asp:Button Text="Volver" ID="btnVolver" CssClass="btnVolver" OnClick="btnVolver_Click" runat="server" />
+                </div>
+
+            </div>
 
             <asp:Label ID="lblMensaje" runat="server" CssClass="lblMensaje" />
 
@@ -41,9 +49,9 @@
 
                         <ItemTemplate>
 
-                            <asp:Button ID="btnEditar" CssClass="btnEditar" runat="server" Text="Editar" CommandName="Editar" CommandArgument='<%# Eval("IdUsuario") %>' Enabled='<%# Convert.ToInt32(Eval("IdUsuario")) != ((dominio.Usuario)Session["usuarioLogueado"]).IdUsuario %>'/>
+                            <asp:Button ID="btnEditar" CssClass="btnEditar" runat="server" Text="Editar" CommandName="Editar" CommandArgument='<%# Eval("IdUsuario") %>' Enabled='<%# Convert.ToInt32(Eval("IdUsuario")) != ((dominio.Usuario)Session["usuarioLogueado"]).IdUsuario %>' />
                             <asp:Button ID="btnEstado" CssClass="btnEstado" runat="server" Text='<%# Convert.ToBoolean(Eval("Activo")) ? "Desactivar" : "Activar" %>' CommandName="CambiarEstado" CommandArgument='<%# Eval("IdUsuario") %>'
-                                Enabled='<%# Convert.ToInt32(Eval("IdUsuario")) != ((dominio.Usuario)Session["usuarioLogueado"]).IdUsuario %>'/>
+                                Enabled='<%# Convert.ToInt32(Eval("IdUsuario")) != ((dominio.Usuario)Session["usuarioLogueado"]).IdUsuario %>' />
 
                         </ItemTemplate>
 

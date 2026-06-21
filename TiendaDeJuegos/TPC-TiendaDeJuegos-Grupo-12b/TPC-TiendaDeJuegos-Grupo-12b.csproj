@@ -88,11 +88,14 @@
     <Content Include="Resources\StyleTPC\AdminCategoriasStyle.css" />
     <Content Include="Resources\StyleTPC\AdminUsuariosStyles.css" />
     <Content Include="Resources\StyleTPC\CatalogoStyle.css" />
+    <Content Include="Resources\StyleTPC\EditarUserAdminStyle.css" />
+    <Content Include="Resources\StyleTPC\ErrorStyle.css" />
     <Content Include="Resources\StyleTPC\LoginStyle.css" />
     <Content Include="Resources\StyleTPC\MasterStyle.css" />
     <Content Include="Resources\StyleTPC\Home.css" />
     <Content Include="Resources\StyleTPC\MiCuentaStyle.css" />
     <Content Include="Resources\StyleTPC\RegistroStyle.css" />
+    <Content Include="Resources\StyleTPC\VendedorPedidosStyle.css" />
     <Content Include="Resources\StyleTPC\VerProductoStyle.css" />
     <Content Include="VendedorPedidos.aspx" />
     <Content Include="VerProducto.aspx" />

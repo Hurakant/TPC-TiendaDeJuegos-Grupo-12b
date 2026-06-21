@@ -99,6 +99,35 @@ namespace Negocio
 
         }
 
+        public void ModificarUserAdmin(Usuario usuario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setConsulta("UPDATE Usuario SET Nombre = @Nombre, Apellido = @Apellido, Email = @Email, Telefono = @Telefono , Rol = @Rol WHERE IdUsuario = @Id");
+                datos.setParametro("@Nombre", usuario.Nombre);
+                datos.setParametro("@Apellido", usuario.Apellido);
+                datos.setParametro("@Email", usuario.Email);
+                datos.setParametro("@Telefono", usuario.Telefono);
+                datos.setParametro("@Rol", usuario.Rol);
+                datos.setParametro("@Id", usuario.IdUsuario);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+
+
         public List<Usuario> listar()
         {
             List<Usuario> lista = new List<Usuario>();
