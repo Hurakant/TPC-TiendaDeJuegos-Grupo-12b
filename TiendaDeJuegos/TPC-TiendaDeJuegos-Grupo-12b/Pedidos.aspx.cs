@@ -3,6 +3,7 @@ using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Web.UI.WebControls;
 
 namespace TPC_TiendaDeJuegos_Grupo_12b
 {
@@ -68,6 +69,27 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         protected void btnVolver_Click(object sender, EventArgs e)
         {
             Response.Redirect("Home.aspx");
+        }
+
+        protected void btnDetalle_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+
+            int idPedido = Convert.ToInt32(btn.CommandArgument);
+
+            Response.Redirect("DetallePedido.aspx?id=" + idPedido);
+        }
+
+        protected void gvPedidos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                string rol = Session["rol"]?.ToString();
+
+                Button btnDetalle = (Button)e.Row.FindControl("btnDetalle");
+
+               
+            }
         }
     }
 }

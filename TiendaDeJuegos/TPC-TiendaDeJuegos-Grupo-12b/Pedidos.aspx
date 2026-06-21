@@ -8,7 +8,7 @@
 
 <div class="container mt-4">
 
-    <!-- HEADER -->
+    
     <div class="card shadow-sm p-3 mb-3">
 
         <div class="d-flex justify-content-between align-items-center">
@@ -30,65 +30,70 @@
 
     </div>
 
-    <!-- MENSAJE -->
+  
     <asp:Label ID="lblMensaje" runat="server" CssClass="text-danger fw-bold" />
 
     <div class="card shadow-sm p-3">
 
-        <asp:GridView ID="gvPedidos"
-            runat="server"
-            CssClass="table table-hover align-middle"
-            AutoGenerateColumns="false">
+       <asp:GridView ID="gvPedidos"
+    runat="server"
+    CssClass="table table-hover table-striped align-middle shadow-sm"
+    AutoGenerateColumns="false"
+    GridLines="None"
+    HeaderStyle-CssClass="table-dark"
+    OnRowDataBound="gvPedidos_RowDataBound">
 
-            <Columns>
+    <Columns>
 
-              
-                <asp:BoundField DataField="IdPedido" HeaderText="#ID" />
+        <asp:BoundField DataField="IdPedido" HeaderText="#ID" />
+        <asp:BoundField DataField="Cliente.Nombre" HeaderText="Cliente" />
+        <asp:BoundField DataField="Fecha" HeaderText="Fecha" DataFormatString="{0:dd/MM/yyyy}" />
+        <asp:BoundField DataField="Estado" HeaderText="Estado" />
+        <asp:BoundField DataField="MontoTotal" HeaderText="Total" DataFormatString="{0:C}" />
 
-                <asp:BoundField DataField="Cliente.Nombre" HeaderText="Cliente" />
+        <asp:TemplateField HeaderText="Acciones">
 
-                <asp:BoundField DataField="Fecha" HeaderText="Fecha" DataFormatString="{0:dd/MM/yyyy}" />
+            <ItemTemplate>
 
-                
-                <asp:BoundField DataField="Estado" HeaderText="Estado" />
+                <div class="d-flex gap-2">
 
-                
-                <asp:BoundField DataField="MontoTotal" HeaderText="Total" DataFormatString="{0:C}" />
+                   
+                    <asp:DropDownList ID="ddlEstado"
+                        runat="server"
+                        CssClass="form-select form-select-sm"
+                        Width="140px">
 
-                
-                <asp:TemplateField HeaderText="Acciones">
+                        <asp:ListItem Text="Pendiente" />
+                        <asp:ListItem Text="En preparación" />
+                        <asp:ListItem Text="Enviado" />
 
-                    <ItemTemplate>
+                    </asp:DropDownList>
 
-                        <div class="d-flex gap-2">
+                  
+                    <asp:Button ID="btnActualizar"
+                        runat="server"
+                        Text="Actualizar"
+                        CommandArgument='<%# Eval("IdPedido") %>'
+                        CssClass="btn btn-sm btn-primary"
+                        OnClick="btnActualizar_Click" />
 
-                            <asp:DropDownList ID="ddlEstado"
-                                runat="server"
-                                CssClass="form-select form-select-sm"
-                                Width="150px">
+                    
+                    <asp:Button ID="btnDetalle"
+                        runat="server"
+                        Text="Ver"
+                        CommandArgument='<%# Eval("IdPedido") %>'
+                        CssClass="btn btn-sm btn-outline-dark"
+                        OnClick="btnDetalle_Click" />
 
-                                <asp:ListItem Text="Pendiente" />
-                                <asp:ListItem Text="En preparación" />
-                                <asp:ListItem Text="Enviado" />
+                </div>
 
-                            </asp:DropDownList>
+            </ItemTemplate>
 
-                            <asp:Button ID="btnActualizar"
-                                runat="server"
-                                Text="Actualizar"
-                                CommandArgument='<%# Eval("IdPedido") %>'
-                                CssClass="btn btn-sm btn-primary"
-                                OnClick="btnActualizar_Click" />
+        </asp:TemplateField>
 
-                        </div>
+    </Columns>
 
-                    </ItemTemplate>
-
-                </asp:TemplateField>
-
-            </Columns>
-
-        </asp:GridView>
+</asp:GridView>
 
     </div>
 
