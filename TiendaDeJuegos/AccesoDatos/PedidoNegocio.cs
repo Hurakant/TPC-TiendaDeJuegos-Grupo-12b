@@ -2,6 +2,7 @@
 using dominio;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Negocio
 {
@@ -157,6 +158,85 @@ namespace Negocio
                 case 3: return "Tarjeta";
                 case 4: return "MercadoPago";
                 default: return "Desconocido";
+            }
+        }
+
+        public List<Pedido> ListarTodos()
+        {
+            List<Pedido> lista = new List<Pedido>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setConsulta(@"
+            SELECT 
+                p.IDPedido,
+                p.FechaCreacion,
+                p.MontoTotal,
+                p.IDEstadoPedido,
+                p.IDFormaDePago,
+                p.IDFormaDeEntrega,
+                u.Nombre
+            FROM Pedido p
+            INNER JOIN Usuario u ON u.IdUsuario = p.IDUsuario
+            ORDER BY p.FechaCreacion DESC
+        ");
+
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Pedido p = new Pedido();
+
+                    p.IdPedido = (int)datos.Lector["IDPedido"];
+                    p.Fecha = (DateTime)datos.Lector["FechaCreacion"];
+                    p.MontoTotal = (decimal)datos.Lector["MontoTotal"];
+                    p.Estado = (EstadoPedido)Convert.ToInt32(datos.Lector["IDEstadoPedido"]);
+
+                    p.Cliente = new Usuario
+                    {
+                        Nombre = datos.Lector["Nombre"].ToString()
+                    };
+
+                    lista.Add(p);
+                }
+
+                return lista;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public DataTable ListarTodosParaGrid()
+        {
+            AccesoDatos datos = new AccesoDatos();
+            DataTable tabla = new DataTable();
+
+            try
+            {
+                datos.setConsulta(@"
+            SELECT 
+                p.IDPedido,
+                u.Nombre AS Cliente,
+                p.FechaCreacion,
+                p.MontoTotal,
+                p.IDEstadoPedido
+            FROM Pedido p
+            INNER JOIN Usuario u ON u.IdUsuario = p.IDUsuario
+            ORDER BY p.FechaCreacion DESC
+        ");
+
+                datos.ejecutarLectura();
+
+                tabla.Load(datos.Lector);
+
+                return tabla;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
     }

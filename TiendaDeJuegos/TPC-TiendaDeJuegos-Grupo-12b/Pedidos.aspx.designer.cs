@@ -11,7 +11,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 {
 
 
-    public partial class VendedorPedidos
+    public partial class Pedidos
     {
 
         /// <summary>

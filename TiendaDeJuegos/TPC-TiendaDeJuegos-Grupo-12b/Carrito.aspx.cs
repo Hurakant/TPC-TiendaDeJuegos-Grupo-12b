@@ -94,7 +94,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             lblMensaje.Text = "Carrito vaciado 🧹";
         }
 
-        protected void btnAgregarTest_Click(object sender, EventArgs e)
+     /*   protected void btnAgregarTest_Click(object sender, EventArgs e)
         {
             var carrito = ObtenerCarrito();
 
@@ -109,7 +109,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             CargarCarrito();
             lblMensaje.Text = "Producto agregado ✔";
         }
-
+     */
         protected void gvCarrito_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Eliminar")

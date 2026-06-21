@@ -1,0 +1,108 @@
+﻿/* =========================
+   DETALLE PEDIDO - STYLE
+   ========================= */
+
+.detalle-wrapper {
+    padding: 30px;
+    background: #12121a;
+    min-height: 80vh;
+    color: #ffffff;
+}
+
+/* CARD PRINCIPAL */
+.detalle-card {
+    background: #1e1e2f;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+/* HEADER */
+.detalle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #2f2f44;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+}
+
+    .detalle-header h3 {
+        margin: 0;
+        font-size: 22px;
+    }
+
+/* ESTADO */
+.badge-estado {
+    background: #ffc107;
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* INFO GRID */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.info-box {
+    background: #2a2a40;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #2f2f44;
+}
+
+    .info-box strong {
+        display: block;
+        margin-bottom: 5px;
+        color: #aaa;
+    }
+
+/* TABLA DETALLE */
+.detalle-table {
+    width: 100%;
+    background: #151522;
+    border-radius: 10px;
+    overflow: hidden;
+    border-collapse: collapse;
+}
+
+    .detalle-table th {
+        background: #2a2a40;
+        padding: 12px;
+        text-align: left;
+        color: #fff;
+    }
+
+    .detalle-table td {
+        padding: 12px;
+        border-bottom: 1px solid #2f2f44;
+        color: #ddd;
+    }
+
+/* TOTAL */
+.total-box {
+    text-align: right;
+    margin-top: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #00d084;
+}
+
+/* BOTÓN VOLVER */
+.volver-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #aaa;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+    .volver-link:hover {
+        color: #fff;
+    }

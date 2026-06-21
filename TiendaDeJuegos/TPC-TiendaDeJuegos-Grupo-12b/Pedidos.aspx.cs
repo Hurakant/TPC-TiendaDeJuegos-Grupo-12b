@@ -1,10 +1,12 @@
 ﻿using dominio;
+using Negocio;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace TPC_TiendaDeJuegos_Grupo_12b
 {
-    public partial class VendedorPedidos : System.Web.UI.Page
+    public partial class Pedidos : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,6 +23,8 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             {
                 Session["ErrorNoPermisos"] = true;
                 Response.Redirect("Error.aspx");
+                Response.Redirect("Error.aspx");
+                return;
             }
 
             if (user.Rol == Rol.Admin)
@@ -41,18 +45,18 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
         private void CargarPedidos()
         {
-            // Falta conectar a la base esto es somulacion)
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Id");
-            dt.Columns.Add("Cliente");
-            dt.Columns.Add("Fecha");
-            dt.Columns.Add("Estado");
-            dt.Columns.Add("Total");
+            Usuario user = (Usuario)Session["usuarioLogueado"];
 
-            dt.Rows.Add("1", "Juan Perez", "2026-06-17", "Pendiente", "1500");
-            dt.Rows.Add("2", "Maria Lopez", "2026-06-16", "Enviado", "3200");
+            PedidoNegocio negocio = new PedidoNegocio();
 
-            gvPedidos.DataSource = dt;
+            List<Pedido> pedidos;
+
+            if (user.Rol == Rol.Admin || user.Rol == Rol.Vendedor)
+                pedidos = negocio.ListarTodos();
+            else
+                pedidos = negocio.ListarPorUsuario(user.IdUsuario);
+
+            gvPedidos.DataSource = pedidos;
             gvPedidos.DataBind();
         }
 

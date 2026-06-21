@@ -213,7 +213,7 @@ END", cn))
             if (user.Rol == Rol.Admin)
             {
 
-                Response.Redirect("~/VendedorPedidos.aspx");
+                Response.Redirect("~/Pedidos.aspx");
             }
             else
             {
@@ -247,7 +247,7 @@ END", cn))
 
             if (user.Rol == Rol.Vendedor)
             {
-                Response.Redirect("~/VendedorPedidos.aspx");
+                Response.Redirect("~/Pedidos.aspx");
             }
             else
             {

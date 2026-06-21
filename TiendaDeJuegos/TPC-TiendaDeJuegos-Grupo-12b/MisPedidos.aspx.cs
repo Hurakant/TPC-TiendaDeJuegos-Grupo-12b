@@ -2,6 +2,7 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
+using System.Web.UI.WebControls;
 
 namespace TPC_TiendaDeJuegos_Grupo_12b
 {
@@ -40,6 +41,14 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             gvPedidos.Visible = true;
             gvPedidos.DataSource = pedidos;
             gvPedidos.DataBind();
+        }
+
+        protected void btnDetalle_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            int idPedido = Convert.ToInt32(btn.CommandArgument);
+
+            Response.Redirect("DetallePedido.aspx?id=" + idPedido);
         }
     }
 }

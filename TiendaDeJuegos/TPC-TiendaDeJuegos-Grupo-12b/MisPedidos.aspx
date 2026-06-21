@@ -46,6 +46,17 @@
                            
                             <asp:BoundField DataField="MontoTotal" HeaderText="Total" />
 
+                            <asp:TemplateField HeaderText="Acciones">
+        <ItemTemplate>
+            <asp:Button ID="btnDetalle"
+                runat="server"
+                Text="Ver detalle"
+                CssClass="btn btn-sm btn-primary"
+                CommandArgument='<%# Eval("IdPedido") %>'
+                OnClick="btnDetalle_Click" />
+        </ItemTemplate>
+    </asp:TemplateField>
+
                         </Columns>
 
                     </asp:GridView>

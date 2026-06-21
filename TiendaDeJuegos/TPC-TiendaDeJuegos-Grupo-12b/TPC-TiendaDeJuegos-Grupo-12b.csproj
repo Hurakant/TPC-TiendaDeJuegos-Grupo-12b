@@ -76,6 +76,7 @@
     <Content Include="AdminUsuarios.aspx" />
     <Content Include="Carrito.aspx" />
     <Content Include="Catalogo.aspx" />
+    <Content Include="DetallePedido.aspx" />
     <Content Include="EditarUsuarioAdmin.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Home.aspx" />
@@ -88,6 +89,7 @@
     <Content Include="Resources\StyleTPC\AdminCategoriasStyle.css" />
     <Content Include="Resources\StyleTPC\AdminUsuariosStyles.css" />
     <Content Include="Resources\StyleTPC\CatalogoStyle.css" />
+    <Content Include="Resources\StyleTPC\DetallePedidoStyle.css" />
     <Content Include="Resources\StyleTPC\EditarUserAdminStyle.css" />
     <Content Include="Resources\StyleTPC\ErrorStyle.css" />
     <Content Include="Resources\StyleTPC\LoginStyle.css" />
@@ -95,9 +97,9 @@
     <Content Include="Resources\StyleTPC\Home.css" />
     <Content Include="Resources\StyleTPC\MiCuentaStyle.css" />
     <Content Include="Resources\StyleTPC\RegistroStyle.css" />
-    <Content Include="Resources\StyleTPC\VendedorPedidosStyle.css" />
+    <Content Include="Resources\StyleTPC\PedidosStyle.css" />
     <Content Include="Resources\StyleTPC\VerProductoStyle.css" />
-    <Content Include="VendedorPedidos.aspx" />
+    <Content Include="Pedidos.aspx" />
     <Content Include="VerProducto.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -129,6 +131,13 @@
     </Compile>
     <Compile Include="Catalogo.aspx.designer.cs">
       <DependentUpon>Catalogo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetallePedido.aspx.cs">
+      <DependentUpon>DetallePedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetallePedido.aspx.designer.cs">
+      <DependentUpon>DetallePedido.aspx</DependentUpon>
     </Compile>
     <Compile Include="EditarUsuarioAdmin.aspx.cs">
       <DependentUpon>EditarUsuarioAdmin.aspx</DependentUpon>
@@ -187,12 +196,12 @@
     <Compile Include="Registro.aspx.designer.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VendedorPedidos.aspx.cs">
-      <DependentUpon>VendedorPedidos.aspx</DependentUpon>
+    <Compile Include="Pedidos.aspx.cs">
+      <DependentUpon>Pedidos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VendedorPedidos.aspx.designer.cs">
-      <DependentUpon>VendedorPedidos.aspx</DependentUpon>
+    <Compile Include="Pedidos.aspx.designer.cs">
+      <DependentUpon>Pedidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="VerProducto.aspx.cs">
       <DependentUpon>VerProducto.aspx</DependentUpon>

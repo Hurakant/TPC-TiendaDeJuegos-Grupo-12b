@@ -95,10 +95,6 @@
 <p>Forma de pago:</p>
 <asp:DropDownList ID="ddlPago" runat="server" />
 
-                    <asp:Button ID="btnAgregarTest" runat="server"
-    Text="Agregar producto de prueba"
-    CssClass="btn btn-primary"
-    OnClick="btnAgregarTest_Click" />
 
                 </div>
 
