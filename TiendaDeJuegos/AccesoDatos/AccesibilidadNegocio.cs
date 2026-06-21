@@ -1,5 +1,5 @@
 ﻿using AccesoBD;
-using dominio;
+using Dominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,25 +8,25 @@ using System.Threading.Tasks;
 
 namespace Negocio
 {
-    public class CategoriaNegocio
+    public class AccesibilidadNegocio
     {
-        public List<Categoria> listar(string filtro = "", bool soloActivos = true)
+        public List<Accesibilidad> listar(string filtro = "", bool soloActivos = true)
         {
-            List<Categoria> lista = new List<Categoria>();
+            List<Accesibilidad> lista = new List<Accesibilidad>();
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setConsulta("EXEC SP_Categoria_Listar @Filtro = @Filtro, @SoloActivos = @SoloActivos");
+                datos.setConsulta("EXEC SP_Accesibilidad_Listar @Filtro = @Filtro, @SoloActivos = @SoloActivos");
                 datos.setParametro("@Filtro", string.IsNullOrWhiteSpace(filtro) ? (object)DBNull.Value : filtro.Trim());
                 datos.setParametro("@SoloActivos", soloActivos);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
-                    Categoria aux = new Categoria();
-                    aux.IdCategoria = (int)datos.Lector["IDCategoria"];
-                    aux.NombreCategoria = (string)datos.Lector["NombreCategoria"];
+                    Accesibilidad aux = new Accesibilidad();
+                    aux.IdAccesibilidad = (int)datos.Lector["IDAccesibilidad"];
+                    aux.NombreAccesibilidad = (string)datos.Lector["NombreAccesibilidad"];
                     aux.Activo = (bool)datos.Lector["Activo"];
                     lista.Add(aux);
                 }
@@ -43,20 +43,20 @@ namespace Negocio
             }
         }
 
-        public Categoria obtenerPorId(int idCategoria)
+        public Accesibilidad obtenerPorId(int idAccesibilidad)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setConsulta("EXEC SP_Categoria_ObtenerPorId @IDCategoria = @IDCategoria");
-                datos.setParametro("@IDCategoria", idCategoria);
+                datos.setConsulta("EXEC SP_Accesibilidad_ObtenerPorId @IDAccesibilidad = @IDAccesibilidad");
+                datos.setParametro("@IDAccesibilidad", idAccesibilidad);
                 datos.ejecutarLectura();
 
                 if (datos.Lector.Read())
                 {
-                    Categoria aux = new Categoria();
-                    aux.IdCategoria = (int)datos.Lector["IDCategoria"];
-                    aux.NombreCategoria = (string)datos.Lector["NombreCategoria"];
+                    Accesibilidad aux = new Accesibilidad();
+                    aux.IdAccesibilidad = (int)datos.Lector["IDAccesibilidad"];
+                    aux.NombreAccesibilidad = (string)datos.Lector["NombreAccesibilidad"];
                     aux.Activo = (bool)datos.Lector["Activo"];
                     return aux;
                 }
@@ -78,7 +78,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setConsulta("EXEC SP_Categoria_ExisteNombre @Nombre = @Nombre, @IdExcluir = @IdExcluir");
+                datos.setConsulta("EXEC SP_Accesibilidad_ExisteNombre @Nombre = @Nombre, @IdExcluir = @IdExcluir");
                 datos.setParametro("@Nombre", nombre);
                 datos.setParametro("@IdExcluir", idExcluir);
                 datos.ejecutarLectura();
@@ -99,7 +99,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setConsulta("EXEC SP_Categoria_Agregar @Nombre = @Nombre");
+                datos.setConsulta("EXEC SP_Accesibilidad_Agregar @Nombre = @Nombre");
                 datos.setParametro("@Nombre", nombre.Trim());
                 datos.ejecutarLectura();
 
@@ -118,13 +118,13 @@ namespace Negocio
             }
         }
 
-        public bool modificar(int idCategoria, string nombre)
+        public bool modificar(int idAccesibilidad, string nombre)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setConsulta("EXEC SP_Categoria_Modificar @IDCategoria = @IDCategoria, @Nombre = @Nombre");
-                datos.setParametro("@IDCategoria", idCategoria);
+                datos.setConsulta("EXEC SP_Accesibilidad_Modificar @IDAccesibilidad = @IDAccesibilidad, @Nombre = @Nombre");
+                datos.setParametro("@IDAccesibilidad", idAccesibilidad);
                 datos.setParametro("@Nombre", nombre.Trim());
                 datos.ejecutarAccion();
                 return true;
@@ -140,13 +140,13 @@ namespace Negocio
         }
 
         //Eliminación logica, no fisica
-        public bool eliminar(int idCategoria)
+        public bool eliminar(int idAccesibilidad)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setConsulta("EXEC SP_Categoria_Eliminar @IDCategoria = @IDCategoria");
-                datos.setParametro("@IDCategoria", idCategoria);
+                datos.setConsulta("EXEC SP_Accesibilidad_Eliminar @IDAccesibilidad = @IDAccesibilidad");
+                datos.setParametro("@IDAccesibilidad", idAccesibilidad);
                 datos.ejecutarAccion();
                 return true;
             }
