@@ -80,6 +80,11 @@
                                     </div>
                                 </div>
                                 <div class="game-row-actions">
+                                    <asp:HyperLink ID="lnkEditarProducto" runat="server"
+                                        CssClass="game-row-link"
+                                        NavigateUrl='<%# "AdminProductos.aspx?id=" + Eval("IdProducto") %>'>
+                                        EditarProducto
+                                    </asp:HyperLink>
                                     <asp:HyperLink ID="lnkVerDetalle" runat="server"
                                         CssClass="game-row-link"
                                         NavigateUrl='<%# "VerProducto.aspx?id=" + Eval("IdProducto") %>'>
