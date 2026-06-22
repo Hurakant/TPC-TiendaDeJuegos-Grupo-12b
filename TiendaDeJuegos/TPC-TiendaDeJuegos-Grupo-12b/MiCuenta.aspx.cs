@@ -36,6 +36,11 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 Info.Visible = true;
                 Editar.Visible = false;
 
+                DireccionCard.Visible = true;
+                AgregarDire.Visible = false;
+
+                CargarGridDirecciones();
+
             }
         }
 
@@ -124,6 +129,135 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
             Info.Visible = true;
             Editar.Visible = false;
+        }
+
+
+        // direccion
+        protected void dgvDirecciones_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "EliminarDir")
+            {
+                try
+                {
+                    int idDireccion = Convert.ToInt32(e.CommandArgument);
+
+                    DireccionNegocio negocio = new DireccionNegocio();
+
+                    negocio.EliminarDireccion(idDireccion);
+                    CargarGridDirecciones();
+                }
+                catch (Exception ex)
+                {
+                    lblMsjDireccion.Text = "No se pudo eliminar la dirección: " + ex.Message;
+                    lblMsjDireccion.Visible = true;
+                }
+            }
+        }
+
+        private void CargarGridDirecciones()
+        {
+
+            try
+            {
+                Usuario user = (Usuario)Session["usuarioLogueado"];
+                DireccionNegocio negocio = new DireccionNegocio();
+
+                List<Direccion> listaDirecciones = negocio.ListarPorUsuario(user.IdUsuario);
+
+                dgvDirecciones.DataSource = listaDirecciones;
+                dgvDirecciones.DataBind();
+
+                if (listaDirecciones != null && listaDirecciones.Count >= 3)
+                {
+                    btnAgregarDireccion.Enabled = false;
+                    lblMsjDireccion.Text = "Alcanzaste el límite de 3 direcciones. Borrá una para agregar otra.";
+                    lblMsjDireccion.Visible = true;
+                }
+                else
+                {
+                    btnAgregarDireccion.Enabled = true;
+                    lblMsjDireccion.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMsjDireccion.Text = "Error al cargar las direcciones: " + ex.Message;
+                lblMsjDireccion.Visible = true;
+            }
+        }
+
+        protected void btnAgregarDireccion_Click(object sender, EventArgs e)
+        {
+            AgregarDire.Visible = true;
+            DireccionCard.Visible = false;
+        }
+
+        protected void btnGuardarDireccion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(txtCalle.Text) || string.IsNullOrWhiteSpace(txtNumero.Text) || string.IsNullOrWhiteSpace(txtLocalidad.Text) || string.IsNullOrWhiteSpace(txtProvincia.Text) || string.IsNullOrWhiteSpace(txtCodigoPostal.Text))
+                {
+                    lblErrorDireccion.Text = "Todos los campos son obligatorios.";
+                    lblErrorDireccion.Visible = true;
+                    return;
+                }
+
+                Usuario usuario = (Usuario)Session["usuarioLogueado"];
+
+                Direccion direccion = new Direccion();
+
+                direccion.IDUsuario = usuario.IdUsuario;
+                direccion.Calle = txtCalle.Text.Trim();
+                direccion.Numero = txtNumero.Text.Trim();
+
+                if (!string.IsNullOrWhiteSpace(txtPiso.Text))
+                {
+                    direccion.Piso = txtPiso.Text.Trim();
+                }
+
+                if (!string.IsNullOrWhiteSpace(txtDepto.Text))
+                {
+                    direccion.Depto = txtDepto.Text.Trim();
+                }
+
+                direccion.Localidad = txtLocalidad.Text.Trim();
+                direccion.Provincia = txtProvincia.Text.Trim();
+                direccion.CodigoPostal = txtCodigoPostal.Text.Trim();
+
+                DireccionNegocio negocio = new DireccionNegocio();
+                negocio.AgregarDireccion(direccion);
+
+                lblErrorDireccion.Visible = false;
+
+                AgregarDire.Visible = false;
+                DireccionCard.Visible = true;
+
+                CargarGridDirecciones();
+                LimpiarCamposDireccion();
+            }
+            catch (Exception ex)
+            {
+                lblErrorDireccion.Text = ex.Message;
+                lblErrorDireccion.Visible = true;
+            }
+        }
+
+        private void LimpiarCamposDireccion()
+        {
+            txtCalle.Text = "";
+            txtNumero.Text = "";
+            txtPiso.Text = "";
+            txtDepto.Text = "";
+            txtLocalidad.Text = "";
+            txtProvincia.Text = "";
+            txtCodigoPostal.Text = "";
+        }
+
+        protected void btnCancelarDireccion_Click(object sender, EventArgs e)
+        {
+            AgregarDire.Visible = false;
+            DireccionCard.Visible = true;
         }
     }
 }

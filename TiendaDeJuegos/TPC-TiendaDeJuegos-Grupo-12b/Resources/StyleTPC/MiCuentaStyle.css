@@ -2,13 +2,16 @@
     min-height: 80vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    gap: 30px;
     padding: 70px 15px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .cuenta-card {
-    width: 100%;
-    max-width: 600px;
+    width: 500px;
+    min-width: 500px;
     background: rgba(18,18,26,.95);
     border: 1px solid rgba(255,255,255,.07);
     border-radius: 22px;
@@ -60,10 +63,10 @@
     transition: .3s;
 }
 
-    .btnPrincipal:hover {
-        transform: scale(1.02);
-        box-shadow: 0 0 18px rgba(233,30,99,.35);
-    }
+.btnPrincipal:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 18px rgba(233,30,99,.35);
+}
 
 .btnSecundario {
     border: 1px solid rgba(255,255,255,.15);
@@ -95,4 +98,72 @@
     display: block;
     color: #ff5f8f;
     margin-bottom: 15px;
+}
+
+/*direcciones*/
+
+.DireccionCard {
+    flex: 1;
+    min-width: 0;
+    background: rgba(18,18,26,.95);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 22px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(64,49,71,.45);
+    backdrop-filter: blur(10px);
+}
+
+.DireTitulo {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.DireTexto {
+    color: rgba(255,255,255,.7);
+    font-size: .95rem;
+    margin-bottom: 20px;
+}
+
+.tablaDire {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 12px;
+    background: rgba(255,255,255,.02);
+}
+
+.tablaDire th {
+    background: rgba(233,30,99,.15);
+    color: white;
+    padding: 12px 10px;
+    text-align: left;
+    font-weight: 600;
+    font-size: .9rem;
+}
+
+.tablaDire td {
+    padding: 10px;
+    color: rgba(255,255,255,.9);
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    font-size: .9rem;
+}
+
+.tablaDire tr:last-child td {
+    border-bottom: none;
+}
+
+.tablaDire tr:hover {
+    background: rgba(255,255,255,.03);
+}
+
+.tablaDire td {
+    text-align: center;
+    padding: 20px;
+    color: rgba(255,255,255,.6);
+}
+
+#btnAgregarDireccion {
+    margin-top: 15px;
 }

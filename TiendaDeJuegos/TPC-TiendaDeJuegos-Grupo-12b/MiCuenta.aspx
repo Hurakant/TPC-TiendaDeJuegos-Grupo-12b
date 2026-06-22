@@ -78,6 +78,82 @@
 
     </div>
 
+     <%--direccion--%>
+ <div class="DireccionCard" id="DireccionCard" runat="server">
+     <h3 class="DireTitulo">Mis Direcciones</h3>
+     <p class="DireTexto">Podés registrar un máximo de 3 direcciones disponibles.</p>
+
+     <asp:GridView ID="dgvDirecciones" runat="server" AutoGenerateColumns="false" CssClass="tablaDire" GridLines="None" DataKeyNames="IDDireccion" OnRowCommand="dgvDirecciones_RowCommand" EmptyDataText="No hay direcciones registradas.">
+         <Columns>
+             <asp:BoundField DataField="Calle" HeaderText="Calle" />
+             <asp:BoundField DataField="Numero" HeaderText="Número" />
+             <asp:BoundField DataField="Piso" HeaderText="Piso" NullDisplayText="-" />
+             <asp:BoundField DataField="Depto" HeaderText="Depto" NullDisplayText="-" />
+             <asp:BoundField DataField="Localidad" HeaderText="Localidad" />
+             <asp:BoundField DataField="Provincia" HeaderText="Provincia" />
+             <asp:BoundField DataField="CodigoPostal" HeaderText="Cód. Postal" />
+
+             <asp:TemplateField HeaderText="Acción">
+                 <ItemTemplate>
+                     <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CommandName="EliminarDir" CommandArgument='<%# Eval("IDDireccion") %>' CssClass="btnCerrar" Style="padding: 5px 10px; font-size: 0.85em; margin: 0;" OnClientClick="return confirm('¿Estas seguro de eliminar la direccion?');" />
+                 </ItemTemplate>
+             </asp:TemplateField>
+         </Columns>
+     </asp:GridView>
+
+     <%-- btn agregar --%>
+     <asp:Button ID="btnAgregarDireccion" runat="server" Text="+ Agregar" CssClass="btnPrincipal" OnClick="btnAgregarDireccion_Click"/>
+     <asp:Label ID="lblMsjDireccion" runat="server" CssClass="error" Visible="false"></asp:Label>
+ </div>
+
+ <%-- agregar dirección --%>
+ <div id="AgregarDire" runat="server">
+
+     <h3 class="cuentaTitulo">Nueva Dirección</h3>
+
+     <p class="info-item">
+         <strong>Calle:</strong>
+         <asp:TextBox ID="txtCalle" runat="server" CssClass="txtCuenta" />
+     </p>
+
+     <p class="info-item">
+         <strong>Número:</strong>
+         <asp:TextBox ID="txtNumero" runat="server" CssClass="txtCuenta" />
+     </p>
+
+     <p class="info-item">
+         <strong>Piso:</strong>
+         <asp:TextBox ID="txtPiso" runat="server" CssClass="txtCuenta" />
+     </p>
+
+     <p class="info-item">
+         <strong>Departamento:</strong>
+         <asp:TextBox ID="txtDepto" runat="server" CssClass="txtCuenta" />
+     </p>
+
+     <p class="info-item">
+         <strong>Localidad:</strong>
+         <asp:TextBox ID="txtLocalidad" runat="server" CssClass="txtCuenta" />
+     </p>
+
+     <p class="info-item">
+         <strong>Provincia:</strong>
+         <asp:TextBox ID="txtProvincia" runat="server" CssClass="txtCuenta" />
+     </p>
+
+     <p class="info-item">
+         <strong>Código Postal:</strong>
+         <asp:TextBox ID="txtCodigoPostal" runat="server" CssClass="txtCuenta" />
+     </p>
+
+     <asp:Label ID="lblErrorDireccion" runat="server" CssClass="error" Visible="false"> </asp:Label>
+
+     <asp:Button ID="btnGuardarDireccion" runat="server" Text="Guardar Dirección" CssClass="btnPrincipal" OnClick="btnGuardarDireccion_Click" />
+
+     <asp:Button ID="btnCancelarDireccion" runat="server" Text="Cancelar" CssClass="btnSecundario" OnClick="btnCancelarDireccion_Click" />
+
+ </div>
+
 </div>
 
 </asp:Content>

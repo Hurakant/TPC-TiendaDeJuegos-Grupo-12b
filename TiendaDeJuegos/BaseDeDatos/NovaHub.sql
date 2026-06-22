@@ -143,6 +143,32 @@ BEGIN
     );
 END
 GO
+
+-- DIRECCION
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'dbo' + N'.Direccion') AND type = 'U')
+BEGIN
+    CREATE TABLE DIRECCION
+    (
+        IdDireccion INT IDENTITY(1,1) PRIMARY KEY,
+        IDUsuario INT NOT NULL,
+        
+        Calle NVARCHAR(150) NOT NULL,
+        Numero NVARCHAR(20) NOT NULL,
+        Piso NVARCHAR(20) NULL,
+        Depto NVARCHAR(20) NULL,
+        Localidad NVARCHAR(100) NOT NULL,
+        Provincia NVARCHAR(100) NOT NULL,
+        CodigoPostal NVARCHAR(20) NOT NULL,
+        
+        Activo BIT NOT NULL DEFAULT 1,
+
+        CONSTRAINT FK_Direccion_Usuario
+            FOREIGN KEY (IDUsuario)
+            REFERENCES Usuario(IDUsuario)
+    );
+END
+GO
  
 /*=========================================================
 USUARIOS
@@ -278,6 +304,8 @@ BEGIN
         FechaCreacion DATETIME NOT NULL DEFAULT GETDATE(),
  
         MontoTotal DECIMAL(18,2) NOT NULL DEFAULT 0,
+
+        IdDireccion INT NULL,
  
         IDFormaDePago INT NOT NULL,
         IDFormaDeEntrega INT NOT NULL,
@@ -297,7 +325,11 @@ BEGIN
  
         CONSTRAINT FK_Pedido_Estado
             FOREIGN KEY (IDEstadoPedido)
-            REFERENCES EstadoPedido(IDEstadoPedido)
+            REFERENCES EstadoPedido(IDEstadoPedido),
+
+        CONSTRAINT FK_Pedido_Direccion 
+            FOREIGN KEY (IdDireccion)
+            REFERENCES Direccion(IdDireccion)
     );
 END
 GO
@@ -439,4 +471,3 @@ BEGIN
     WHERE pa.IDProducto = @IDProducto;
 END
 GO
- 

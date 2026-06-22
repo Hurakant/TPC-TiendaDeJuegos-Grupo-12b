@@ -22,6 +22,8 @@ namespace dominio
 
         public FormaDeEntrega FormaDeEntrega { get; set; }
 
+        public Direccion Direccion { get; set; }
+
         public decimal Total => Detalle.Sum(x => x.Subtotal);
 
         public string FormaDePagoTexto =>

@@ -8,14 +8,15 @@ namespace dominio
 {
     public class Direccion
     {
-        public int IdDireccion { get; set; }
-        public int IdUsuario { get; set; }
-        public string Calle {  get; set; }
-        public string NumeroDeCasa { get; set; }
-        public string localidad { get; set; }
+        public int IDDireccion { get; set; }
+        public int IDUsuario { get; set; }
+        public string Calle { get; set; }
+        public string Numero { get; set; }
+        public string Piso { get; set; }
+        public string Depto { get; set; }
+        public string Localidad { get; set; }
+        public string Provincia { get; set; }
         public string CodigoPostal { get; set; }
-        public string Observaciones { get; set; }
-        public bool EsPrincipal { get; set; }
-        public bool Activa {  get; set; }
+        public bool Activo { get; set; }
     }
 }
