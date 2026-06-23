@@ -90,10 +90,15 @@
                         OnClick="btnVaciar_Click" />
 
                     <p>Forma de entrega:</p>
-<asp:DropDownList ID="ddlEntrega" runat="server" />
+                    <asp:DropDownList ID="ddlEntrega" runat="server" OnSelectedIndexChanged="ddlEntrega_SelectedIndexChanged" AutoPostBack="true"/>
 
-<p>Forma de pago:</p>
-<asp:DropDownList ID="ddlPago" runat="server" />
+                    <div id="divDirecciones" runat="server" visible="false">
+                        <p>Elija la direccion de envio:</p>
+                        <asp:DropDownList ID="ddlDirecciones" runat="server"  />
+                    </div>
+
+                    <p>Forma de pago:</p>
+                    <asp:DropDownList ID="ddlPago" runat="server" />
 
 
                 </div>

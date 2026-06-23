@@ -36,6 +36,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             {
                 CargarCarrito();
                 CargarCombos();
+
             }
         }
 
@@ -192,6 +193,31 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 Session[key] = new dominio.Carrito();
 
             return (dominio.Carrito)Session[key];
+        }
+
+        protected void ddlEntrega_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlEntrega.SelectedValue == "2")
+            {
+                CargarDirecciones();
+                divDirecciones.Visible = true;
+            }
+            else
+            {
+                divDirecciones.Visible = false;
+            }
+        }
+
+        private void CargarDirecciones()
+        {
+            int idUsuario = ((Usuario)Session["usuarioLogueado"]).IdUsuario;
+
+            DireccionNegocio dire = new DireccionNegocio();
+
+            ddlDirecciones.DataSource = dire.ListarPorUsuario(idUsuario);
+            ddlDirecciones.DataTextField = "DireccionCompleta";
+            ddlDirecciones.DataValueField = "IdDireccion";
+            ddlDirecciones.DataBind();
         }
     }
 }

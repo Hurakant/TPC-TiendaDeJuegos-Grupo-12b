@@ -18,5 +18,12 @@ namespace dominio
         public string Provincia { get; set; }
         public string CodigoPostal { get; set; }
         public bool Activo { get; set; }
+        public string DireccionCompleta
+        {
+            get
+            {
+                return Calle + " " + Numero + ", " + Localidad;
+            }
+        }
     }
 }
