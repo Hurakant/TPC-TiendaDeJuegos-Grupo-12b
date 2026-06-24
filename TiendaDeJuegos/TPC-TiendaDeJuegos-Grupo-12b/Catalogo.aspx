@@ -17,7 +17,7 @@
                         <div class="catalogo-sidebar-title">Filtrar por categoria:</div>
                         <asp:CheckBoxList ID="chkCategorias" runat="server"
                             CssClass="chk-filtros"
-                            RepeatLayout="Flow"
+                            RepeatLayout="UnorderedList"
                             AutoPostBack="true"
                             OnSelectedIndexChanged="chkCategorias_SelectedIndexChanged">
                         </asp:CheckBoxList>

@@ -14,11 +14,17 @@
 
         <div class="edit-user-cont">
 
-            <h2>Editar Producto</h2>
+            <h2>
+                <asp:Literal ID="litTitulo" runat="server" Text="Editar Producto" /></h2>
 
             <div class="form-group">
                 <asp:Label Text="Nombre del producto" runat="server" CssClass="lblform" />
                 <asp:TextBox ID="txtNombre" runat="server" CssClass="txtform" />
+            </div>
+
+            <div class="form-group">
+                <asp:Label Text="Descripcion" runat="server" CssClass="lblform" />
+                <asp:TextBox ID="txtDescripcion" runat="server" CssClass="txtform" TextMode="MultiLine" Rows="3" />
             </div>
 
             <div class="form-group">

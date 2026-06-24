@@ -12,16 +12,23 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
     public partial class AdminProductos : System.Web.UI.Page
     {
         private int idProducto = 0;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!int.TryParse(Request.QueryString["id"], out idProducto) || idProducto <= 0)
-            { 
+            aplicarPermisos();
 
+            // Si no viene un id valido en la querystring, estamos en modo "Nuevo producto"
+            if (!int.TryParse(Request.QueryString["id"], out idProducto) || idProducto <= 0)
+            {
+                idProducto = 0;
             }
 
             if (!IsPostBack)
             {
-                CargarProducto();
+                if (idProducto > 0)
+                    CargarProducto();
+                else
+                    CargarProductoNuevo();
             }
         }
 
@@ -39,8 +46,11 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                     return;
                 }
 
+                litTitulo.Text = "Editar Producto";
+
                 txtNombre.Text = prod.Nombre;
-                txtUrlDeLaImagen.Text = prod.ImagenUrl?.ToString() ?? "Sin Imagen";
+                txtDescripcion.Text = prod.Descripcion;
+                txtUrlDeLaImagen.Text = string.IsNullOrWhiteSpace(prod.ImagenUrl) ? "" : prod.ImagenUrl;
                 txtPrecio.Text = DecimalAString(prod.Precio);
                 txtPorcentajeDeDescuento.Text = DecimalAString(prod.Descuento);
                 txtStockDisponible.Text = IntAString(prod.Stock);
@@ -57,22 +67,127 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 pnlNoEncontrado.Visible = true;
             }
         }
+
+        private void CargarProductoNuevo()
+        {
+            pnlNoEncontrado.Visible = false;
+            pnlEditandoProducto.Visible = true;
+
+            litTitulo.Text = "Nuevo Producto";
+            txtFechaDeLanzamiento.Text = DateTime.Today.ToString("yyyy-MM-dd");
+
+            CargarCategorias();
+        }
+
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
+            OcultarError();
 
+            string nombre = (txtNombre.Text ?? "").Trim();
+            string descripcion = (txtDescripcion.Text ?? "").Trim();
+            string urlImagen = (txtUrlDeLaImagen.Text ?? "").Trim();
+
+            decimal precio = StringADecimal(txtPrecio.Text);
+            decimal descuento = StringADecimal(txtPorcentajeDeDescuento.Text);
+            int stock = StringAInt(txtStockDisponible.Text);
+            bool esDigital = chkEsDigital.Checked;
+
+            DateTime fechaLanzamiento;
+            if (!DateTime.TryParse(txtFechaDeLanzamiento.Text, out fechaLanzamiento))
+                fechaLanzamiento = DateTime.Today;
+
+            // ---- Validaciones basicas ----
+            if (string.IsNullOrWhiteSpace(nombre))
+            {
+                MostrarError("El nombre del producto es obligatorio.");
+                return;
+            }
+
+            if (precio <= 0)
+            {
+                MostrarError("El precio debe ser mayor a 0.");
+                return;
+            }
+
+            if (descuento < 0 || descuento > 100)
+            {
+                MostrarError("El porcentaje de descuento debe estar entre 0 y 100.");
+                return;
+            }
+
+            if (stock < 0)
+            {
+                MostrarError("El stock no puede ser negativo.");
+                return;
+            }
+
+            List<Categoria> categoriasSeleccionadas = ObtenerCategoriasSeleccionadas();
+            if (categoriasSeleccionadas.Count == 0)
+            {
+                MostrarError("Debe seleccionar al menos una categoria.");
+                return;
+            }
+
+            ProductoNegocio negocio = new ProductoNegocio();
+
+            try
+            {
+                if (negocio.existeNombreProducto(nombre, idProducto))
+                {
+                    MostrarError("Ya existe un producto con ese nombre.");
+                    return;
+                }
+
+                Producto prod = new Producto
+                {
+                    IdProducto = idProducto,
+                    Nombre = nombre,
+                    Descripcion = descripcion,
+                    ImagenUrl = urlImagen,
+                    Precio = precio,
+                    Descuento = descuento,
+                    Stock = stock,
+                    FechaLanzamiento = fechaLanzamiento,
+                    EsDigital = esDigital,
+                    Activo = true,
+                    Categoria = categoriasSeleccionadas
+                };
+
+                if (idProducto > 0)
+                {
+                    // ---- MODIFICAR ----
+                    negocio.modificar(prod);
+                }
+                else
+                {
+                    // ---- CREAR ----
+                    negocio.agregar(prod);
+                    idProducto = prod.IdProducto;
+                }
+
+                Response.Redirect("Catalogo.aspx");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error guardar producto: " + ex.Message);
+                MostrarError("Ocurrio un error al guardar el producto. Intente nuevamente.");
+            }
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)
         {
             Response.Redirect("Catalogo.aspx");
         }
+
         private void aplicarPermisos()
         {
-            Usuario user = (Usuario)Session["usuarioLogueado"];
             if (Session["usuarioLogueado"] == null)
             {
                 Response.Redirect("Login.aspx");
+                return;
             }
+
+            Usuario user = (Usuario)Session["usuarioLogueado"];
 
             if (user.Rol != Rol.Admin)
             {
@@ -80,6 +195,19 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 Response.Redirect("Error.aspx");
             }
         }
+
+        private void MostrarError(string mensaje)
+        {
+            lblMsjError.Text = mensaje;
+            lblMsjError.Visible = true;
+        }
+
+        private void OcultarError()
+        {
+            lblMsjError.Visible = false;
+            lblMsjError.Text = "";
+        }
+
         public static string DecimalAString(decimal valor)
         {
             return valor.ToString();
@@ -100,6 +228,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         {
             return int.TryParse(texto, out int precio) ? precio : 0;
         }
+
         private void CargarCategorias()
         {
             CategoriaNegocio negocio = new CategoriaNegocio();
@@ -109,6 +238,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             cblCategorias.DataValueField = "IdCategoria";
             cblCategorias.DataBind();
         }
+
         private void SeleccionarCategoriasProducto(Producto prod)
         {
             foreach (Categoria categoria in prod.Categoria)
@@ -119,6 +249,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                     item.Selected = true;
             }
         }
+
         private List<Categoria> ObtenerCategoriasSeleccionadas()
         {
             List<Categoria> categorias = new List<Categoria>();
@@ -136,6 +267,5 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
             return categorias;
         }
-
     }
 }

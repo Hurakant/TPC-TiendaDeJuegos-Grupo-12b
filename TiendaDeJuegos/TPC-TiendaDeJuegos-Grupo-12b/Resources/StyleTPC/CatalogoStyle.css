@@ -30,9 +30,10 @@
     gap: 6px;
     margin: 0;
     padding: 0;
+    list-style: none;
 }
 
-    .catalogo-sidebar .chk-filtros label {
+    .catalogo-sidebar .chk-filtros li {
         display: flex;
         align-items: center;
         gap: 8px;
@@ -46,11 +47,17 @@
         transition: background .2s, border-color .2s, color .2s, transform .15s;
     }
 
-        .catalogo-sidebar .chk-filtros label:hover {
+        .catalogo-sidebar .chk-filtros li:hover {
             color: #fff;
             background: rgba(233, 30, 99, .10);
             border-color: rgba(233, 30, 99, .35);
             transform: translateX(2px);
+        }
+
+        .catalogo-sidebar .chk-filtros li:has(input:checked) {
+            background: linear-gradient(135deg, rgba(233, 30, 99, .18), rgba(156, 39, 176, .14));
+            border-color: var(--primary-pink, #e91e63);
+            color: #fff;
         }
 
     .catalogo-sidebar .chk-filtros input[type="checkbox"] {
@@ -59,12 +66,13 @@
         cursor: pointer;
         width: 14px;
         height: 14px;
+        flex-shrink: 0;
     }
 
-    .catalogo-sidebar .chk-filtros label:has(input:checked) {
-        background: linear-gradient(135deg, rgba(233, 30, 99, .18), rgba(156, 39, 176, .14));
-        border-color: var(--primary-pink, #e91e63);
-        color: #fff;
+    .catalogo-sidebar .chk-filtros label {
+        cursor: pointer;
+        flex: 1;
+        margin: 0;
     }
 
 .catalogo-sidebar-clear {

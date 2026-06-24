@@ -144,32 +144,6 @@ BEGIN
 END
 GO
 
--- DIRECCION
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'dbo' + N'.Direccion') AND type = 'U')
-BEGIN
-    CREATE TABLE DIRECCION
-    (
-        IdDireccion INT IDENTITY(1,1) PRIMARY KEY,
-        IDUsuario INT NOT NULL,
-        
-        Calle NVARCHAR(150) NOT NULL,
-        Numero NVARCHAR(20) NOT NULL,
-        Piso NVARCHAR(20) NULL,
-        Depto NVARCHAR(20) NULL,
-        Localidad NVARCHAR(100) NOT NULL,
-        Provincia NVARCHAR(100) NOT NULL,
-        CodigoPostal NVARCHAR(20) NOT NULL,
-        
-        Activo BIT NOT NULL DEFAULT 1,
-
-        CONSTRAINT FK_Direccion_Usuario
-            FOREIGN KEY (IDUsuario)
-            REFERENCES Usuario(IDUsuario)
-    );
-END
-GO
- 
 /*=========================================================
 USUARIOS
 =========================================================*/
@@ -192,6 +166,32 @@ BEGIN
         Activo BIT NOT NULL DEFAULT 1,
  
         FechaAlta DATETIME NOT NULL DEFAULT GETDATE()
+    );
+END
+GO
+
+-- DIRECCION
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'dbo' + N'.Direccion') AND type = 'U')
+BEGIN
+    CREATE TABLE DIRECCION
+    (
+        IdDireccion INT IDENTITY(1,1) PRIMARY KEY,
+        IDUsuario INT NOT NULL,
+        
+        Calle NVARCHAR(150) NOT NULL,
+        Numero NVARCHAR(20) NOT NULL,
+        Piso NVARCHAR(20) NULL,
+        Depto NVARCHAR(20) NULL,
+        Localidad NVARCHAR(100) NOT NULL,
+        Provincia NVARCHAR(100) NOT NULL,
+        CodigoPostal NVARCHAR(20) NOT NULL,
+        
+        Activo BIT NOT NULL DEFAULT 1,
+
+        CONSTRAINT FK_Direccion_Usuario
+            FOREIGN KEY (IDUsuario)
+            REFERENCES Usuario(IDUsuario)
     );
 END
 GO
