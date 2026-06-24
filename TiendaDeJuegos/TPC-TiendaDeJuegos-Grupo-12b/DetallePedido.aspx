@@ -12,34 +12,35 @@
 
     <div class="container detalle-card">
 
+       
         <div class="detalle-header d-flex justify-content-between align-items-center">
 
-    <h3>
-        Pedido #<asp:Label ID="lblIdPedido" runat="server" />
-    </h3>
+            <h3>
+                Pedido #<asp:Label ID="lblIdPedido" runat="server" />
+            </h3>
 
-    <div class="d-flex align-items-center gap-2">
+            <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select w-25">
+                <asp:ListItem Text="Pendiente" Value="1" />
+                <asp:ListItem Text="Pagado" Value="2" />
+                <asp:ListItem Text="En preparación" Value="3" />
+                <asp:ListItem Text="Enviado" Value="4" />
+                <asp:ListItem Text="Entregado" Value="5" />
+                <asp:ListItem Text="Cancelado" Value="6" />
+            </asp:DropDownList>
 
-        <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select w-50">
+            <asp:Button ID="btnGuardar" runat="server"
+                Text="Actualizar"
+                CssClass="btn btn-success"
+                OnClick="btnGuardar_Click" />
 
-    <asp:ListItem Text="Pendiente" Value="1" />
-    <asp:ListItem Text="Pagado" Value="2" />
-    <asp:ListItem Text="En preparación" Value="3" />
-    <asp:ListItem Text="Enviado" Value="4" />
-    <asp:ListItem Text="Entregado" Value="5" />
-    <asp:ListItem Text="Cancelado" Value="6" />
+        </div>
 
-</asp:DropDownList>
+        
+        <div class="mt-3">
+            <asp:Label ID="lblMensaje" runat="server" Visible="false" />
+        </div>
 
-        <asp:Button ID="btnGuardar" runat="server"
-            Text="Actualizar"
-            CssClass="btn btn-success"
-            OnClick="btnGuardar_Click" />
-
-    </div>
-
-</div>
-
+        
         <div class="info-grid">
 
             <div class="info-box">
@@ -59,6 +60,22 @@
 
         </div>
 
+        
+        <div class="info-grid mt-3">
+
+            <div class="info-box">
+                <strong>Forma de entrega</strong>
+                <asp:DropDownList ID="ddlEntrega" runat="server" CssClass="form-select" />
+            </div>
+
+            <div class="info-box">
+                <strong>Forma de pago</strong>
+                <asp:DropDownList ID="ddlPago" runat="server" CssClass="form-select" />
+            </div>
+
+        </div>
+
+       
         <asp:GridView ID="gvDetalle" runat="server"
             AutoGenerateColumns="False"
             CssClass="detalle-table">
@@ -72,11 +89,12 @@
 
         </asp:GridView>
 
+     
         <div class="total-box">
             Total: $<asp:Label ID="lblTotal" runat="server" />
         </div>
 
-        <a href="MisPedidos.aspx" class="volver-link">
+        <a href="Home.aspx" class="volver-link">
             ← Volver
         </a>
 

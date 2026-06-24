@@ -24,7 +24,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             {
                 Session["ErrorNoPermisos"] = true;
                 Response.Redirect("Error.aspx");
-                Response.Redirect("Error.aspx");
+                
                 return;
             }
 
@@ -61,10 +61,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             gvPedidos.DataBind();
         }
 
-        protected void btnActualizar_Click(object sender, EventArgs e)
-        {
-            lblMensaje.Text = "Estado actualizado (conectar a BD después)";
-        }
+     
 
         protected void btnVolver_Click(object sender, EventArgs e)
         {
@@ -80,16 +77,6 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             Response.Redirect("DetallePedido.aspx?id=" + idPedido);
         }
 
-        protected void gvPedidos_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                string rol = Session["rol"]?.ToString();
-
-                Button btnDetalle = (Button)e.Row.FindControl("btnDetalle");
-
-               
-            }
-        }
+        
     }
 }

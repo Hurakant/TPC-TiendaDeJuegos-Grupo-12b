@@ -347,5 +347,33 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void ModificarPedidoCompleto(Pedido pedido)
+{
+    AccesoDatos datos = new AccesoDatos();
+
+    try
+    {
+        datos.setConsulta(@"
+            UPDATE Pedido
+            SET 
+                IDEstadoPedido = @Estado,
+                IDFormaDePago = @Pago,
+                IDFormaDeEntrega = @Entrega
+            WHERE IDPedido = @IdPedido
+        ");
+
+        datos.setParametro("@IdPedido", pedido.IdPedido);
+        datos.setParametro("@Estado", (int)pedido.Estado);
+        datos.setParametro("@Pago", pedido.FormaDePago.IdFormaDePago);
+        datos.setParametro("@Entrega", (int)pedido.FormaDeEntrega);
+
+        datos.ejecutarAccion();
+    }
+    finally
+    {
+        datos.cerrarConexion();
+    }
+}
     }
 }

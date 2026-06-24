@@ -1,13 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace dominio
 {
     public class Pedido
+
+
     {
+        public Pedido()
+        {
+            FormaDePago = new FormaDePago();
+            Cliente = new Usuario();
+            FormaDeEntrega = new FormaDeEntrega();
+            Direccion = new Direccion();
+        }
+
         public int IdPedido { get; set; }
 
         public Usuario Cliente { get; set; }
@@ -18,6 +29,7 @@ namespace dominio
 
         public EstadoPedido Estado { get; set; }
 
+        
         public FormaDePago FormaDePago { get; set; }
 
         public FormaDeEntrega FormaDeEntrega { get; set; }
@@ -28,6 +40,7 @@ namespace dominio
 
         public string FormaDePagoTexto =>
             FormaDePago != null ? FormaDePago.Nombre : "";
+
         public decimal MontoTotal { get; set; }
     }
 }
