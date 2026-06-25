@@ -84,6 +84,7 @@
     <Content Include="Login.aspx" />
     <Content Include="MiCuenta.aspx" />
     <Content Include="MisPedidos.aspx" />
+    <Content Include="PruebaMail.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="Resources\Logo\LogosfB.svg" />
     <Content Include="Resources\Logo\LogosfN.svg" />
@@ -197,6 +198,13 @@
       <DependentUpon>MisPedidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PruebaMail.aspx.cs">
+      <DependentUpon>PruebaMail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PruebaMail.aspx.designer.cs">
+      <DependentUpon>PruebaMail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Registro.aspx.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

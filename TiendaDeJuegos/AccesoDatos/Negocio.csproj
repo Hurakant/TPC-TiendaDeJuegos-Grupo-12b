@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,6 +46,7 @@
     <Compile Include="CarritoNegocio.cs" />
     <Compile Include="CategoriaNegocio.cs" />
     <Compile Include="DireccionNegocio.cs" />
+    <Compile Include="EmailService.cs" />
     <Compile Include="FormaDeEntregaNegocio.cs" />
     <Compile Include="FormaDePagoNegocio.cs" />
     <Compile Include="PedidoNegocio.cs" />
