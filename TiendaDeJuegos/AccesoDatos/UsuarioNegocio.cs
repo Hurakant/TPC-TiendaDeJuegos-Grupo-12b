@@ -135,7 +135,7 @@ namespace Negocio
 
             try
             {
-                datos.setConsulta("SELECT IDUsuario,Nombre, Apellido, Email, Telefono, Activo, Rol FROM USUARIO");
+                datos.setConsulta("SELECT IDUsuario,Nombre, Apellido, Email, Telefono, Activo, Rol,FechaAlta  FROM USUARIO");
 
                 datos.ejecutarLectura();
 
@@ -149,6 +149,7 @@ namespace Negocio
                     aux.Email = datos.Lector["Email"].ToString();
                     aux.Telefono = datos.Lector["Telefono"].ToString();
                     aux.Activo = (bool)datos.Lector["Activo"];
+                    aux.FechaAlta = (DateTime)datos.Lector["FechaAlta"];
 
                     aux.Rol = (Rol)datos.Lector["Rol"];
 
@@ -206,7 +207,7 @@ namespace Negocio
 
             try
             {
-                datos.setConsulta("SELECT IDUsuario, Nombre, Apellido, Email, Telefono,Rol, Activo FROM Usuario WHERE IDUsuario = @id");
+                datos.setConsulta("SELECT IDUsuario, Nombre, Apellido, Email, Telefono, Rol, FechaAlta, Activo FROM Usuario WHERE IDUsuario = @id");
                 datos.setParametro("@id", id);
 
                 datos.ejecutarLectura();
@@ -218,12 +219,76 @@ namespace Negocio
                     user.Apellido = (string)datos.Lector["Apellido"];
                     user.Email = (string)datos.Lector["Email"];
                     user.Telefono = (string)datos.Lector["Telefono"];
+                    user.FechaAlta = (DateTime)datos.Lector["FechaAlta"];
                     user.Activo = (bool)(datos.Lector["Activo"]);
 
                     user.Rol = (Rol)datos.Lector["Rol"]; 
                 }
 
                 return user;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        // filtro usuairo
+        public List<Usuario> listar(string filtro = "", bool? soloActivos = null, Rol? rol = null)
+        {
+            List<Usuario> lista = new List<Usuario>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setConsulta("EXEC SP_Usuario_Listar @Filtro = @Filtro, @SoloActivos = @SoloActivos, @Rol = @Rol");
+
+                if (string.IsNullOrWhiteSpace(filtro))
+                {
+                    datos.setParametro("@Filtro", DBNull.Value);
+                }
+                else
+                {
+                    datos.setParametro("@Filtro", filtro.Trim());
+                }
+
+                if (soloActivos != null)
+                {
+                    datos.setParametro("@SoloActivos", soloActivos);
+                }
+                else
+                {
+                    datos.setParametro("@SoloActivos", DBNull.Value);
+                }
+
+                if (rol != null)
+                {
+                    datos.setParametro("@Rol", (int)rol);
+                }
+                else
+                {
+                    datos.setParametro("@Rol", DBNull.Value);
+                }
+
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Usuario aux = new Usuario();
+
+                    aux.IdUsuario = (int)datos.Lector["IDUsuario"];
+                    aux.FechaAlta = (DateTime)datos.Lector["FechaAlta"];
+                    aux.Nombre = datos.Lector["Nombre"].ToString();
+                    aux.Apellido = datos.Lector["Apellido"].ToString();
+                    aux.Email = datos.Lector["Email"].ToString();
+                    aux.Telefono = datos.Lector["Telefono"].ToString();
+                    aux.Activo = (bool)datos.Lector["Activo"];
+                    aux.Rol = (Rol)datos.Lector["Rol"];
+
+                    lista.Add(aux);
+                }
+
+                return lista;
             }
             finally
             {

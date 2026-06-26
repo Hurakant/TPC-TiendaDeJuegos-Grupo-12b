@@ -35,7 +35,35 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         {
             UsuarioNegocio negocio = new UsuarioNegocio();
 
-            gvUsuarios.DataSource = negocio.listar();
+            bool? estado = null;
+            if (ddlEstado.SelectedValue == "1")
+            {
+                estado = true;
+            }
+            else if (ddlEstado.SelectedValue == "0")
+            {
+                estado = false;
+            }
+
+            Rol? rol = null;
+            if (!string.IsNullOrEmpty(ddlRol.SelectedValue))
+            {
+                rol = (Rol)Enum.Parse(typeof(Rol), ddlRol.SelectedValue);
+            }
+
+            List<Usuario> lista = negocio.listar(txtFiltro.Text.Trim(), estado, rol);
+
+            if (lista.Count == 0)
+            {
+                lblMensaje.Visible = true;
+                lblMensaje.Text = "No se encontraron coincidencias.";
+            }
+            else
+            {
+                lblMensaje.Visible = false;
+            }
+
+            gvUsuarios.DataSource = lista;
             gvUsuarios.DataBind();
         }
 
@@ -76,6 +104,21 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         protected void btnVolver_Click(object sender, EventArgs e)
         {
             Response.Redirect("Home.aspx");
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            cargarUsuarios();
+        }
+
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtFiltro.Text = null;
+
+            ddlRol.SelectedIndex = 0;
+            ddlEstado.SelectedIndex = 0;
+
+            cargarUsuarios();
         }
     }
 }

@@ -21,12 +21,38 @@
 
             </div>
 
-            <asp:Label ID="lblMensaje" runat="server" CssClass="lblMensaje" />
+            <div class="filtrosUsuarios">
+
+                <asp:TextBox ID="txtFiltro" runat="server" CssClass="txtFiltro" placeholder="Buscar por nombre, apellido o email..." />
+                <asp:DropDownList ID="ddlRol" runat="server" CssClass="ddlFiltro">
+
+                    <asp:ListItem Text="Todos los roles" Value="" />
+                    <asp:ListItem Text="Admin" Value="3" />
+                    <asp:ListItem Text="Cliente" Value="1" />
+                    <asp:ListItem Text="Vendedor" Value="2" />
+
+                </asp:DropDownList>
+
+                <asp:DropDownList ID="ddlEstado" runat="server" CssClass="ddlFiltro">
+
+                    <asp:ListItem Text="Todos los estados" Value="" />
+                    <asp:ListItem Text="Activos" Value="1" />
+                    <asp:ListItem Text="Inactivos" Value="0" />
+
+                </asp:DropDownList>
+
+                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btnBuscar" OnClick="btnBuscar_Click" />
+                <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar Filtros" CssClass="btnLimpiar" OnClick="btnLimpiar_Click" />
+            
+            </div>
+                            <asp:Label ID="lblMensaje" runat="server" CssClass="lblMensaje" />
+            <%--grid usuarios--%>
 
             <asp:GridView ID="gvUsuarios" runat="server" DataKeyNames="IdUsuario" OnRowCommand="gvUsuarios_RowCommand" CssClass="tablaUsuarios" AutoGenerateColumns="false">
                 <Columns>
 
                     <asp:BoundField DataField="IdUsuario" HeaderText="ID" />
+                    <asp:BoundField DataField="FechaAlta" HeaderText="Fecha Alta" DataFormatString="{0:dd/MM/yyyy}" />
                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                     <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
                     <asp:BoundField DataField="Email" HeaderText="Email" />
