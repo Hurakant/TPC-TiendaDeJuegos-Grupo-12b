@@ -74,9 +74,13 @@
                                     <h5 class="game-row-title"><%# Eval("Nombre") %></h5>
                                     <p class="game-row-price">$ <%# Eval("Precio", "{0:N2}") %></p>
                                     <div class="game-row-cats">
-                                        <span class="cat-chip">
-                                            <%# ObtenerCategoria(Container.DataItem) %>
-                                        </span>
+                                        <div style="margin-bottom: 5px;">
+                                            <%# ObtenerCategorias(Container.DataItem) %>
+                                        </div>
+
+                                        <div>
+                                            <%# ObtenerAccesibilidad(Container.DataItem) %>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="game-row-actions">

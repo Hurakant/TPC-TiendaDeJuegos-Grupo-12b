@@ -1,4 +1,5 @@
 ﻿using dominio;
+using Dominio;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,14 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 {
     public partial class AdminProductos : System.Web.UI.Page
     {
+        private const int DESCRIPCION_MAX_LENGTH = 1000;
+
         private int idProducto = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             aplicarPermisos();
 
-            // Si no viene un id valido en la querystring, estamos en modo "Nuevo producto"
             if (!int.TryParse(Request.QueryString["id"], out idProducto) || idProducto <= 0)
             {
                 idProducto = 0;
@@ -58,7 +60,12 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 chkEsDigital.Checked = prod.EsDigital;
 
                 CargarCategorias();
-                SeleccionarCategoriasProducto(prod);
+                CargarAccesibilidades();
+
+                GuardarIdsPersistidos(prod.Categoria.Select(c => c.IdCategoria).ToList());
+                AplicarSeleccionPersistida();
+                GuardarAccesibilidadesIdsPersistidos(prod.Accesibilidad.Select(a => a.IdAccesibilidad).ToList());
+                AplicarSeleccionAccesibilidadPersistida();
             }
             catch (Exception ex)
             {
@@ -77,6 +84,16 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             txtFechaDeLanzamiento.Text = DateTime.Today.ToString("yyyy-MM-dd");
 
             CargarCategorias();
+            CargarAccesibilidades();
+            GuardarIdsPersistidos(new List<int>());
+            GuardarAccesibilidadesIdsPersistidos(new List<int>());
+        }
+
+        protected void btnBuscarCategoria_Click(object sender, EventArgs e)
+        {
+            SincronizarSeleccionVisibleConPersistido();
+            CargarCategorias(txtBuscarCategoria.Text.Trim());
+            AplicarSeleccionPersistida();
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -87,19 +104,27 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             string descripcion = (txtDescripcion.Text ?? "").Trim();
             string urlImagen = (txtUrlDeLaImagen.Text ?? "").Trim();
 
-            decimal precio = StringADecimal(txtPrecio.Text);
-            decimal descuento = StringADecimal(txtPorcentajeDeDescuento.Text);
-            int stock = StringAInt(txtStockDisponible.Text);
-            bool esDigital = chkEsDigital.Checked;
-
-            DateTime fechaLanzamiento;
-            if (!DateTime.TryParse(txtFechaDeLanzamiento.Text, out fechaLanzamiento))
-                fechaLanzamiento = DateTime.Today;
-
-            // ---- Validaciones basicas ----
             if (string.IsNullOrWhiteSpace(nombre))
             {
                 MostrarError("El nombre del producto es obligatorio.");
+                return;
+            }
+
+            if (nombre.Length > 200)
+            {
+                MostrarError("El nombre no puede superar los 200 caracteres.");
+                return;
+            }
+
+            if (descripcion.Length > DESCRIPCION_MAX_LENGTH)
+            {
+                MostrarError("La descripcion no puede superar los " + DESCRIPCION_MAX_LENGTH + " caracteres.");
+                return;
+            }
+
+            if (!decimal.TryParse(txtPrecio.Text, out decimal precio))
+            {
+                MostrarError("El precio debe ser un valor numerico (ej: 1999.99).");
                 return;
             }
 
@@ -109,9 +134,21 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 return;
             }
 
+            if (!decimal.TryParse(txtPorcentajeDeDescuento.Text, out decimal descuento))
+            {
+                MostrarError("El porcentaje de descuento debe ser un valor numerico.");
+                return;
+            }
+
             if (descuento < 0 || descuento > 100)
             {
                 MostrarError("El porcentaje de descuento debe estar entre 0 y 100.");
+                return;
+            }
+
+            if (!int.TryParse(txtStockDisponible.Text, out int stock))
+            {
+                MostrarError("El stock debe ser un numero entero.");
                 return;
             }
 
@@ -121,12 +158,22 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 return;
             }
 
-            List<Categoria> categoriasSeleccionadas = ObtenerCategoriasSeleccionadas();
-            if (categoriasSeleccionadas.Count == 0)
+            SincronizarSeleccionVisibleConPersistido();
+            SincronizarSeleccionAccesibilidadVisibleConPersistido();
+            List<int> idsCategoriasSeleccionadas = ObtenerIdsPersistidos();
+            List<int> idsAccesibilidadesSeleccionadas = ObtenerAccesibilidadesIdsPersistidos();
+
+            if (idsCategoriasSeleccionadas.Count == 0)
             {
                 MostrarError("Debe seleccionar al menos una categoria.");
                 return;
             }
+
+            bool esDigital = chkEsDigital.Checked;
+
+            DateTime fechaLanzamiento;
+            if (!DateTime.TryParse(txtFechaDeLanzamiento.Text, out fechaLanzamiento))
+                fechaLanzamiento = DateTime.Today;
 
             ProductoNegocio negocio = new ProductoNegocio();
 
@@ -150,17 +197,16 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                     FechaLanzamiento = fechaLanzamiento,
                     EsDigital = esDigital,
                     Activo = true,
-                    Categoria = categoriasSeleccionadas
+                    Categoria = idsCategoriasSeleccionadas.Select(id => new Categoria { IdCategoria = id }).ToList(),
+                    Accesibilidad = idsAccesibilidadesSeleccionadas.Select(id => new Accesibilidad { IdAccesibilidad = id }).ToList()
                 };
 
                 if (idProducto > 0)
                 {
-                    // ---- MODIFICAR ----
                     negocio.modificar(prod);
                 }
                 else
                 {
-                    // ---- CREAR ----
                     negocio.agregar(prod);
                     idProducto = prod.IdProducto;
                 }
@@ -229,43 +275,133 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             return int.TryParse(texto, out int precio) ? precio : 0;
         }
 
-        private void CargarCategorias()
+        private void CargarCategorias(string filtro = "")
         {
             CategoriaNegocio negocio = new CategoriaNegocio();
 
-            cblCategorias.DataSource = negocio.listar();
+            cblCategorias.DataSource = negocio.listar(filtro, true);
             cblCategorias.DataTextField = "NombreCategoria";
             cblCategorias.DataValueField = "IdCategoria";
             cblCategorias.DataBind();
         }
 
-        private void SeleccionarCategoriasProducto(Producto prod)
+        private List<int> ObtenerIdsPersistidos()
         {
-            foreach (Categoria categoria in prod.Categoria)
-            {
-                ListItem item = cblCategorias.Items.FindByValue(categoria.IdCategoria.ToString());
+            if (string.IsNullOrWhiteSpace(hdnCategoriasIds.Value))
+                return new List<int>();
 
-                if (item != null)
-                    item.Selected = true;
-            }
+            return hdnCategoriasIds.Value
+                .Split(',')
+                .Select(s => int.TryParse(s, out int id) ? id : -1)
+                .Where(id => id > 0)
+                .Distinct()
+                .ToList();
         }
 
-        private List<Categoria> ObtenerCategoriasSeleccionadas()
+        private void GuardarIdsPersistidos(List<int> ids)
         {
-            List<Categoria> categorias = new List<Categoria>();
+            hdnCategoriasIds.Value = string.Join(",", ids.Distinct());
+        }
+
+        private void SincronizarSeleccionVisibleConPersistido()
+        {
+            List<int> persistidos = ObtenerIdsPersistidos();
 
             foreach (ListItem item in cblCategorias.Items)
             {
+                if (!int.TryParse(item.Value, out int id))
+                    continue;
+
                 if (item.Selected)
                 {
-                    categorias.Add(new Categoria
-                    {
-                        IdCategoria = int.Parse(item.Value)
-                    });
+                    if (!persistidos.Contains(id))
+                        persistidos.Add(id);
+                }
+                else
+                {
+                    persistidos.Remove(id);
                 }
             }
 
-            return categorias;
+            GuardarIdsPersistidos(persistidos);
+        }
+
+        private void AplicarSeleccionPersistida()
+        {
+            List<int> persistidos = ObtenerIdsPersistidos();
+
+            foreach (ListItem item in cblCategorias.Items)
+            {
+                if (int.TryParse(item.Value, out int id))
+                    item.Selected = persistidos.Contains(id);
+            }
+        }
+
+        private void CargarAccesibilidades(string filtro = "")
+        {
+            AccesibilidadNegocio negocio = new AccesibilidadNegocio();
+
+            cblAccesibilidades.DataSource = negocio.listar(filtro, true);
+            cblAccesibilidades.DataTextField = "NombreAccesibilidad";
+            cblAccesibilidades.DataValueField = "IdAccesibilidad";
+            cblAccesibilidades.DataBind();
+        }
+
+        protected void btnBuscarAccesibilidad_Click(object sender, EventArgs e)
+        {
+            SincronizarSeleccionAccesibilidadVisibleConPersistido();
+            CargarAccesibilidades(txtBuscarAccesibilidad.Text.Trim());
+            AplicarSeleccionAccesibilidadPersistida();
+        }
+
+        private List<int> ObtenerAccesibilidadesIdsPersistidos()
+        {
+            if (string.IsNullOrWhiteSpace(hdnAccesibilidadesIds.Value))
+                return new List<int>();
+
+            return hdnAccesibilidadesIds.Value
+                .Split(',')
+                .Select(s => int.TryParse(s, out int id) ? id : -1)
+                .Where(id => id > 0)
+                .Distinct()
+                .ToList();
+        }
+
+        private void GuardarAccesibilidadesIdsPersistidos(List<int> ids)
+        {
+            hdnAccesibilidadesIds.Value = string.Join(",", ids.Distinct());
+        }
+
+        private void SincronizarSeleccionAccesibilidadVisibleConPersistido()
+        {
+            List<int> persistidos = ObtenerAccesibilidadesIdsPersistidos();
+
+            foreach (ListItem item in cblAccesibilidades.Items)
+            {
+                if (!int.TryParse(item.Value, out int id)) continue;
+
+                if (item.Selected)
+                {
+                    if (!persistidos.Contains(id)) persistidos.Add(id);
+                }
+                else
+                {
+                    persistidos.Remove(id);
+                }
+            }
+
+            GuardarAccesibilidadesIdsPersistidos(persistidos);
+        }
+
+        private void AplicarSeleccionAccesibilidadPersistida()
+        {
+            List<int> persistidos = ObtenerAccesibilidadesIdsPersistidos();
+
+            foreach (ListItem item in cblAccesibilidades.Items)
+            {
+                if (int.TryParse(item.Value, out int id))
+                    item.Selected = persistidos.Contains(id);
+            }
         }
     }
 }

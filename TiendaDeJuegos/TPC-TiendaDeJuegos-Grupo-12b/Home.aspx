@@ -22,6 +22,8 @@
                 <div class="panel-buttons">
                     <asp:Button ID="btnCategoria" runat="server" Text="Administrar Categorias" OnClick="btnCategoria_Click" CssClass="btn-panel" />
 
+                    <asp:Button ID="btnAccesibilidad" runat="server" Text="Administrar Accesibilidad" OnClick="btnAccesibilidad_Click" CssClass="btn-panel" />
+
                     <asp:Button ID="btnProductos" runat="server" Text="Administrar Productos" OnClick="btnProductos_Click" CssClass="btn-panel" />
 
                     <asp:Button ID="btnUsuarios" runat="server" Text="Administrar Usuarios" OnClick="btnUsuarios_Click" CssClass="btn-panel" />

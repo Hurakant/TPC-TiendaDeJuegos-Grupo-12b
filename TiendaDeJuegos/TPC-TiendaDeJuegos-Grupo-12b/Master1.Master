@@ -19,7 +19,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
-
+        <%-- ScriptManager1 --%>
+        <asp:ScriptManager ID="ScriptManager1" runat="server" />
         <%--NAV--%>
         <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(180deg, #0a0a0f 0%, #12121a 100%); border-bottom: 1px solid rgba(233, 30, 99, 0.3); padding: 0.5rem 1.5rem;">
             <div style="display: flex; align-items: center; width: 100%;">

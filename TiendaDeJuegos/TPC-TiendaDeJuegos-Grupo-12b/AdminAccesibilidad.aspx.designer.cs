@@ -11,53 +11,17 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 {
 
 
-    public partial class Master1
+    public partial class AdminAccesibilidad
     {
 
         /// <summary>
-        /// head control.
+        /// btnVolver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
-
-        /// <summary>
-        /// form1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-
-        /// <summary>
-        /// ScriptManager1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
-
-        /// <summary>
-        /// lnkLogo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkLogo;
-
-        /// <summary>
-        /// imgLogo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgLogo;
+        protected global::System.Web.UI.WebControls.Button btnVolver;
 
         /// <summary>
         /// txtBuscar control.
@@ -78,183 +42,156 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         protected global::System.Web.UI.WebControls.Button btnBuscar;
 
         /// <summary>
-        /// lnkInicio control.
+        /// btnAgregar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkInicio;
+        protected global::System.Web.UI.WebControls.Button btnAgregar;
 
         /// <summary>
-        /// rptCategorias control.
+        /// pnlVacio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptCategorias;
+        protected global::System.Web.UI.WebControls.Panel pnlVacio;
 
         /// <summary>
-        /// lnkOfertas control.
+        /// hfSelectedId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkOfertas;
+        protected global::System.Web.UI.WebControls.HiddenField hfSelectedId;
 
         /// <summary>
-        /// lnkMisPedidos control.
+        /// pnlSinSeleccion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkMisPedidos;
+        protected global::System.Web.UI.WebControls.Panel pnlSinSeleccion;
 
         /// <summary>
-        /// lnkNovedades control.
+        /// pnlEdicion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkNovedades;
+        protected global::System.Web.UI.WebControls.Panel pnlEdicion;
 
         /// <summary>
-        /// lnkBtnCarrito control.
+        /// lblIdEditar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkBtnCarrito;
+        protected global::System.Web.UI.WebControls.Label lblIdEditar;
 
         /// <summary>
-        /// lblCantidadCarrito control.
+        /// txtNombreEditar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCantidadCarrito;
+        protected global::System.Web.UI.WebControls.TextBox txtNombreEditar;
 
         /// <summary>
-        /// lnkBtnSesion control.
+        /// btnGuardar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkBtnSesion;
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
 
         /// <summary>
-        /// litSesionTexto control.
+        /// btnEliminar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litSesionTexto;
+        protected global::System.Web.UI.WebControls.Button btnEliminar;
 
         /// <summary>
-        /// ContentPlaceHolder1 control.
+        /// btnLimpiar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.WebControls.Button btnLimpiar;
 
         /// <summary>
-        /// lnkFootInicio control.
+        /// lblMensaje control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkFootInicio;
+        protected global::System.Web.UI.WebControls.Label lblMensaje;
 
         /// <summary>
-        /// lnkFootCat control.
+        /// pnlAlta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkFootCat;
+        protected global::System.Web.UI.WebControls.Panel pnlAlta;
 
         /// <summary>
-        /// lnkFootOfertas control.
+        /// txtNombreNueva control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkFootOfertas;
+        protected global::System.Web.UI.WebControls.TextBox txtNombreNueva;
 
         /// <summary>
-        /// lnkFootNovedades control.
+        /// btnGuardarNueva control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkFootNovedades;
+        protected global::System.Web.UI.WebControls.Button btnGuardarNueva;
 
         /// <summary>
-        /// lnkFootPerfil control.
+        /// btnCancelarNueva control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkFootPerfil;
+        protected global::System.Web.UI.WebControls.Button btnCancelarNueva;
 
         /// <summary>
-        /// lnkFootCarrito control.
+        /// lblMensajeAlta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkFootCarrito;
+        protected global::System.Web.UI.WebControls.Label lblMensajeAlta;
 
         /// <summary>
-        /// lnkFootLogin control.
+        /// rptAccesibilidades control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkFootLogin;
-
-        /// <summary>
-        /// lnkFootInsta control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkFootInsta;
-
-        /// <summary>
-        /// lnkFootDisc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkFootDisc;
-
-        /// <summary>
-        /// lnkFootYt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkFootYt;
+        protected global::System.Web.UI.WebControls.Repeater rptAccesibilidades;
     }
 }

@@ -82,7 +82,6 @@ BEGIN
             CHECK (Stock >= 0),
  
         FechaLanzamiento DATE NOT NULL,
-        IDCategoria INT NOT NULL,
  
         EsDigital BIT NOT NULL
             CONSTRAINT DF_Producto_EsDigital DEFAULT (0),

@@ -1,21 +1,6 @@
 USE NovaHub;
 GO
- 
-/*Migracion de datos desde idcategoria a la tabla de productocategoria. Por si acaso para que no se les rompa la db*/
-IF EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('dbo.Producto') AND name = 'IDCategoria')
-BEGIN
-    INSERT INTO ProductoCategoria (IDProducto, IDCategoria)
-    SELECT P.IDProducto, P.IDCategoria
-    FROM Producto P
-    WHERE NOT EXISTS (
-        SELECT 1 FROM ProductoCategoria PC
-        WHERE PC.IDProducto = P.IDProducto AND PC.IDCategoria = P.IDCategoria
-    );
- 
-    ALTER TABLE Producto DROP COLUMN IDCategoria;
-END
-GO
- 
+
 CREATE OR ALTER PROCEDURE SP_Producto_ObtenerPorId
     @IDProducto INT
 AS
@@ -204,7 +189,10 @@ CREATE OR ALTER PROCEDURE SP_Producto_ActualizarStock
 AS
 BEGIN
     SET NOCOUNT ON;
-    UPDATE Producto SET Stock = Stock + @Cantidad WHERE IDProducto = @IDProducto;
+    UPDATE Producto
+    SET Stock = Stock + @Cantidad
+    WHERE IDProducto = @IDProducto
+    AND Stock + @Cantidad >= 0;
 END
 GO
  

@@ -97,13 +97,60 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
             CargarProductos();
         }
-        protected string ObtenerCategoria(object item)
+        // Método para las categorías normales
+        protected string ObtenerCategorias(object item)
         {
             Producto p = (Producto)item;
 
-            return p.Categoria.Count > 0
-                ? p.Categoria[0].NombreCategoria
-                : "Sin categoría";
+            if (p.Categoria == null || p.Categoria.Count == 0)
+            {
+                return "<span class=\"cat-chip\">Sin categoría</span>";
+            }
+
+            int maximoAMostrar = 4;
+            string html = "";
+
+            var categoriasAMostrar = p.Categoria.Take(maximoAMostrar).ToList();
+
+            foreach (var cat in categoriasAMostrar)
+            {
+                html += $"<span class=\"cat-chip\">{cat.NombreCategoria}</span> ";
+            }
+
+            if (p.Categoria.Count > maximoAMostrar)
+            {
+                html += "<span class=\"cat-chip\">...</span>";
+            }
+
+            return html;
+        }
+
+        // Método para las categorías de accesibilidad
+        protected string ObtenerAccesibilidad(object item)
+        {
+            Producto p = (Producto)item;
+
+            if (p.Accesibilidad == null || p.Accesibilidad.Count == 0)
+            {
+                return "";
+            }
+
+            int maximoAMostrar = 4;
+            string html = "";
+
+            var accAMostrar = p.Accesibilidad.Take(maximoAMostrar).ToList();
+
+            foreach (var acc in accAMostrar)
+            {
+                html += $"<span class=\"cat-chip acc-chip\" >{acc.NombreAccesibilidad}</span> ";
+            }
+
+            if (p.Accesibilidad.Count > maximoAMostrar)
+            {
+                html += "<span class=\"cat-chip\" >...</span>";
+            }
+
+            return html;
         }
     }
 }

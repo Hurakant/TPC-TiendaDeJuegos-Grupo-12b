@@ -14,7 +14,7 @@ namespace Negocio
     {
         //LISTAR (No voy a nombrarlos todos porque tienen nombres descriptivos)
         //POR HACER:
-        //Añadir procedures en todas las operaciones, expandir Actualizar stock para que sea:
+        //expandir Actualizar stock para que sea:
         //Actualizar, Aumentar, Disminuir para no hacerlo de forma arcaica cuando se hagan las compras
 
         //Metodo para armar lista generica

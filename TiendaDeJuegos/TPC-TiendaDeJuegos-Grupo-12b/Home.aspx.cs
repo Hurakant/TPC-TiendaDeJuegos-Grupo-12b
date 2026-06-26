@@ -33,7 +33,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                      p.Categoria.Any(c => c.NombreCategoria == "RPG"));
 
                  rptAccion.DataSource = productos.Where(p =>
-                     p.Categoria.Any(c => c.NombreCategoria == "Accion"));
+                     p.Categoria.Any(c => c.NombreCategoria == "Acción"));
 
                  rptShooter.DataSource = productos.Where(p =>
                      p.Categoria.Any(c => c.NombreCategoria == "Shooter"));
@@ -120,22 +120,22 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                     foreach (var juego in datos.results.Take(20))
                     {
                         using (SqlCommand cmd = new SqlCommand(@"
-IF NOT EXISTS (
-    SELECT 1 FROM Producto WHERE Nombre = @Nombre
-)
-BEGIN
-    INSERT INTO Producto
-    (
-        Nombre, Descripcion, ImagenUrl, FechaLanzamiento,
-        Precio, Descuento, Stock, EsDigital, Activo, IDCategoria
-    )
-    VALUES
-    (
-        @Nombre, @Descripcion, @ImagenUrl, @Fecha,
-        @Precio, @Descuento, @Stock, @EsDigital, @Activo, @IDCategoria
-    )
-END", cn))
-                        {
+                                IF NOT EXISTS (
+                                    SELECT 1 FROM Producto WHERE Nombre = @Nombre
+                                )
+                                BEGIN
+                                    INSERT INTO Producto
+                                    (
+                                        Nombre, Descripcion, ImagenUrl, FechaLanzamiento,
+                                        Precio, Descuento, Stock, EsDigital, Activo, IDCategoria
+                                    )
+                                    VALUES
+                                    (
+                                        @Nombre, @Descripcion, @ImagenUrl, @Fecha,
+                                        @Precio, @Descuento, @Stock, @EsDigital, @Activo, @IDCategoria
+                                    )
+                                END", cn))
+                            {
                             cmd.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = juego.name;
                             cmd.Parameters.Add("@Descripcion", SqlDbType.VarChar).Value = "Importado desde API RAWG";
                             cmd.Parameters.Add("@ImagenUrl", SqlDbType.VarChar).Value = juego.background_image ?? "";
@@ -253,6 +253,21 @@ END", cn))
             {
                 Response.Redirect("Error.aspx");
             }
+        }
+
+        protected void btnAccesibilidad_Click(object sender, EventArgs e)
+        {
+            Usuario user = (Usuario)Session["usuarioLogueado"];
+            if (user.Rol == Rol.Admin)
+            {
+
+                Response.Redirect("AdminAccesibilidad.aspx");
+            }
+            else
+            {
+                Response.Redirect("Error.aspx", false);
+            }
+
         }
     }
 }

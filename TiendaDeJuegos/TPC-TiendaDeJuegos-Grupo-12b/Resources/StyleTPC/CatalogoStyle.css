@@ -279,6 +279,7 @@
     transition: .2s;
     display: inline-block;
     text-align: center;
+    margin-right: auto;
 }
 
     .game-row-link:hover {

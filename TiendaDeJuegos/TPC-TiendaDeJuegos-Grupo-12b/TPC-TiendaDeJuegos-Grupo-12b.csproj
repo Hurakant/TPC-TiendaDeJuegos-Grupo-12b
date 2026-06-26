@@ -72,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminAccesibilidad.aspx" />
     <Content Include="AdminCategorias.aspx" />
     <Content Include="AdminProductos.aspx" />
     <Content Include="AdminUsuarios.aspx" />
@@ -88,7 +89,9 @@
     <Content Include="Registro.aspx" />
     <Content Include="Resources\Logo\LogosfB.svg" />
     <Content Include="Resources\Logo\LogosfN.svg" />
+    <Content Include="Resources\StyleTPC\AdminAccesibilidadStyle.css" />
     <Content Include="Resources\StyleTPC\AdminCategoriasStyle.css" />
+    <Content Include="Resources\StyleTPC\AdminProductosStyle.css" />
     <Content Include="Resources\StyleTPC\AdminUsuariosStyles.css" />
     <Content Include="Resources\StyleTPC\CatalogoStyle.css" />
     <Content Include="Resources\StyleTPC\DetallePedidoStyle.css" />
@@ -106,6 +109,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminAccesibilidad.aspx.cs">
+      <DependentUpon>AdminAccesibilidad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminAccesibilidad.aspx.designer.cs">
+      <DependentUpon>AdminAccesibilidad.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminCategorias.aspx.cs">
       <DependentUpon>AdminCategorias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
