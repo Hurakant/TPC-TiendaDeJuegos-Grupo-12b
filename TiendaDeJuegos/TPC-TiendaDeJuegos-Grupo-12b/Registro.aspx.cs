@@ -67,13 +67,15 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
                 EmailService.EnviarBienvenida(usuario.Email, usuario.Nombre, usuario.Apellido, out string errorBienvenida);
 
-                TokenNegocio tokenNegocio = new TokenNegocio();
-                string codigo = tokenNegocio.GenerarToken(usuario.IdUsuario, TipoToken.VerificacionCorreo);
-                EmailService.EnviarCodigoVerificacion(usuario.Email, codigo, out string errorCodigo);
+                //Prueba de forzar login
 
-                Session.Add("usuarioPendienteVerificacion", usuario);
+                //TokenNegocio tokenNegocio = new TokenNegocio();
+                //string codigo = tokenNegocio.GenerarToken(usuario.IdUsuario, TipoToken.VerificacionCorreo);
+                //EmailService.EnviarCodigoVerificacion(usuario.Email, codigo, out string errorCodigo);
 
-                Response.Redirect("~/VerificacionCorreo.aspx", false);
+                //Session.Add("usuarioPendienteVerificacion", usuario);
+
+                Response.Redirect("~/Login.aspx", false);
             }
             catch (Exception ex)
             {
