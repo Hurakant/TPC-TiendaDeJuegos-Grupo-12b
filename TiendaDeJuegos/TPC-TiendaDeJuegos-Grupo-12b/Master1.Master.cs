@@ -24,11 +24,13 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             if (!IsPostBack)
             {
 
-                Session["CantidadCarrito"] = 777;
+                
                 CargarCategorias();
                 ActualizarSesion();
                 ActualizarCarrito();
+
             }
+            
         }
 
         public void CargarCategorias()
@@ -61,9 +63,24 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
         public void ActualizarCarrito()
         {
-            int cantidad = Session["CantidadCarrito"] != null
-                ? (int)Session["CantidadCarrito"]
-                : 0;
+            int cantidad = 0;
+
+            // Caso 1: carrito global
+            if (Session["Carrito"] is dominio.Carrito carrito)
+            {
+                cantidad = carrito.ItemCarrito.Sum(x => x.Cantidad);
+            }
+            // Caso 2: carrito por usuario (tu implementación actual)
+            else if (Session["usuarioLogueado"] != null)
+            {
+                Usuario user = (Usuario)Session["usuarioLogueado"];
+                string key = "Carrito_" + user.IdUsuario;
+
+                if (Session[key] is dominio.Carrito carritoUser)
+                {
+                    cantidad = carritoUser.ItemCarrito.Sum(x => x.Cantidad);
+                }
+            }
 
             lblCantidadCarrito.Text = cantidad.ToString();
             lblCantidadCarrito.Visible = cantidad > 0;
@@ -94,6 +111,8 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             if (!string.IsNullOrEmpty(termino))
                 Response.Redirect($"~/Busqueda.aspx?q={Server.UrlEncode(termino)}");
         }
+
+       
 
     }
 }

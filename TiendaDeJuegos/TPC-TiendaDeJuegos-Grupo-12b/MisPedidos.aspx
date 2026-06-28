@@ -27,39 +27,24 @@
                     </p>
                 </div>
 
-                <!-- GRID DE PEDIDOS -->
                 <div class="mb-3">
 
                     <asp:GridView ID="gvPedidos" runat="server"
-                        CssClass="table table-dark table-hover"
-                        AutoGenerateColumns="False">
+    CssClass="table table-dark table-hover"
+    AutoGenerateColumns="False">
 
-                        <Columns>
+    <Columns>
 
-                            <asp:BoundField DataField="IdPedido" HeaderText="ID" />
-                            <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
+        <asp:BoundField DataField="IdPedido" HeaderText="ID" />
+        <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
+        <asp:BoundField DataField="Estado" HeaderText="Estado" />
+        <asp:BoundField DataField="FormaDeEntrega" HeaderText="Entrega" />
+        <asp:BoundField DataField="FormaDePagoTexto" HeaderText="Pago" />
+        <asp:BoundField DataField="MontoTotal" HeaderText="Total" />
 
-                            <asp:BoundField DataField="Estado" HeaderText="Estado" />
-                            <asp:BoundField DataField="FormaDeEntrega" HeaderText="Entrega" />
-                            <asp:BoundField DataField="FormaDePagoTexto" HeaderText="Pago" />
+    </Columns>
 
-                           
-                            <asp:BoundField DataField="MontoTotal" HeaderText="Total" />
-
-                            <asp:TemplateField HeaderText="Acciones">
-        <ItemTemplate>
-            <asp:Button ID="btnDetalle"
-                runat="server"
-                Text="Ver detalle"
-                CssClass="btn btn-sm btn-primary"
-                CommandArgument='<%# Eval("IdPedido") %>'
-                OnClick="btnDetalle_Click" />
-        </ItemTemplate>
-    </asp:TemplateField>
-
-                        </Columns>
-
-                    </asp:GridView>
+</asp:GridView>
 
                 </div>
 

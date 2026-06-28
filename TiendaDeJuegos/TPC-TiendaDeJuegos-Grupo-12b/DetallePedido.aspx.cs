@@ -9,9 +9,17 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (Session["usuarioLogueado"] == null)
             {
                 Response.Redirect("Login.aspx");
+                return;
+            }
+            Usuario user = (Usuario)Session["usuarioLogueado"];
+
+            if (user.Rol == Rol.Cliente)
+            {
+                Response.Redirect("Home.aspx");
                 return;
             }
 
