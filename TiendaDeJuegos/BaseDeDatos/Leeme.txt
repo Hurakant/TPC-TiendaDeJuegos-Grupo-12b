@@ -1,0 +1,4 @@
+Hola!
+Los scripts SQL Están listados en el orden que deben ejecutarse para evitar inconsistencias
+
+Limpiar productos sirve para eliminar todos los productos que tenga la base de datos cargados

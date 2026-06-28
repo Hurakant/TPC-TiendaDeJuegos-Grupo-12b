@@ -1,4 +1,5 @@
 ﻿using dominio;
+using Dominio;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -62,13 +63,21 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 usuario.Activo = true;
 
                 int id = negocio.RegistroUser(usuario);
-                Session.Add("usuarioLogueado", usuario);
+                usuario.IdUsuario = id;
 
-                Response.Redirect("~/Home.aspx",false);
+                EmailService.EnviarBienvenida(usuario.Email, usuario.Nombre, usuario.Apellido, out string errorBienvenida);
+
+                TokenNegocio tokenNegocio = new TokenNegocio();
+                string codigo = tokenNegocio.GenerarToken(usuario.IdUsuario, TipoToken.VerificacionCorreo);
+                EmailService.EnviarCodigoVerificacion(usuario.Email, codigo, out string errorCodigo);
+
+                Session.Add("usuarioPendienteVerificacion", usuario);
+
+                Response.Redirect("~/VerificacionCorreo.aspx", false);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                lblMsjError.Text = "Ocurrio un error al procesar el registro. Intentelo de nuevo.";
+                lblMsjError.Text = "Ocurrio un error al procesar el registro. Intentelo de nuevo." + ex.ToString();
                 lblMsjError.Visible = true;
             }
             

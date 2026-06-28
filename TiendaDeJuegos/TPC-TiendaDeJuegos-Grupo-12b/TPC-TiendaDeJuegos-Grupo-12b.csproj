@@ -105,6 +105,7 @@
     <Content Include="Resources\StyleTPC\PedidosStyle.css" />
     <Content Include="Resources\StyleTPC\VerProductoStyle.css" />
     <Content Include="Pedidos.aspx" />
+    <Content Include="VerificacionCorreo.aspx" />
     <Content Include="VerProducto.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -228,6 +229,13 @@
     </Compile>
     <Compile Include="Pedidos.aspx.designer.cs">
       <DependentUpon>Pedidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VerificacionCorreo.aspx.cs">
+      <DependentUpon>VerificacionCorreo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VerificacionCorreo.aspx.designer.cs">
+      <DependentUpon>VerificacionCorreo.aspx</DependentUpon>
     </Compile>
     <Compile Include="VerProducto.aspx.cs">
       <DependentUpon>VerProducto.aspx</DependentUpon>

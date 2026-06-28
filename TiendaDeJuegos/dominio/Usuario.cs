@@ -17,6 +17,7 @@ namespace dominio
         public string Telefono { get; set; }
         public Rol Rol {  get; set; }
         public bool Activo { get; set; }
+        public bool CorreoVerificado { get; set; }
         public List<Direccion> Direccion { get; set; } = new List<Direccion>();
     }
 }

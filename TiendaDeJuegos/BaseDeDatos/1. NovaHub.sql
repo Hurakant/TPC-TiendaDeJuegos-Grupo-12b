@@ -53,7 +53,7 @@ BEGIN
     );
 END
 GO
- 
+
 /*=========================================================
 PRODUCTOS
 =========================================================*/
@@ -164,10 +164,26 @@ BEGIN
  
         Activo BIT NOT NULL DEFAULT 1,
  
-        FechaAlta DATETIME NOT NULL DEFAULT GETDATE()
+        FechaAlta DATETIME NOT NULL DEFAULT GETDATE(),
+        CorreoVerificado BIT NOT NULL DEFAULT 0
     );
 END
 GO
+--Crear tabla de tokens
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'dbo.Token') AND type = 'U')
+CREATE TABLE Token (
+    IDToken           INT IDENTITY(1,1) PRIMARY KEY,
+    IDUsuario         INT NOT NULL,
+    Codigo            VARCHAR(6) NOT NULL,
+    Tipo              INT NOT NULL,           -- 1 = VerificacionCorreo, 2 = RecuperacionContrasena
+    FechaCreacion     DATETIME NOT NULL DEFAULT GETDATE(),
+    FechaVencimiento  DATETIME NOT NULL,
+    CONSTRAINT FK_Token_Usuario FOREIGN KEY (IDUsuario) REFERENCES Usuario(IDUsuario)
+);
+ 
+CREATE UNIQUE INDEX UX_Token_Usuario_Tipo ON Token(IDUsuario, Tipo);
+GO
+ 
 
 -- DIRECCION
 
@@ -387,23 +403,23 @@ WHERE NOT EXISTS (
 GO
  
 /*DATOS INICIALES USUARIOS*/
-INSERT INTO Usuario (Nombre, Apellido, Email, Contrasena, Telefono, Rol)
-SELECT v.Nombre, v.Apellido, v.Email, v.Contrasena, v.Telefono, v.Rol
+INSERT INTO Usuario (Nombre, Apellido, Email, Contrasena, Telefono, Rol, CorreoVerificado)
+SELECT v.Nombre, v.Apellido, v.Email, v.Contrasena, v.Telefono, v.Rol, v.CorreoVerificado
 FROM (VALUES
     -- ADMIN
-    ('Admin', 'NovaHub', 'admin@gmail.com', '123456789', '1111111111', 3),
+    ('Admin', 'NovaHub', 'admin@gmail.com', '123456789', '1111111111', 3, 1),
  
     -- VENDEDORES
-    ('Juan', 'Perez', 'vendedor1@gmail.com', '123456789', '1122222222', 2),
-    ('Maria', 'Gomez', 'vendedor2@gmail.com', '123456789', '1133333333', 2),
+    ('Juan', 'Perez', 'vendedor1@gmail.com', '123456789', '1122222222', 2, 1),
+    ('Maria', 'Gomez', 'vendedor2@gmail.com', '123456789', '1133333333', 2, 1),
  
     -- CLIENTES
-    ('Carlos', 'Lopez', 'cliente1@gmail.com', '123456789', '1144444444', 1),
-    ('Ana', 'Martinez', 'cliente2@gmail.com', '123456789', '1155555555', 1),
-    ('Lucas', 'Fernandez', 'cliente3@gmail.com', '123456789', '1166666666', 1),
-    ('Sofia', 'Rodriguez', 'cliente4@gmail.com', '123456789', '1177777777', 1)
+    ('Carlos', 'Lopez', 'cliente1@gmail.com', '123456789', '1144444444', 1, 1),
+    ('Ana', 'Martinez', 'cliente2@gmail.com', '123456789', '1155555555', 1, 1),
+    ('Lucas', 'Fernandez', 'cliente3@gmail.com', '123456789', '1166666666', 1, 1),
+    ('Sofia', 'Rodriguez', 'cliente4@gmail.com', '123456789', '1177777777', 1, 1)
  
-) AS v(Nombre, Apellido, Email, Contrasena, Telefono, Rol)
+) AS v(Nombre, Apellido, Email, Contrasena, Telefono, Rol, CorreoVerificado)
 WHERE NOT EXISTS (
     SELECT 1 FROM Usuario u WHERE u.Email = v.Email
 );

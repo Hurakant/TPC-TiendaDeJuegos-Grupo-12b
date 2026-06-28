@@ -1,4 +1,5 @@
 ﻿using dominio;
+using Dominio;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,17 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
                 if (negocio.Loguear(usuario))
                 {
+                    //Si todavía no verificó el correo, lo mandamos a verificar su correo
+                    if (!usuario.CorreoVerificado)
+                    {
+                        TokenNegocio tokenNegocio = new TokenNegocio();
+                        string codigo = tokenNegocio.GenerarToken(usuario.IdUsuario, TipoToken.VerificacionCorreo);
+                        EmailService.EnviarCodigoVerificacion(usuario.Email, codigo, out string errorEnvio);
+
+                        Session.Add("usuarioPendienteVerificacion", usuario);
+                        Response.Redirect("~/VerificacionCorreo.aspx", false);
+                        return;
+                    }
                     Session.Add("usuarioLogueado", usuario);
                     Response.Redirect("Home.aspx");
                 }
