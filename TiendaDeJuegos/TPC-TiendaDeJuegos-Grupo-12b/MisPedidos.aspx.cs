@@ -50,6 +50,20 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
             Response.Redirect("DetallePedido.aspx?id=" + idPedido);
         }
+
+        protected void gvPedidos_RowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var pedido = (Pedido)e.Row.DataItem;
+
+                // ocultar dirección si no es envío a domicilio
+                if (pedido.FormaDeEntrega != FormaDeEntrega.EnvioADomicilio)
+                {
+                    e.Row.Cells[6].Text = ""; // columna Dirección
+                }
+            }
+        }
     }
 }
 

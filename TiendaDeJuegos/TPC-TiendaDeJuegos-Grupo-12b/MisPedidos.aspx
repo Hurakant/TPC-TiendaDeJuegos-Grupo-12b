@@ -29,9 +29,10 @@
 
                 <div class="mb-3">
 
-                    <asp:GridView ID="gvPedidos" runat="server"
+    <asp:GridView ID="gvPedidos" runat="server"
     CssClass="table table-dark table-hover"
-    AutoGenerateColumns="False">
+    AutoGenerateColumns="False"
+    OnRowDataBound="gvPedidos_RowDataBound">
 
     <Columns>
 
@@ -41,6 +42,7 @@
         <asp:BoundField DataField="FormaDeEntrega" HeaderText="Entrega" />
         <asp:BoundField DataField="FormaDePagoTexto" HeaderText="Pago" />
         <asp:BoundField DataField="MontoTotal" HeaderText="Total" />
+        <asp:BoundField DataField="DireccionTexto" HeaderText="Dirección" />
 
     </Columns>
 

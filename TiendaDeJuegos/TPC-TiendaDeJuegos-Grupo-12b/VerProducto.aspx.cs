@@ -66,6 +66,15 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                     btnAgregarCarrito.Enabled = false;
                     btnAgregarCarrito.Text = "Sin stock";
                 }
+
+
+                Usuario user = (Usuario)Session["usuarioLogueado"];
+
+                if (user != null && user.Rol != Rol.Cliente)
+                {
+                    btnAgregarCarrito.Enabled = false;
+                    btnAgregarCarrito.Text = "Solo para clientes";
+                }
             }
             catch (Exception ex)
             {
@@ -83,6 +92,13 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 if (user == null)
                 {
                     lblMensaje.Text = "Inicie sesión para continuar con la compra.";
+                    lblMensaje.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+
+                if (user.Rol != Rol.Cliente)
+                {
+                    lblMensaje.Text = "Solo los clientes pueden agregar productos al carrito.";
                     lblMensaje.ForeColor = System.Drawing.Color.Red;
                     return;
                 }

@@ -22,7 +22,19 @@ namespace dominio
         {
             get
             {
-                return Calle + " " + Numero + ", " + Localidad;
+                string direccion = Calle + " " + Numero;
+
+                if (!string.IsNullOrWhiteSpace(Piso))
+                    direccion += ", Piso " + Piso;
+
+                if (!string.IsNullOrWhiteSpace(Depto))
+                    direccion += ", Depto " + Depto;
+
+                direccion += ", " + Localidad;
+                direccion += ", " + Provincia;
+                direccion += " (" + CodigoPostal + ")";
+
+                return direccion;
             }
         }
     }

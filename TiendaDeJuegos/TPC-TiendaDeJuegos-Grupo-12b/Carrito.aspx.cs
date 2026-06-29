@@ -134,6 +134,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             if (carrito.ItemCarrito.Count == 0)
             {
                 lblMensaje.Text = "El carrito está vacío";
+                lblMensaje.ForeColor = System.Drawing.Color.Red;
                 return;
             }
 
@@ -143,13 +144,30 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
             if (pago == null)
             {
-                lblMensaje.Text = "Seleccione una forma de pago válida";
+                lblMensaje.Text = "Seleccione una forma de pago válida.";
+                lblMensaje.ForeColor = System.Drawing.Color.Red;
                 return;
             }
 
-            // Forma de entrega (ENUM)
+            // Forma de entrega
             FormaDeEntrega formaEntrega =
                 (FormaDeEntrega)Convert.ToInt32(ddlEntrega.SelectedValue);
+
+            // ID Dirección
+            int? idDireccion = null;
+
+            if (formaEntrega == FormaDeEntrega.EnvioADomicilio)
+            {
+                if (ddlDirecciones.Items.Count == 0 ||
+                    string.IsNullOrEmpty(ddlDirecciones.SelectedValue))
+                {
+                    lblMensaje.Text = "Seleccione una dirección de entrega.";
+                    lblMensaje.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+
+                idDireccion = Convert.ToInt32(ddlDirecciones.SelectedValue);
+            }
 
             // Crear pedido
             Pedido pedido = new Pedido
@@ -157,31 +175,34 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 Cliente = user,
                 FormaDePago = pago,
                 FormaDeEntrega = formaEntrega,
-                Detalle = carrito.ItemCarrito.ToList()
+                Detalle = carrito.ItemCarrito.ToList(),
+                IDDireccion = idDireccion   // 
             };
 
             PedidoNegocio negocio = new PedidoNegocio();
 
-            // INSERT PEDIDO
+            // Crear pedido en la base
             int idPedido = negocio.CrearPedido(pedido);
 
             if (idPedido == 0)
             {
-                lblMensaje.Text = "Error al crear el pedido";
+                lblMensaje.Text = "Error al crear el pedido.";
+                lblMensaje.ForeColor = System.Drawing.Color.Red;
                 return;
             }
 
-            // INSERT DETALLE
+            // Agregar detalle
             foreach (CarritoItem item in carrito.ItemCarrito)
             {
                 negocio.AgregarDetalle(idPedido, item);
             }
 
-            // LIMPIAR CARRITO
+            // Vaciar carrito
             carrito.ItemCarrito.Clear();
             CargarCarrito();
 
-            lblMensaje.Text = "Pedido creado ✔ ID: " + idPedido;
+            lblMensaje.Text = "✔ Pedido creado correctamente. ID: " + idPedido;
+            lblMensaje.ForeColor = System.Drawing.Color.Green;
         }
 
         private dominio.Carrito ObtenerCarrito()
@@ -214,10 +235,36 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
             DireccionNegocio dire = new DireccionNegocio();
 
-            ddlDirecciones.DataSource = dire.ListarPorUsuario(idUsuario);
+            var lista = dire.ListarPorUsuario(idUsuario);
+
+            ddlDirecciones.Items.Clear();
+
+            if (lista.Count == 0)
+            {
+                divDirecciones.Visible = true;
+
+                ddlDirecciones.Items.Add(new ListItem("No posee direcciones registradas", "0"));
+
+                btnComprar.Enabled = false;
+
+                lblMensaje.Text = "Para recibir el pedido en su domicilio primero debe registrar una dirección.";
+                lblMensaje.ForeColor = System.Drawing.Color.Red;
+
+                return;
+            }
+
+            ddlDirecciones.DataSource = lista;
             ddlDirecciones.DataTextField = "DireccionCompleta";
-            ddlDirecciones.DataValueField = "IdDireccion";
+            ddlDirecciones.DataValueField = "IDDireccion";
             ddlDirecciones.DataBind();
+
+            ddlDirecciones.Items.Insert(0,
+    new ListItem("-- Seleccione una dirección --", ""));
+
+            btnComprar.Enabled = true;
+            lblMensaje.Text = "";
+
+            lnkDireccion.Visible = false;
         }
     }
 }

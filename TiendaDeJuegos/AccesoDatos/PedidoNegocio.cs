@@ -16,30 +16,38 @@ namespace Negocio
             try
             {
                 datos.setConsulta(@"
-                    INSERT INTO Pedido
-                    (
-                        IDUsuario,
-                        MontoTotal,
-                        IDFormaDePago,
-                        IDFormaDeEntrega,
-                        IDEstadoPedido
-                    )
-                    OUTPUT INSERTED.IDPedido
-                    VALUES
-                    (
-                        @IDUsuario,
-                        @MontoTotal,
-                        @IDFormaDePago,
-                        @IDFormaDeEntrega,
-                        @IDEstadoPedido
-                    )
-                ");
+            INSERT INTO Pedido
+            (
+                IDUsuario,
+                MontoTotal,
+                IDFormaDePago,
+                IDFormaDeEntrega,
+                IDEstadoPedido,
+                IDDireccion
+            )
+            OUTPUT INSERTED.IDPedido
+            VALUES
+            (
+                @IDUsuario,
+                @MontoTotal,
+                @IDFormaDePago,
+                @IDFormaDeEntrega,
+                @IDEstadoPedido,
+                @IDDireccion
+            )
+        ");
 
                 datos.setParametro("@IDUsuario", pedido.Cliente.IdUsuario);
                 datos.setParametro("@MontoTotal", pedido.Total);
                 datos.setParametro("@IDFormaDePago", pedido.FormaDePago.IdFormaDePago);
                 datos.setParametro("@IDFormaDeEntrega", (int)pedido.FormaDeEntrega);
                 datos.setParametro("@IDEstadoPedido", 1);
+
+                // 🔥 NUEVO
+                datos.setParametro(
+                    "@IDDireccion",
+                    pedido.IDDireccion.HasValue ? (object)pedido.IDDireccion.Value : DBNull.Value
+                );
 
                 datos.ejecutarLectura();
 
@@ -105,40 +113,59 @@ namespace Negocio
                 datos.setConsulta(@"
             SELECT 
                 p.IDPedido,
-                p.FechaCreacion,
                 p.MontoTotal,
-                p.IDEstadoPedido,
+                p.FechaCreacion AS Fecha,
+                p.IDFormaDeEntrega,
                 p.IDFormaDePago,
-                p.IDFormaDeEntrega
+                p.IDEstadoPedido,
+                p.IDDireccion,
+                d.Calle,
+                d.Numero,
+                d.Localidad,
+                d.Provincia,
+                d.CodigoPostal
             FROM Pedido p
-            WHERE p.IDUsuario = @IDUsuario
-            ORDER BY p.FechaCreacion DESC
+            LEFT JOIN Direccion d ON p.IDDireccion = d.IDDireccion
+            WHERE p.IDUsuario = @idUsuario
+            ORDER BY p.IDPedido DESC
         ");
 
-                datos.setParametro("@IDUsuario", idUsuario);
+                datos.setParametro("@idUsuario", idUsuario);
+
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
-                    Pedido p = new Pedido();
+                    Pedido pedido = new Pedido();
 
-                    p.IdPedido = (int)datos.Lector["IDPedido"];
-                    p.Fecha = (DateTime)datos.Lector["FechaCreacion"];
-                    p.Estado = (EstadoPedido)Convert.ToInt32(datos.Lector["IDEstadoPedido"]);
-                    p.MontoTotal = (decimal)datos.Lector["MontoTotal"];
+                    // 🔹 Datos básicos
+                    pedido.IdPedido = (int)datos.Lector["IDPedido"];
+                    pedido.MontoTotal = (decimal)datos.Lector["MontoTotal"];
+                    pedido.Fecha = (DateTime)datos.Lector["Fecha"];
+                    pedido.Estado =
+    (EstadoPedido)Convert.ToInt32(datos.Lector["IDEstadoPedido"]);
 
-                    //  FORMA DE PAGO
+                    pedido.FormaDeEntrega = (FormaDeEntrega)(int)datos.Lector["IDFormaDeEntrega"];
+
                     int idPago = (int)datos.Lector["IDFormaDePago"];
-                    p.FormaDePago = new FormaDePago
+
+                    pedido.FormaDePago = new FormaDePago
                     {
                         IdFormaDePago = idPago,
                         Nombre = ObtenerNombrePago(idPago)
                     };
 
-                    //  FORMA DE ENTREGA
-                    p.FormaDeEntrega = (FormaDeEntrega)Convert.ToInt32(datos.Lector["IDFormaDeEntrega"]);
+                    // 🔹 Dirección (solo si existe)
+                    pedido.Direccion = new Direccion
+                    {
+                        Calle = datos.Lector["Calle"]?.ToString(),
+                        Numero = datos.Lector["Numero"]?.ToString(),
+                        Localidad = datos.Lector["Localidad"]?.ToString(),
+                        Provincia = datos.Lector["Provincia"]?.ToString(),
+                        CodigoPostal = datos.Lector["CodigoPostal"]?.ToString()
+                    };
 
-                    lista.Add(p);
+                    lista.Add(pedido);
                 }
 
                 return lista;

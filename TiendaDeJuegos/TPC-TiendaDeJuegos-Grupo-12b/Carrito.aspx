@@ -82,7 +82,7 @@
                         CssClass="btnIngresar"
                         OnClick="btnComprar_Click" />
 
-                    <a href="Home.aspx" class="cancelar-link">Seguir comprando</a>
+                    <a href="Catalogo.aspx" class="cancelar-link">Seguir comprando</a>
 
                     <asp:Button ID="btnVaciar" runat="server"
                         Text="Vaciar carrito"
@@ -94,8 +94,19 @@
 
                     <div id="divDirecciones" runat="server" visible="false">
                         <p>Elija la direccion de envio:</p>
-                        <asp:DropDownList ID="ddlDirecciones" runat="server"  />
+                        <asp:DropDownList
+    ID="ddlDirecciones"
+    runat="server"
+    CssClass="form-select" />
                     </div>
+
+    <asp:HyperLink
+    ID="lnkDireccion"
+    runat="server"
+    NavigateUrl="MiCuenta.aspx"
+    CssClass="btn btn-warning mt-2"
+    Text="➕ Agregar una dirección"
+    Visible="false" />
 
                     <p>Forma de pago:</p>
                     <asp:DropDownList ID="ddlPago" runat="server" />

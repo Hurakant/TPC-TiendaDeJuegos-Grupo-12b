@@ -34,6 +34,8 @@ namespace dominio
 
         public FormaDeEntrega FormaDeEntrega { get; set; }
 
+        public int? IDDireccion { get; set; }
+
         public Direccion Direccion { get; set; }
 
         public decimal Total => Detalle.Sum(x => x.Subtotal);
@@ -42,5 +44,16 @@ namespace dominio
             FormaDePago != null ? FormaDePago.Nombre : "";
 
         public decimal MontoTotal { get; set; }
+
+        public string DireccionTexto
+        {
+            get
+            {
+                if (FormaDeEntrega == FormaDeEntrega.EnvioADomicilio && Direccion != null)
+                    return Direccion.DireccionCompleta;
+
+                return "-";
+            }
+        }
     }
 }
