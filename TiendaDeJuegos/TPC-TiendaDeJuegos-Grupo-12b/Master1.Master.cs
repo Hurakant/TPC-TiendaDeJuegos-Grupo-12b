@@ -25,7 +25,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             {
 
                 
-                CargarCategorias();
+                //CargarCategorias();
                 ActualizarSesion();
                 ActualizarCarrito();
 
@@ -33,19 +33,19 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             
         }
 
-        public void CargarCategorias()
-        {
-            var categorias = new List<Categoria>
-    {
-        new Categoria { Nombre = "Shooters",     Url = "~/Cat/Shooters.aspx",    Icono = "bi bi-crosshair me-2" },
-        new Categoria { Nombre = "Action-RPG",   Url = "~/Cat/ActionRPG.aspx",   Icono = "bi bi-shield" },
-        new Categoria { Nombre = "Battle Royale",Url = "~/Cat/BattleRoyale.aspx",Icono = "bi bi-flag me-2" },
-        new Categoria { Nombre = "Sandbox",      Url = "~/Cat/Sandbox.aspx",     Icono = "bi bi-box me-2" },
-        new Categoria { Nombre = "MOBA",         Url = "~/Cat/MOBA.aspx",        Icono = "bi bi-people me-2" },
-    };
-            rptCategorias.DataSource = categorias;
-            rptCategorias.DataBind();
-        }
+    //    public void CargarCategorias()
+    //    {
+    //        var categorias = new List<Categoria>
+    //{
+    //    new Categoria { Nombre = "Shooters",     Url = "~/Cat/Shooters.aspx",    Icono = "bi bi-crosshair me-2" },
+    //    new Categoria { Nombre = "Action-RPG",   Url = "~/Cat/ActionRPG.aspx",   Icono = "bi bi-shield" },
+    //    new Categoria { Nombre = "Battle Royale",Url = "~/Cat/BattleRoyale.aspx",Icono = "bi bi-flag me-2" },
+    //    new Categoria { Nombre = "Sandbox",      Url = "~/Cat/Sandbox.aspx",     Icono = "bi bi-box me-2" },
+    //    new Categoria { Nombre = "MOBA",         Url = "~/Cat/MOBA.aspx",        Icono = "bi bi-people me-2" },
+    //};
+    //        rptCategorias.DataSource = categorias;
+    //        rptCategorias.DataBind();
+    //    }
 
         public void ActualizarSesion()
         {

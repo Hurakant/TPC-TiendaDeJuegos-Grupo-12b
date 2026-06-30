@@ -69,6 +69,15 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         protected global::System.Web.UI.WebControls.Repeater rptCategorias;
 
         /// <summary>
+        /// rptAccesibilidad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptAccesibilidad;
+
+        /// <summary>
         /// lblStock control.
         /// </summary>
         /// <remarks>

@@ -52,8 +52,21 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 else
                     imgProducto.ImageUrl = "https://via.placeholder.com/500x420/0d0d14/666666?text=Sin+Imagen";
 
+                // categorias
+                rptCategorias.DataSource = null; 
                 rptCategorias.DataSource = prod.Categoria;
-                rptCategorias.DataBind();
+                if (prod.Categoria != null && prod.Categoria.Count > 0)
+                {
+                   rptCategorias.DataBind();
+                }
+
+                // categorias de accesibilidad
+                rptAccesibilidad.DataSource = null;
+                rptAccesibilidad.DataSource = prod.Accesibilidad;
+                if (prod.Accesibilidad != null && prod.Accesibilidad.Count > 0)
+                {
+                    rptAccesibilidad.DataBind();
+                }
 
                 if (prod.Stock > 0)
                 {

@@ -34,13 +34,28 @@
                                 $<asp:Label ID="lblPrecio" runat="server" Text="0.00"></asp:Label>
                             </p>
 
-                            <div class="producto-cats">
-                                <asp:Repeater ID="rptCategorias" runat="server">
-                                    <ItemTemplate>
-                                        <span class="cat-capsula">Capsula de categoria</span>
-                                    </ItemTemplate>
-                                </asp:Repeater>
+                            <div class="producto-seccion">
+                                <div class="producto-desc-titulo">Categorías</div>
+                                <div class="producto-cats">
+                                    <asp:Repeater ID="rptCategorias" runat="server">
+                                        <ItemTemplate>
+                                            <span class="cat-capsula"><%# Eval("NombreCategoria") %></span>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </div>
                             </div>
+
+                            <div class="producto-seccion">
+                                <div class="producto-desc-titulo">Accesibilidad</div>
+                                <div class="producto-cats">
+                                    <asp:Repeater ID="rptAccesibilidad" runat="server">
+                                        <ItemTemplate>
+                                            <span class="cat-capsula"><%# Eval("NombreAccesibilidad") %></span>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </div>
+                            </div>
+
                             <asp:Label ID="lblStock" Text="Aqui va el stock" runat="server" CssClass="producto-stock" />
                             <!-- STOCK -->
                             <!-- Boton carrito -->
