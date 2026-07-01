@@ -296,5 +296,54 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        // Buscar un usuario por email (lo usa la recuperación de contraseña)
+        public Usuario ObtenerPorEmail(string email)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setConsulta("SELECT IDUsuario, Nombre, Apellido, Email, Telefono, Rol, Activo, CorreoVerificado FROM Usuario WHERE Email = @email");
+                datos.setParametro("@email", email);
+
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    Usuario usuario = new Usuario();
+                    usuario.IdUsuario = (int)datos.Lector["IDUsuario"];
+                    usuario.Nombre = datos.Lector["Nombre"].ToString();
+                    usuario.Apellido = datos.Lector["Apellido"].ToString();
+                    usuario.Email = datos.Lector["Email"].ToString();
+                    usuario.Telefono = datos.Lector["Telefono"].ToString();
+                    usuario.Rol = (Rol)datos.Lector["Rol"];
+                    usuario.Activo = (bool)datos.Lector["Activo"];
+                    usuario.CorreoVerificado = (bool)datos.Lector["CorreoVerificado"];
+                    return usuario;
+                }
+
+                return null;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        // Actualizar solo la contraseña (lo usa la recuperación de contraseña)
+        public void CambiarContrasena(int idUsuario, string nuevaContrasena)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setConsulta("UPDATE Usuario SET Contrasena = @pass WHERE IdUsuario = @id");
+                datos.setParametro("@pass", nuevaContrasena);
+                datos.setParametro("@id", idUsuario);
+                datos.ejecutarAccion();
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

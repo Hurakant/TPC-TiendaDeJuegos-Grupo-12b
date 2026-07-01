@@ -86,6 +86,7 @@
     <Content Include="MiCuenta.aspx" />
     <Content Include="MisPedidos.aspx" />
     <Content Include="PruebaMail.aspx" />
+    <Content Include="RecuperarPass.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="Resources\Logo\LogosfB.svg" />
     <Content Include="Resources\Logo\LogosfN.svg" />
@@ -215,6 +216,13 @@
     </Compile>
     <Compile Include="PruebaMail.aspx.designer.cs">
       <DependentUpon>PruebaMail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RecuperarPass.aspx.cs">
+      <DependentUpon>RecuperarPass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RecuperarPass.aspx.designer.cs">
+      <DependentUpon>RecuperarPass.aspx</DependentUpon>
     </Compile>
     <Compile Include="Registro.aspx.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
