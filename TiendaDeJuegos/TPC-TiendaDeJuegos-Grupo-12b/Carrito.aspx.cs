@@ -64,8 +64,8 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         {
             var carrito = ObtenerCarrito();
 
-            gvCarrito.DataSource = carrito.ItemCarrito;
-            gvCarrito.DataBind();
+            rptCarrito.DataSource = carrito.ItemCarrito;
+            rptCarrito.DataBind();
 
             lblTotal.Text = "$" + carritoNegocio.CalcularTotal().ToString("0.00");
         }
@@ -111,20 +111,20 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             lblMensaje.Text = "Producto agregado ";
         }
      */
-        protected void gvCarrito_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "Eliminar")
-            {
-                var carrito = ObtenerCarrito();
+        //protected void gvCarrito_RowCommand(object sender, GridViewCommandEventArgs e)
+        //{
+        //    if (e.CommandName == "Eliminar")
+        //    {
+        //        var carrito = ObtenerCarrito();
 
-                int idProducto = Convert.ToInt32(e.CommandArgument);
+        //        int idProducto = Convert.ToInt32(e.CommandArgument);
 
-                carrito.ItemCarrito.RemoveAll(x => x.IdProducto == idProducto);
+        //        carrito.ItemCarrito.RemoveAll(x => x.IdProducto == idProducto);
 
-                CargarCarrito();
-                lblMensaje.Text = "Producto eliminado ";
-            }
-        }
+        //        CargarCarrito();
+        //        lblMensaje.Text = "Producto eliminado ";
+        //    }
+        //}
 
         protected void btnComprar_Click(object sender, EventArgs e)
         {
@@ -249,6 +249,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
                 lblMensaje.Text = "Para recibir el pedido en su domicilio primero debe registrar una dirección.";
                 lblMensaje.ForeColor = System.Drawing.Color.Red;
+                lnkDireccion.Visible = true;
 
                 return;
             }
@@ -265,6 +266,21 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             lblMensaje.Text = "";
 
             lnkDireccion.Visible = false;
+        }
+
+        protected void rptCarrito_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "Eliminar")
+            {
+                var carrito = ObtenerCarrito();
+
+                int idProducto = Convert.ToInt32(e.CommandArgument);
+
+                carrito.ItemCarrito.RemoveAll(x => x.IdProducto == idProducto);
+
+                CargarCarrito();
+                lblMensaje.Text = "Producto eliminado";
+            }
         }
     }
 }

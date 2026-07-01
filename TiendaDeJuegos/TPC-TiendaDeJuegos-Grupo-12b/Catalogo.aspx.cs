@@ -165,5 +165,31 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
             return html;
         }
+
+        protected void rptProductos_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                HyperLink lnkEditar = (HyperLink)e.Item.FindControl("lnkEditarProducto");
+
+                if (Session["usuarioLogueado"] != null)
+                {
+                    Usuario user = (Usuario)Session["usuarioLogueado"];
+
+                    if (user.Rol == Rol.Admin || user.Rol == Rol.Vendedor)
+                    {
+                        lnkEditar.Visible = true;
+                    }
+                    else
+                    {
+                        lnkEditar.Visible = false;
+                    }
+                }
+                else
+                {
+                    lnkEditar.Visible = false;
+                }
+            }
+        }
     }
 }

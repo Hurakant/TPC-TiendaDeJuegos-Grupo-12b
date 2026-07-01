@@ -60,7 +60,7 @@
                     </asp:Label>
 
                     <!-- LISTADO DE PRODUCTOS -->
-                    <asp:Repeater ID="rptProductos" runat="server">
+                    <asp:Repeater ID="rptProductos" runat="server" OnItemDataBound="rptProductos_ItemDataBound">
                         <HeaderTemplate>
                             <div class="catalogo-lista">
                         </HeaderTemplate>
@@ -87,7 +87,7 @@
                                     <asp:HyperLink ID="lnkEditarProducto" runat="server"
                                         CssClass="game-row-link"
                                         NavigateUrl='<%# "AdminProductos.aspx?id=" + Eval("IdProducto") %>'>
-                                        EditarProducto
+                                        Editar Producto
                                     </asp:HyperLink>
                                     <asp:HyperLink ID="lnkVerDetalle" runat="server"
                                         CssClass="game-row-link"

@@ -2,6 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="Resources/StyleTPC/LoginStyle.css" rel="stylesheet" />
+    <link href="Resources/StyleTPC/CarritoStyle.css" rel="stylesheet" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -26,52 +27,124 @@
                 </div>
 
                 <!-- LISTA DE PRODUCTOS -->
-                <div class="mb-3">
+                <%--<div class="mb-3">
 
                     <asp:GridView ID="gvCarrito" runat="server"
-    CssClass="table table-dark table-hover"
-    AutoGenerateColumns="False"
-    OnRowCommand="gvCarrito_RowCommand">
+                        CssClass="carrito-grid"
+                        AutoGenerateColumns="False"
+                        OnRowCommand="gvCarrito_RowCommand">
 
-    <Columns>
+                        <Columns>
 
-        <asp:BoundField DataField="Nombre" HeaderText="Producto" />
-        <asp:BoundField DataField="Precio" HeaderText="Precio" />
-        <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
-        <asp:BoundField DataField="Subtotal" HeaderText="Subtotal" />
+                            <asp:BoundField DataField="Nombre" HeaderText="Producto" />
+                            <asp:BoundField DataField="Precio" HeaderText="Precio" />
+                            <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
+                            <asp:BoundField DataField="Subtotal" HeaderText="Subtotal" />
 
-        <asp:TemplateField HeaderText="Acción">
-            <ItemTemplate>
-                <asp:Button ID="btnEliminar"
-                    runat="server"
-                    Text="Eliminar"
-                    CssClass="btn btn-danger btn-sm"
-                    CommandName="Eliminar"
-                    CommandArgument='<%# Eval("IdProducto") %>' />
-            </ItemTemplate>
-        </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Acción">
+                                <ItemTemplate>
+                                    <asp:Button ID="btnEliminar"
+                                        runat="server"
+                                        Text="Eliminar"
+                                        CssClass="btn btn-danger btn-sm"
+                                        CommandName="Eliminar"
+                                        CommandArgument='<%# Eval("IdProducto") %>' />
+                                </ItemTemplate>
+                            </asp:TemplateField>
 
-    </Columns>
+                        </Columns>
 
-</asp:GridView>
+                    </asp:GridView>--%>
 
-                    
+                <asp:Label ID="lblMensaje" runat="server" CssClass="text-success" />
+
+                <asp:Repeater ID="rptCarrito" runat="server" OnItemCommand="rptCarrito_ItemCommand">
+                    <HeaderTemplate>
+
+                        <div class="carrito">
+
+                            <div class="carrito-header">
+                                <div>Producto</div>
+                                <div>Precio</div>
+                                <div>Cantidad</div>
+                                <div>Subtotal</div>
+                                <div></div>
+                            </div>
+                    </HeaderTemplate>
+
+                    <ItemTemplate>
+
+                        <div class="carrito-item">
+
+                            <div class="producto">
+                                <%# Eval("Nombre") %>
+                            </div>
+
+                            <div>
+                                $ <%# Eval("Precio") %>
+                            </div>
+
+                            <div>
+                                <%# Eval("Cantidad") %>
+                            </div>
+
+                            <div class="subtotal">
+                                $ <%# Eval("Subtotal", "{0:N2}") %>
+                            </div>
+
+                            <div>
+                                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btnEliminar" CommandName="Eliminar" CommandArgument='<%# Eval("IdProducto") %>' />
+                            </div>
+
+                        </div>
+
+                    </ItemTemplate>
+
+                    <FooterTemplate>
+                        </div>
+
+   
+                    </FooterTemplate>
+
+                </asp:Repeater>
+
+                <!-- TOTAL -->
+                <div class="carrito-total">
+
+                    <span class="titulo-total">TOTAL</span>
+
+                    <asp:Label
+                        ID="lblTotal"
+                        runat="server"
+                        CssClass="precio-total"
+                        Text="$0" />
 
                 </div>
 
-                <!-- TOTAL -->
-                <div class="mb-4 text-end">
+                <%--ddl--%>
+                <div Class="ddl-carrito">
 
-                    <asp:Label ID="lblTotalTexto" runat="server"
-                        Text="Total:"
-                        CssClass="login-label" />
+                <p class="titulo-opcion" >Forma de entrega:</p>
+                <asp:DropDownList ID="ddlEntrega" CssClass="select-carrito" runat="server" OnSelectedIndexChanged="ddlEntrega_SelectedIndexChanged" AutoPostBack="true" />
 
-                    <asp:Label ID="lblTotal" runat="server"
-                        Text="$0"
-                        CssClass="login-titulo" />
-                    <asp:Label ID="lblMensaje" runat="server" CssClass="text-success" />
-                    <asp:Label ID="lblDebug" runat="server" ForeColor="Red" />
+                <div id="divDirecciones" runat="server" visible="false">
+                    <p>Elija la direccion de envio:</p>
+                    <asp:DropDownList
+                        ID="ddlDirecciones"
+                        runat="server"
+                        CssClass="select-carrito"  />
+                </div>
 
+                <asp:HyperLink
+                    ID="lnkDireccion"
+                    runat="server"
+                    NavigateUrl="MiCuenta.aspx"
+                    CssClass="btn btn-warning mt-2"
+                    Text="➕ Agregar una dirección"
+                    Visible="false" />
+
+                <p class="titulo-opcion" >Forma de pago:</p>
+                <asp:DropDownList ID="ddlPago" runat="server" CssClass="select-carrito" />
                 </div>
 
                 <!-- BOTONES -->
@@ -88,29 +161,6 @@
                         Text="Vaciar carrito"
                         CssClass="btn btn-outline-danger"
                         OnClick="btnVaciar_Click" />
-
-                    <p>Forma de entrega:</p>
-                    <asp:DropDownList ID="ddlEntrega" runat="server" OnSelectedIndexChanged="ddlEntrega_SelectedIndexChanged" AutoPostBack="true"/>
-
-                    <div id="divDirecciones" runat="server" visible="false">
-                        <p>Elija la direccion de envio:</p>
-                        <asp:DropDownList
-    ID="ddlDirecciones"
-    runat="server"
-    CssClass="form-select" />
-                    </div>
-
-    <asp:HyperLink
-    ID="lnkDireccion"
-    runat="server"
-    NavigateUrl="MiCuenta.aspx"
-    CssClass="btn btn-warning mt-2"
-    Text="➕ Agregar una dirección"
-    Visible="false" />
-
-                    <p>Forma de pago:</p>
-                    <asp:DropDownList ID="ddlPago" runat="server" />
-
 
                 </div>
 

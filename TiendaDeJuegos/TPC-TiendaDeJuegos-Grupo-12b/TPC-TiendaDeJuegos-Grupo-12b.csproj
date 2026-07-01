@@ -94,6 +94,7 @@
     <Content Include="Resources\StyleTPC\AdminCategoriasStyle.css" />
     <Content Include="Resources\StyleTPC\AdminProductosStyle.css" />
     <Content Include="Resources\StyleTPC\AdminUsuariosStyles.css" />
+    <Content Include="Resources\StyleTPC\CarritoStyle.css" />
     <Content Include="Resources\StyleTPC\CatalogoStyle.css" />
     <Content Include="Resources\StyleTPC\DetallePedidoStyle.css" />
     <Content Include="Resources\StyleTPC\EditarUserAdminStyle.css" />
