@@ -88,6 +88,7 @@
     <Content Include="PruebaMail.aspx" />
     <Content Include="RecuperarPass.aspx" />
     <Content Include="Registro.aspx" />
+    <Content Include="ResetearPass.aspx" />
     <Content Include="Resources\Logo\LogosfB.svg" />
     <Content Include="Resources\Logo\LogosfN.svg" />
     <Content Include="Resources\StyleTPC\AdminAccesibilidadStyle.css" />
@@ -238,6 +239,13 @@
     </Compile>
     <Compile Include="Pedidos.aspx.designer.cs">
       <DependentUpon>Pedidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ResetearPass.aspx.cs">
+      <DependentUpon>ResetearPass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ResetearPass.aspx.designer.cs">
+      <DependentUpon>ResetearPass.aspx</DependentUpon>
     </Compile>
     <Compile Include="VerificacionCorreo.aspx.cs">
       <DependentUpon>VerificacionCorreo.aspx</DependentUpon>
