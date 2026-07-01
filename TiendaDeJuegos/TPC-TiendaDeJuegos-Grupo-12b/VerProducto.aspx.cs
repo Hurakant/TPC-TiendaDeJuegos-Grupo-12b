@@ -136,7 +136,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 CarritoNegocio carritoNegocio = new CarritoNegocio(carrito);
                 carritoNegocio.AgregarProducto(prod, 1);
 
-                lblMensaje.Text = "✔ Producto agregado al carrito";
+                lblMensaje.Text = " Producto agregado al carrito";
                 lblMensaje.ForeColor = System.Drawing.Color.Green;
             }
             catch (Exception ex)

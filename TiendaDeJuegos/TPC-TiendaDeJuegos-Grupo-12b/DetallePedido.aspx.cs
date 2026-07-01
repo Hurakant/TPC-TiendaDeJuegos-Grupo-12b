@@ -87,23 +87,26 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
 
             if (user.Rol == Rol.Vendedor)
             {
+                // El vendedor no puede marcar un pedido como Pagado o Cancelado
+                ddlEstado.Items.Remove(ddlEstado.Items.FindByValue("2"));
+                ddlEstado.Items.Remove(ddlEstado.Items.FindByValue("6"));
+
                 ddlEstado.Enabled = true;
 
-                if (ddlEntrega != null)
-                    ddlEntrega.Enabled = false;
-
-                if (ddlPago != null)
-                    ddlPago.Enabled = false;
+                // Solo el administrador puede modificar estos datos
+                ddlEntrega.Enabled = false;
+                ddlPago.Enabled = false;
+                lblInfoPermisos.Visible = true;
+                lblInfoPermisos.Text =
+          
+           "La forma de pago y entrega solo pueden ser modificadas por un administrador.";
             }
             else if (user.Rol == Rol.Admin)
             {
                 ddlEstado.Enabled = true;
-
-                if (ddlEntrega != null)
-                    ddlEntrega.Enabled = true;
-
-                if (ddlPago != null)
-                    ddlPago.Enabled = true;
+                ddlEntrega.Enabled = true;
+                ddlPago.Enabled = true;
+                lblInfoPermisos.Visible = false;
             }
         }
 

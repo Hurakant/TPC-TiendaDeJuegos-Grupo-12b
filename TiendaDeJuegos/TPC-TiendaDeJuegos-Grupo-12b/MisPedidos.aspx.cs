@@ -57,10 +57,10 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             {
                 var pedido = (Pedido)e.Row.DataItem;
 
-                // ocultar dirección si no es envío a domicilio
+                
                 if (pedido.FormaDeEntrega != FormaDeEntrega.EnvioADomicilio)
                 {
-                    e.Row.Cells[6].Text = ""; // columna Dirección
+                    e.Row.Cells[6].Text = ""; 
                 }
             }
         }
@@ -96,4 +96,4 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
     Session["Carrito"] = carrito;
 
     Response.Redirect("Carrito.aspx");
-}  Metogo agregar al carrito que debe ir en catalogo */
+}  Metogo agregar al carrito que debe ir en catalogo  opcional */

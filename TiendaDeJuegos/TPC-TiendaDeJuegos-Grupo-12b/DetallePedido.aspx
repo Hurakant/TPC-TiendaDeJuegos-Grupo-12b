@@ -10,7 +10,7 @@
 
 <div class="detalle-wrapper">
 
-    <div class="container detalle-card">
+    <div class="detalle-card">
 
        
         <div class="detalle-header d-flex justify-content-between align-items-center">
@@ -41,7 +41,7 @@
         </div>
 
         
-        <div class="info-grid">
+        <div class="info-grid mt-2">
 
             <div class="info-box">
                 <strong>Fecha</strong>
@@ -53,15 +53,11 @@
                 <asp:Label ID="lblEntrega" runat="server" />
             </div>
 
-            <div class="info-box">
-                <strong>Pago</strong>
-                <asp:Label ID="lblPago" runat="server" />
-            </div>
 
         </div>
 
         
-        <div class="info-grid mt-3">
+        <div class="info-grid mt-2">
 
             <div class="info-box">
                 <strong>Forma de entrega</strong>
@@ -73,8 +69,16 @@
                 <asp:DropDownList ID="ddlPago" runat="server" CssClass="form-select" />
             </div>
 
+      
+
         </div>
 
+       <div class="mt-2">
+    <asp:Label ID="lblInfoPermisos"
+        runat="server"
+        CssClass="alert alert-info d-block"
+        Visible="false" />
+</div>
        
         <asp:GridView ID="gvDetalle" runat="server"
             AutoGenerateColumns="False"

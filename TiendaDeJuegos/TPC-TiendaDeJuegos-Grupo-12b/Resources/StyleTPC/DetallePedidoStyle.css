@@ -9,15 +9,18 @@
     color: #ffffff;
 }
 
-/* CARD PRINCIPAL */
 .detalle-card {
     background: #1e1e2f;
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
 }
 
-/* HEADER */
+
+
 .detalle-header {
     display: flex;
     justify-content: space-between;
@@ -32,7 +35,7 @@
         font-size: 22px;
     }
 
-/* ESTADO */
+
 .badge-estado {
     background: #ffc107;
     color: #000;
@@ -42,12 +45,14 @@
     font-weight: bold;
 }
 
-/* INFO GRID */
-.info-grid {
+
+body .detalle-card .info-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin: 20px auto;
+    max-width: 700px;
+    background: red !important;
 }
 
 .info-box {
@@ -63,7 +68,7 @@
         color: #aaa;
     }
 
-/* TABLA DETALLE */
+
 .detalle-table {
     width: 100%;
     background: #151522;
@@ -85,7 +90,7 @@
         color: #ddd;
     }
 
-/* TOTAL */
+
 .total-box {
     text-align: right;
     margin-top: 15px;
@@ -94,7 +99,7 @@
     color: #00d084;
 }
 
-/* BOTÓN VOLVER */
+
 .volver-link {
     display: inline-block;
     margin-top: 20px;
@@ -102,7 +107,8 @@
     text-decoration: none;
     transition: 0.2s;
 }
-
-    .volver-link:hover {
+.volver-link:hover {
         color: #fff;
     }
+
+    

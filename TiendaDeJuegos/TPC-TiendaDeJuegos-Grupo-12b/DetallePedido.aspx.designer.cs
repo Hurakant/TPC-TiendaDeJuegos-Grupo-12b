@@ -69,15 +69,6 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         protected global::System.Web.UI.WebControls.Label lblEntrega;
 
         /// <summary>
-        /// lblPago control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPago;
-
-        /// <summary>
         /// ddlEntrega control.
         /// </summary>
         /// <remarks>
@@ -94,6 +85,15 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlPago;
+
+        /// <summary>
+        /// lblInfoPermisos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblInfoPermisos;
 
         /// <summary>
         /// gvDetalle control.

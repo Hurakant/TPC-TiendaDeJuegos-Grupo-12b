@@ -92,7 +92,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             carrito.ItemCarrito.Clear(); 
 
             CargarCarrito();
-            lblMensaje.Text = "Carrito vaciado 🧹";
+            lblMensaje.Text = "Carrito vaciado ";
         }
 
      /*   protected void btnAgregarTest_Click(object sender, EventArgs e)
@@ -108,7 +108,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             });
 
             CargarCarrito();
-            lblMensaje.Text = "Producto agregado ✔";
+            lblMensaje.Text = "Producto agregado ";
         }
      */
         protected void gvCarrito_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -122,7 +122,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 carrito.ItemCarrito.RemoveAll(x => x.IdProducto == idProducto);
 
                 CargarCarrito();
-                lblMensaje.Text = "Producto eliminado ✔";
+                lblMensaje.Text = "Producto eliminado ";
             }
         }
 
@@ -176,12 +176,12 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 FormaDePago = pago,
                 FormaDeEntrega = formaEntrega,
                 Detalle = carrito.ItemCarrito.ToList(),
-                IDDireccion = idDireccion   // 
+                IDDireccion = idDireccion   
             };
 
             PedidoNegocio negocio = new PedidoNegocio();
 
-            // Crear pedido en la base
+         
             int idPedido = negocio.CrearPedido(pedido);
 
             if (idPedido == 0)
@@ -191,17 +191,17 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 return;
             }
 
-            // Agregar detalle
+          
             foreach (CarritoItem item in carrito.ItemCarrito)
             {
                 negocio.AgregarDetalle(idPedido, item);
             }
 
-            // Vaciar carrito
+            
             carrito.ItemCarrito.Clear();
             CargarCarrito();
 
-            lblMensaje.Text = "✔ Pedido creado correctamente. ID: " + idPedido;
+            lblMensaje.Text = " Pedido creado correctamente. ID: " + idPedido;
             lblMensaje.ForeColor = System.Drawing.Color.Green;
         }
 
