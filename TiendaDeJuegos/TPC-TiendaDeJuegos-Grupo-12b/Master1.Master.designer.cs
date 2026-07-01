@@ -87,6 +87,15 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         protected global::System.Web.UI.WebControls.HyperLink lnkInicio;
 
         /// <summary>
+        /// rptCategorias control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptCategorias;
+
+        /// <summary>
         /// lnkOfertas control.
         /// </summary>
         /// <remarks>

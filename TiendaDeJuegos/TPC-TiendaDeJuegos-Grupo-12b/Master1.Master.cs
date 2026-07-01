@@ -24,28 +24,26 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             if (!IsPostBack)
             {
 
-                
-                //CargarCategorias();
+
+                CargarCategorias();
                 ActualizarSesion();
                 ActualizarCarrito();
 
             }
-            
+
         }
 
-    //    public void CargarCategorias()
-    //    {
-    //        var categorias = new List<Categoria>
-    //{
-    //    new Categoria { Nombre = "Shooters",     Url = "~/Cat/Shooters.aspx",    Icono = "bi bi-crosshair me-2" },
-    //    new Categoria { Nombre = "Action-RPG",   Url = "~/Cat/ActionRPG.aspx",   Icono = "bi bi-shield" },
-    //    new Categoria { Nombre = "Battle Royale",Url = "~/Cat/BattleRoyale.aspx",Icono = "bi bi-flag me-2" },
-    //    new Categoria { Nombre = "Sandbox",      Url = "~/Cat/Sandbox.aspx",     Icono = "bi bi-box me-2" },
-    //    new Categoria { Nombre = "MOBA",         Url = "~/Cat/MOBA.aspx",        Icono = "bi bi-people me-2" },
-    //};
-    //        rptCategorias.DataSource = categorias;
-    //        rptCategorias.DataBind();
-    //    }
+        public void CargarCategorias()
+        {
+            var categorias = new List<Categoria>
+    {
+        new Categoria { Nombre = "Shooter",     Url = "Catalogo.aspx?idDeCategoria=3",    Icono = "bi bi-crosshair me-2" },
+        new Categoria { Nombre = "RPG",         Url = "Catalogo.aspx?idDeCategoria=1",    Icono = "bi bi-shield" },
+        new Categoria { Nombre = "Acción",      Url = "Catalogo.aspx?idDeCategoria=2",    Icono = "bi bi-flag me-2" },
+    };
+            rptCategorias.DataSource = categorias;
+            rptCategorias.DataBind();
+        }
 
         public void ActualizarSesion()
         {
@@ -70,7 +68,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             {
                 cantidad = carrito.ItemCarrito.Sum(x => x.Cantidad);
             }
-            // Caso 2: carrito por usuario (tu implementación actual)
+            // Caso 2: carrito por usuario
             else if (Session["usuarioLogueado"] != null)
             {
                 Usuario user = (Usuario)Session["usuarioLogueado"];
@@ -97,7 +95,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             {
                 Response.Redirect("Login.aspx");
             }
-                
+
         }
 
         protected void lnkBtnCarrito_Click(object sender, EventArgs e)
@@ -112,7 +110,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 Response.Redirect($"~/Busqueda.aspx?q={Server.UrlEncode(termino)}");
         }
 
-       
+
 
     }
 }

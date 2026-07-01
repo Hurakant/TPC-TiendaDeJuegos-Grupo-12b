@@ -56,7 +56,7 @@
                     </li>
 
                     <%-- Dropdown Categorías --%>
-                <%--    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-controller me-1"></i>Categorias
@@ -86,7 +86,7 @@
                                 </ul>
                             </FooterTemplate>
                         </asp:Repeater>
-                    </li>--%>
+                    </li>
 
                     <li class="nav-item">
                         <asp:HyperLink ID="lnkOfertas" runat="server" NavigateUrl="~/Catalogo.aspx"

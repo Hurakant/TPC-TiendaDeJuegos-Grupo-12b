@@ -16,8 +16,21 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             if (!IsPostBack)
             {
                 CargarCategorias();
+                AplicarFiltroDesdeQueryString();
                 CargarProductos();
             }
+        }
+
+        private void AplicarFiltroDesdeQueryString()
+        {
+            string idParam = Request.QueryString["idDeCategoria"];
+            if (string.IsNullOrEmpty(idParam)) return;
+
+            if (!int.TryParse(idParam, out int idCategoria)) return;
+
+            ListItem item = chkCategorias.Items.FindByValue(idCategoria.ToString());
+            if (item != null)
+                item.Selected = true;
         }
 
         private void CargarCategorias()

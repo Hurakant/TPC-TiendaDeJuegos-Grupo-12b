@@ -9,13 +9,13 @@
     <asp:Label Text="nombre" runat="server" ID="lblBienvenida" Visible="false" CssClass="home-bienvenida" />
 
 
-  <%--admin--%>
+    <%--admin--%>
 
-    <div  id="divAdmin" runat="server" visible="false">
+    <div id="divAdmin" runat="server" visible="false">
 
         <div class="container mt-4">
 
-            <div Class="home-panel">
+            <div class="home-panel">
 
                 <h4 class="panel-title">Gestión Admin</h4>
 
@@ -108,93 +108,263 @@
 
             </div>
             <%-- Termina carrusel --%>
-
+            <%-- se ve largo pero no es mucho --%>
             <%-- RPG --%>
-            <h2 class="home-section-title">RPG</h2>
+            <div class="container mt-4">
 
-            <div class="home-games-grid">
-                <asp:Repeater ID="rptRpg" runat="server">
-                    <ItemTemplate>
-                        <div class="game-card">
-                            <img src='<%# Eval("ImagenUrl") %>' class="card-img" alt='<%# Eval("Nombre") %>' />
-                            <div class="card-body">
-                                <h5>
-                                    <asp:HyperLink ID="lnkVerDetalleCarousel" runat="server"
-                                        CssClass="card-title-link"
-                                        NavigateUrl='<%# "VerProducto.aspx?id=" + Eval("IdProducto") %>'>
-                                                    <%# Eval("Nombre") %>
-                                    </asp:HyperLink>
-                                </h5>
-                                <p class="card-price">$ <%# Eval("Precio", "{0:N2}") %></p>
-                            </div>
+                <h2 class="home-section-title">RPG</h2>
+
+                <div class="category-carousel-wrapper">
+
+                    <div id="carouselRpg" class="carousel slide" data-bs-ride="false">
+
+                        <div class="carousel-inner">
+
+                            <asp:Repeater ID="rptRpg"
+                                runat="server"
+                                OnItemDataBound="rptCategoria_ItemDataBound">
+
+                                <ItemTemplate>
+
+                                    <div id="slide"
+                                        runat="server"
+                                        class="carousel-item">
+
+                                        <div class="d-flex justify-content-center gap-3">
+
+                                            <asp:Repeater
+                                                ID="rptCards"
+                                                runat="server">
+
+                                                <ItemTemplate>
+
+                                                    <div class="game-card">
+
+                                                        <img class="card-img"
+                                                            src="<%# Eval("ImagenUrl") %>" />
+
+                                                        <div class="card-body">
+
+                                                            <asp:HyperLink ID="lnkVerDetalleCarousel" runat="server"
+                                                                CssClass="card-title-link"
+                                                                NavigateUrl='<%# "VerProducto.aspx?id=" + Eval("IdProducto") %>'>
+                                                                            <%# Eval("Nombre") %>
+                                                            </asp:HyperLink>
+
+                                                            <p class="card-price">
+                                                                $ <%# Eval("Precio","{0:N0}") %>
+                                                            </p>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </ItemTemplate>
+
+                                            </asp:Repeater>
+
+                                        </div>
+
+                                    </div>
+
+                                </ItemTemplate>
+
+                            </asp:Repeater>
+
                         </div>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </div>
 
-            <%-- ACCION --%>
-            <h2 class="home-section-title">Acción</h2>
+                        <button class="carousel-control-prev"
+                            type="button"
+                            data-bs-target="#carouselRpg"
+                            data-bs-slide="prev">
 
-            <div class="home-games-grid">
-                <asp:Repeater ID="rptAccion" runat="server">
-                    <ItemTemplate>
-                        <div class="game-card">
-                            <img src='<%# Eval("ImagenUrl") %>' class="card-img" alt='<%# Eval("Nombre") %>' />
-                            <div class="card-body">
-                                <h5>
-                                    <asp:HyperLink ID="lnkVerDetalleCarousel" runat="server"
-                                        CssClass="card-title-link"
-                                        NavigateUrl='<%# "VerProducto.aspx?id=" + Eval("IdProducto") %>'>
-                                                    <%# Eval("Nombre") %>
-                                    </asp:HyperLink>
-                                </h5>
-                                <p class="card-price">$ <%# Eval("Precio", "{0:N2}") %></p>
-                            </div>
+                            <span class="carousel-control-prev-icon"></span>
+
+                        </button>
+
+                        <button class="carousel-control-next"
+                            type="button"
+                            data-bs-target="#carouselRpg"
+                            data-bs-slide="next">
+
+                            <span class="carousel-control-next-icon"></span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <%-- ACCION --%>
+                <h2 class="home-section-title">Acción</h2>
+
+                <div class="category-carousel-wrapper">
+
+                    <div id="carouselAccion" class="carousel slide" data-bs-ride="false">
+
+                        <div class="carousel-inner">
+
+                            <asp:Repeater ID="rptAccion"
+                                runat="server"
+                                OnItemDataBound="rptCategoria_ItemDataBound">
+
+                                <ItemTemplate>
+
+                                    <div id="slide"
+                                        runat="server"
+                                        class="carousel-item">
+
+                                        <div class="d-flex justify-content-center gap-3">
+
+                                            <asp:Repeater
+                                                ID="rptCards"
+                                                runat="server">
+
+                                                <ItemTemplate>
+
+                                                    <div class="game-card">
+
+                                                        <img class="card-img"
+                                                            src="<%# Eval("ImagenUrl") %>" />
+
+                                                        <div class="card-body">
+
+                                                            <asp:HyperLink ID="lnkVerDetalleCarousel" runat="server"
+                                                                CssClass="card-title-link"
+                                                                NavigateUrl='<%# "VerProducto.aspx?id=" + Eval("IdProducto") %>'>
+                                                                            <%# Eval("Nombre") %>
+                                                            </asp:HyperLink>
+
+                                                            <p class="card-price">
+                                                                $ <%# Eval("Precio","{0:N0}") %>
+                                                            </p>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </ItemTemplate>
+
+                                            </asp:Repeater>
+
+                                        </div>
+
+                                    </div>
+
+                                </ItemTemplate>
+
+                            </asp:Repeater>
+
                         </div>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </div>
 
-            <%-- SHOOTER --%>
-            <h2 class="home-section-title">Shooter</h2>
+                        <button class="carousel-control-prev"
+                            type="button"
+                            data-bs-target="#carouselAccion"
+                            data-bs-slide="prev">
 
-            <div class="home-games-grid">
-                <asp:Repeater ID="rptShooter" runat="server">
-                    <ItemTemplate>
-                        <div class="game-card">
-                            <img src='<%# Eval("ImagenUrl") %>' class="card-img" alt='<%# Eval("Nombre") %>' />
-                            <div class="card-body">
-                                <h5>
-                                    <asp:HyperLink ID="lnkVerDetalleCarousel" runat="server"
-                                        CssClass="card-title-link"
-                                        NavigateUrl='<%# "VerProducto.aspx?id=" + Eval("IdProducto") %>'>
-                                                    <%# Eval("Nombre") %>
-                                    </asp:HyperLink>
-                                </h5>
-                                <p class="card-price">$ <%# Eval("Precio", "{0:N2}") %></p>
-                            </div>
+                            <span class="carousel-control-prev-icon"></span>
+
+                        </button>
+
+                        <button class="carousel-control-next"
+                            type="button"
+                            data-bs-target="#carouselAccion"
+                            data-bs-slide="next">
+
+                            <span class="carousel-control-next-icon"></span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <%-- SHOOTER --%>
+                <h2 class="home-section-title">Shooter</h2>
+
+                <div class="category-carousel-wrapper">
+
+                    <div id="carouselShooter" class="carousel slide" data-bs-ride="false">
+
+                        <div class="carousel-inner">
+
+                            <asp:Repeater ID="rptShooter"
+                                runat="server"
+                                OnItemDataBound="rptCategoria_ItemDataBound">
+
+                                <ItemTemplate>
+
+                                    <div id="slide"
+                                        runat="server"
+                                        class="carousel-item">
+
+                                        <div class="d-flex justify-content-center gap-3">
+
+                                            <asp:Repeater
+                                                ID="rptCards"
+                                                runat="server">
+
+                                                <ItemTemplate>
+
+                                                    <div class="game-card">
+
+                                                        <img class="card-img"
+                                                            src="<%# Eval("ImagenUrl") %>" />
+
+                                                        <div class="card-body">
+
+                                                            <asp:HyperLink ID="lnkVerDetalleCarousel" runat="server"
+                                                                CssClass="card-title-link"
+                                                                NavigateUrl='<%# "VerProducto.aspx?id=" + Eval("IdProducto") %>'>
+                                                                            <%# Eval("Nombre") %>
+                                                            </asp:HyperLink>
+
+                                                            <p class="card-price">
+                                                                $ <%# Eval("Precio","{0:N0}") %>
+                                                            </p>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </ItemTemplate>
+
+                                            </asp:Repeater>
+
+                                        </div>
+
+                                    </div>
+
+                                </ItemTemplate>
+
+                            </asp:Repeater>
+
                         </div>
-                    </ItemTemplate>
-                </asp:Repeater>
+
+                        <button class="carousel-control-prev"
+                            type="button"
+                            data-bs-target="#carouselShooter"
+                            data-bs-slide="prev">
+
+                            <span class="carousel-control-prev-icon"></span>
+
+                        </button>
+
+                        <button class="carousel-control-next"
+                            type="button"
+                            data-bs-target="#carouselShooter"
+                            data-bs-slide="next">
+
+                            <span class="carousel-control-next-icon"></span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
             </div>
         </div>
-        <%-- Termina seccion de juegos --%>
-
-        <div class="home-test-box">
-            <h3 class="test-title">Prueba de Base de Datos</h3>
-
-            <asp:Button ID="btnProbar" runat="server"
-                Text="Obtener Juegos"
-                OnClick="btnProbar_Click"
-                CssClass="btn-test" />
-
-            <asp:TextBox ID="txtResultado"
-                runat="server"
-                TextMode="MultiLine"
-                Rows="5"
-                CssClass="test-result">
-            </asp:TextBox>
-        </div>
-
+        <%-- Termina seccion de juegos --%> 
     </div>
 </asp:Content>

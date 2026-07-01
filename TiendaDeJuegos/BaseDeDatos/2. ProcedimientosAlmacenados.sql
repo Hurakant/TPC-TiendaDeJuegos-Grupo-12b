@@ -83,11 +83,12 @@ BEGIN
         AND (@TextoLike IS NULL OR P.Nombre LIKE @TextoLike)
         AND (
             @IdsCategorias IS NULL OR LTRIM(RTRIM(@IdsCategorias)) = ''
-            OR EXISTS (
-                SELECT 1 FROM ProductoCategoria PC
+            OR (
+                SELECT COUNT(DISTINCT PC.IDCategoria)
+                FROM ProductoCategoria PC
                 WHERE PC.IDProducto = P.IDProducto
                   AND PC.IDCategoria IN (SELECT CAST(value AS INT) FROM STRING_SPLIT(@IdsCategorias, ','))
-            )
+            ) = (SELECT COUNT(value) FROM STRING_SPLIT(@IdsCategorias, ','))
         );
  
     SELECT * FROM #ProductosFiltrados

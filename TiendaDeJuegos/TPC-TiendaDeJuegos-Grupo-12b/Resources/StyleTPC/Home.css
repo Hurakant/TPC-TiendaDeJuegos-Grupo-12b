@@ -1,5 +1,4 @@
-﻿
-/* ---- VARIABLES ---- */
+﻿/* ---- VARIABLES ---- */
 :root {
     --primary-pink: #e91e63;
     --primary-purple: #9c27b0;
@@ -302,4 +301,42 @@
     .test-result:focus {
         border-color: var(--primary-pink);
         box-shadow: 0 0 10px rgba(233, 30, 99, .25);
+    }
+/* carousel por categoria */
+.category-carousel-wrapper {
+    position: relative;
+    padding: 0 60px;
+}
+
+    .category-carousel-wrapper .carousel-control-prev,
+    .category-carousel-wrapper .carousel-control-next {
+        width: 44px;
+        height: 44px;
+        background: rgba(18, 18, 26, .85);
+        border: 1px solid var(--border-subtle);
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 1;
+        transition: background .3s, box-shadow .3s;
+    }
+
+    .category-carousel-wrapper .carousel-control-prev {
+        left: -52px;
+    }
+
+    .category-carousel-wrapper .carousel-control-next {
+        right: -52px;
+    }
+
+        .category-carousel-wrapper .carousel-control-prev:hover,
+        .category-carousel-wrapper .carousel-control-next:hover {
+            background: var(--primary-pink);
+            box-shadow: 0 0 16px rgba(233, 30, 99, .45);
+        }
+
+    .category-carousel-wrapper .carousel-control-prev-icon,
+    .category-carousel-wrapper .carousel-control-next-icon {
+        width: 18px;
+        height: 18px;
     }
