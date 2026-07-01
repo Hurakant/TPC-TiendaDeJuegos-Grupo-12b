@@ -138,6 +138,21 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 return;
             }
 
+            //validar stock
+
+            ProductoNegocio prodNegocio = new ProductoNegocio();
+
+            foreach (CarritoItem item in carrito.ItemCarrito)
+            {
+                Producto prodActual = prodNegocio.listarPorId(item.IdProducto);
+
+                if (!prodActual.EsDigital && prodActual.Stock < item.Cantidad)
+                {
+                    lblMensaje.Text = "Stock insuficiente para " + item.Nombre + ". Disponible: "+ prodActual.Stock;
+                    return;
+                }
+            }
+
             // Forma de pago
             FormaDePago pago = ((List<FormaDePago>)Session["FormasDePago"])
                 .FirstOrDefault(x => x.IdFormaDePago == Convert.ToInt32(ddlPago.SelectedValue));
@@ -195,6 +210,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             foreach (CarritoItem item in carrito.ItemCarrito)
             {
                 negocio.AgregarDetalle(idPedido, item);
+                prodNegocio.actualizarStock(item.IdProducto, -item.Cantidad);
             }
 
             

@@ -107,10 +107,14 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         {
             string termino = txtBuscar.Text.Trim();
             if (!string.IsNullOrEmpty(termino))
-                Response.Redirect($"~/Busqueda.aspx?q={Server.UrlEncode(termino)}");
+            {
+                Response.Redirect($"~/Catalogo.aspx?Buscar={Server.UrlEncode(termino)}");
+            }
+            else
+            {
+                Response.Redirect("~/Catalogo.aspx");
+            }
+
         }
-
-
-
     }
 }

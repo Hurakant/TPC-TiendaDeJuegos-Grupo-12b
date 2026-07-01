@@ -68,7 +68,12 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                     rptAccesibilidad.DataBind();
                 }
 
-                if (prod.Stock > 0)
+                if (prod.EsDigital)
+                {
+                    lblStock.Text = "Producto digital: entrega inmediata!";
+                    btnAgregarCarrito.Enabled = true;
+                }
+                else if (prod.Stock > 0)
                 {
                     lblStock.Text = "Stock disponible: " + prod.Stock + " unidades";
                     btnAgregarCarrito.Enabled = true;

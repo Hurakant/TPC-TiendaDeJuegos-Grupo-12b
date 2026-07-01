@@ -17,7 +17,17 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             {
                 CargarCategorias();
                 AplicarFiltroDesdeQueryString();
+                BusquedaDelHome();
                 CargarProductos();
+            }
+        }
+
+        private void BusquedaDelHome()
+        {
+            string buscar = Request.QueryString["Buscar"];
+            if (!string.IsNullOrEmpty(buscar))
+            {
+                txtBuscar.Text = buscar;
             }
         }
 
