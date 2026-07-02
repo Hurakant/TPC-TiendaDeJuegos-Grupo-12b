@@ -32,7 +32,8 @@
     <asp:GridView ID="gvPedidos" runat="server"
     CssClass="table table-dark table-hover"
     AutoGenerateColumns="False"
-    OnRowDataBound="gvPedidos_RowDataBound">
+    OnRowDataBound="gvPedidos_RowDataBound"
+    OnRowCommand="gvPedidos_RowCommand">
 
     <Columns>
 
@@ -43,6 +44,17 @@
         <asp:BoundField DataField="FormaDePagoTexto" HeaderText="Pago" />
         <asp:BoundField DataField="MontoTotal" HeaderText="Total" />
         <asp:BoundField DataField="DireccionTexto" HeaderText="Dirección" />
+
+        <asp:TemplateField HeaderText="Acciones">
+            <ItemStyle HorizontalAlign="Center" />
+            <ItemTemplate>
+                <asp:Button ID="btnDetalle" runat="server"
+                    Text="Ver detalle"
+                    CommandName="VerDetalle"
+                    CommandArgument='<%# Eval("IdPedido") %>'
+                    CssClass="btn btn-sm btn-primary" />
+            </ItemTemplate>
+        </asp:TemplateField>
 
     </Columns>
 

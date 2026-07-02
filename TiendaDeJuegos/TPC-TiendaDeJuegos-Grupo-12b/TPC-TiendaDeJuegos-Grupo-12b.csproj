@@ -78,6 +78,7 @@
     <Content Include="AdminUsuarios.aspx" />
     <Content Include="Carrito.aspx" />
     <Content Include="Catalogo.aspx" />
+    <Content Include="DetalleMiPedido.aspx" />
     <Content Include="DetallePedido.aspx" />
     <Content Include="EditarUsuarioAdmin.aspx" />
     <Content Include="Error.aspx" />
@@ -154,6 +155,13 @@
     </Compile>
     <Compile Include="Catalogo.aspx.designer.cs">
       <DependentUpon>Catalogo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleMiPedido.aspx.cs">
+      <DependentUpon>DetalleMiPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetalleMiPedido.aspx.designer.cs">
+      <DependentUpon>DetalleMiPedido.aspx</DependentUpon>
     </Compile>
     <Compile Include="DetallePedido.aspx.cs">
       <DependentUpon>DetallePedido.aspx</DependentUpon>

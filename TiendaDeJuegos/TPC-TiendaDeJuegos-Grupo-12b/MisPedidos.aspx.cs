@@ -43,12 +43,13 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             gvPedidos.DataBind();
         }
 
-        protected void btnDetalle_Click(object sender, EventArgs e)
+        protected void gvPedidos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            Button btn = (Button)sender;
-            int idPedido = Convert.ToInt32(btn.CommandArgument);
-
-            Response.Redirect("DetallePedido.aspx?id=" + idPedido);
+            if (e.CommandName == "VerDetalle")
+            {
+                int idPedido = Convert.ToInt32(e.CommandArgument);
+                Response.Redirect("DetalleMiPedido.aspx?id=" + idPedido);
+            }
         }
 
         protected void gvPedidos_RowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
@@ -57,10 +58,10 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             {
                 var pedido = (Pedido)e.Row.DataItem;
 
-                
+
                 if (pedido.FormaDeEntrega != FormaDeEntrega.EnvioADomicilio)
                 {
-                    e.Row.Cells[6].Text = ""; 
+                    e.Row.Cells[6].Text = "";
                 }
             }
         }
