@@ -1,4 +1,5 @@
 ﻿using dominio;
+using Dominio;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             if (!IsPostBack)
             {
                 CargarCategorias();
+                CargarAccesibilidad();
                 AplicarFiltroDesdeQueryString();
                 BusquedaDelHome();
                 CargarProductos();
@@ -42,24 +44,53 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             if (item != null)
                 item.Selected = true;
         }
-
-        private void CargarCategorias()
+        //Cargar checkbox categorias con buscador
+        private void CargarCategorias(string filtro = "")
         {
             try
             {
+                List<string> seleccionadasPrevias = new List<string>();
+                foreach (ListItem item in chkCategorias.Items)
+                {
+                    if (item.Selected)
+                        seleccionadasPrevias.Add(item.Value);
+                }
+
                 CategoriaNegocio negocio = new CategoriaNegocio();
-                List<Categoria> categorias = negocio.listar();
+                List<Categoria> categorias = negocio.listar(filtro);
 
                 chkCategorias.Items.Clear();
                 foreach (Categoria cat in categorias)
                 {
                     ListItem item = new ListItem(cat.NombreCategoria, cat.IdCategoria.ToString());
+                    item.Selected = seleccionadasPrevias.Contains(item.Value);
                     chkCategorias.Items.Add(item);
                 }
             }
             catch (Exception ex)
             {
                 lblResultados.Text = "Error al cargar categorías: " + ex.Message;
+            }
+        }
+
+        //Carga el checkbox list de accesibilidad (no tiene buscador)
+        private void CargarAccesibilidad()
+        {
+            try
+            {
+                AccesibilidadNegocio negocio = new AccesibilidadNegocio();
+                List<Accesibilidad> accesibilidades = negocio.listar();
+
+                chkAccesibilidad.Items.Clear();
+                foreach (Accesibilidad acc in accesibilidades)
+                {
+                    ListItem item = new ListItem(acc.NombreAccesibilidad, acc.IdAccesibilidad.ToString());
+                    chkAccesibilidad.Items.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                lblResultados.Text = "Error al cargar accesibilidad: " + ex.Message;
             }
         }
 
@@ -70,6 +101,7 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                 string texto = txtBuscar != null ? txtBuscar.Text.Trim() : "";
                 int orden = ddlOrden != null ? int.Parse(ddlOrden.SelectedValue) : 0;
 
+                //ids de categorias tildados
                 List<int> idsCategorias = new List<int>();
                 foreach (ListItem item in chkCategorias.Items)
                 {
@@ -77,8 +109,16 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
                         idsCategorias.Add(int.Parse(item.Value));
                 }
 
+                //ids de accesibilidad tildados
+                List<int> idsAccesibilidades = new List<int>();
+                foreach (ListItem item in chkAccesibilidad.Items)
+                {
+                    if (item.Selected)
+                        idsAccesibilidades.Add(int.Parse(item.Value));
+                }
+
                 ProductoNegocio negocio = new ProductoNegocio();
-                List<Producto> productos = negocio.listarFiltrado(texto, idsCategorias, orden);
+                List<Producto> productos = negocio.listarFiltrado(texto, idsCategorias, idsAccesibilidades, orden);
 
                 rptProductos.DataSource = productos;
                 rptProductos.DataBind();
@@ -100,7 +140,18 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             CargarProductos();
         }
 
+        //Buscador de categorias por nombre (LIKE en CategoriaNegocio.listar)
+        protected void btnBuscarCategoria_Click(object sender, EventArgs e)
+        {
+            CargarCategorias(txtBuscarCategoria.Text.Trim());
+        }
+
         protected void chkCategorias_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarProductos();
+        }
+
+        protected void chkAccesibilidad_SelectedIndexChanged(object sender, EventArgs e)
         {
             CargarProductos();
         }
@@ -115,9 +166,15 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
             foreach (ListItem item in chkCategorias.Items)
                 item.Selected = false;
 
+            //Tambien se limpia la seleccion de accesibilidad
+            foreach (ListItem item in chkAccesibilidad.Items)
+                item.Selected = false;
+
             txtBuscar.Text = "";
+            txtBuscarCategoria.Text = "";
             ddlOrden.SelectedValue = "0";
 
+            CargarCategorias(); //Mostrar las categorias sin el filtro
             CargarProductos();
         }
         // Método para las categorías normales

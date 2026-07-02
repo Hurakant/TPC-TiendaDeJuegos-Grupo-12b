@@ -11,9 +11,24 @@
 
             <div class="row">
 
-                <!-- COLUMNA IZQUIERDA: FILTROS POR CATEGORIA -->
+                <!-- COLUMNA IZQUIERDA: FILTROS -->
                 <div class="col-lg-2 col-md-3 mb-3">
                     <div class="catalogo-sidebar">
+
+                        <!-- Buscador de categorias por nombre (LIKE) -->
+                        <div class="catalogo-sidebar-title">Buscar categoría:</div>
+                        <div class="catalogo-cat-search">
+                            <asp:TextBox ID="txtBuscarCategoria" runat="server"
+                                CssClass="catalogo-search-input-cat"
+                                placeholder="RPG...">
+                            </asp:TextBox>
+                            <asp:Button ID="btnBuscarCategoria" runat="server"
+                                Text="Buscar"
+                                CssClass="catalogo-btn-buscar-cat"
+                                OnClick="btnBuscarCategoria_Click"
+                                CausesValidation="false" />
+                        </div>
+
                         <div class="catalogo-sidebar-title">Filtrar por categoria:</div>
                         <asp:CheckBoxList ID="chkCategorias" runat="server"
                             CssClass="chk-filtros"
@@ -21,6 +36,16 @@
                             AutoPostBack="true"
                             OnSelectedIndexChanged="chkCategorias_SelectedIndexChanged">
                         </asp:CheckBoxList>
+
+                        <!-- Filtro de accesibilidad -->
+                        <div class="catalogo-sidebar-title">Filtrar por accesibilidad:</div>
+                        <asp:CheckBoxList ID="chkAccesibilidad" runat="server"
+                            CssClass="chk-filtros"
+                            RepeatLayout="UnorderedList"
+                            AutoPostBack="true"
+                            OnSelectedIndexChanged="chkAccesibilidad_SelectedIndexChanged">
+                        </asp:CheckBoxList>
+
                         <asp:Button ID="btnLimpiarFiltros" runat="server"
                             Text="Limpiar filtros"
                             CssClass="catalogo-sidebar-clear"

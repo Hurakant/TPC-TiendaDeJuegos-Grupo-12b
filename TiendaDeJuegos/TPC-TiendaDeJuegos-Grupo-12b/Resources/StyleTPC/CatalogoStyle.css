@@ -296,3 +296,53 @@
     border: 1px dashed var(--border-subtle, rgba(233, 30, 99, 0.2));
     border-radius: 14px;
 }
+
+/* Buscador de categorias */
+.catalogo-cat-search {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+    .catalogo-cat-search .catalogo-search-input-cat {
+        background: #0d0d14;
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, .08);
+        border-radius: 10px;
+        padding: 0 12px;
+        height: 36px;
+        width: 100%;
+        outline: none;
+        transition: .25s;
+    }
+
+        .catalogo-cat-search .catalogo-search-input-cat::placeholder {
+            color: #666;
+        }
+
+        .catalogo-cat-search .catalogo-search-input-cat:focus {
+            border-color: var(--primary-pink, #e91e63);
+            box-shadow: 0 0 10px rgba(233, 30, 99, .25);
+        }
+
+    .catalogo-cat-search .catalogo-btn-buscar-cat {
+        background: var(--gradient-pink-purple, linear-gradient(135deg, #e91e63, #9c27b0));
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 0 14px;
+        height: 36px;
+        width: 100%;
+        font-weight: 600;
+        font-size: .82rem;
+        letter-spacing: .5px;
+        cursor: pointer;
+        transition: .2s;
+    }
+
+        .catalogo-cat-search .catalogo-btn-buscar-cat:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 12px rgba(233, 30, 99, .3);
+        }
+ 

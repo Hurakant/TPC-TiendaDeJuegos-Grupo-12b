@@ -160,18 +160,21 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public List<Producto> listarFiltrado(string texto, List<int> idsCategorias, int orden)
+        public List<Producto> listarFiltrado(string texto, List<int> idsCategorias, List<int> idsAccesibilidades, int orden)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string idsCsv = (idsCategorias != null && idsCategorias.Count > 0)
-                    ? string.Join(",", idsCategorias)
-                    : null;
+                string idsCsv = (idsCategorias != null && idsCategorias.Count > 0) ? string.Join(",", idsCategorias)
+                : null;
 
-                datos.setConsulta("EXEC SP_Producto_ListarFiltrado @Texto = @Texto, @IdsCategorias = @IdsCategorias, @Orden = @Orden");
+                string idsAccCsv = (idsAccesibilidades != null && idsAccesibilidades.Count > 0) ? string.Join(",", idsAccesibilidades)
+                : null;
+
+                datos.setConsulta("EXEC SP_Producto_ListarFiltrado @Texto = @Texto, @IdsCategorias = @IdsCategorias, @IdsAccesibilidades = @IdsAccesibilidades, @Orden = @Orden");
                 datos.setParametro("@Texto", string.IsNullOrWhiteSpace(texto) ? (object)DBNull.Value : texto.Trim());
                 datos.setParametro("@IdsCategorias", idsCsv == null ? (object)DBNull.Value : idsCsv);
+                datos.setParametro("@IdsAccesibilidades", idsAccCsv == null ? (object)DBNull.Value : idsAccCsv);
                 datos.setParametro("@Orden", orden);
                 datos.ejecutarLectura();
 

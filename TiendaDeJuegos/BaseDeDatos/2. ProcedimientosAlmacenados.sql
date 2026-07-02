@@ -65,6 +65,7 @@ GO
 CREATE OR ALTER PROCEDURE SP_Producto_ListarFiltrado
     @Texto NVARCHAR(200) = NULL,
     @IdsCategorias NVARCHAR(MAX) = NULL,
+    @IdsAccesibilidades NVARCHAR(MAX) = NULL,
     @Orden INT = 0
 AS
 BEGIN
@@ -89,6 +90,16 @@ BEGIN
                 WHERE PC.IDProducto = P.IDProducto
                   AND PC.IDCategoria IN (SELECT CAST(value AS INT) FROM STRING_SPLIT(@IdsCategorias, ','))
             ) = (SELECT COUNT(value) FROM STRING_SPLIT(@IdsCategorias, ','))
+        )
+        -- NUEVO: mismo patron que categorias, pero contra ProductoAccesibilidad
+        AND (
+            @IdsAccesibilidades IS NULL OR LTRIM(RTRIM(@IdsAccesibilidades)) = ''
+            OR (
+                SELECT COUNT(DISTINCT PA.IDAccesibilidad)
+                FROM ProductoAccesibilidad PA
+                WHERE PA.IDProducto = P.IDProducto
+                  AND PA.IDAccesibilidad IN (SELECT CAST(value AS INT) FROM STRING_SPLIT(@IdsAccesibilidades, ','))
+            ) = (SELECT COUNT(value) FROM STRING_SPLIT(@IdsAccesibilidades, ','))
         );
  
     SELECT * FROM #ProductosFiltrados

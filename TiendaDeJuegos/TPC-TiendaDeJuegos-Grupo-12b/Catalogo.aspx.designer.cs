@@ -15,6 +15,24 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
     {
 
         /// <summary>
+        /// txtBuscarCategoria control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBuscarCategoria;
+
+        /// <summary>
+        /// btnBuscarCategoria control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBuscarCategoria;
+
+        /// <summary>
         /// chkCategorias control.
         /// </summary>
         /// <remarks>
@@ -22,6 +40,15 @@ namespace TPC_TiendaDeJuegos_Grupo_12b
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList chkCategorias;
+
+        /// <summary>
+        /// chkAccesibilidad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList chkAccesibilidad;
 
         /// <summary>
         /// btnLimpiarFiltros control.
